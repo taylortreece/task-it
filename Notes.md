@@ -1,0 +1,1 @@
+Users need to be in charge of creating projects, segments, and tasks, not companies and teams.
