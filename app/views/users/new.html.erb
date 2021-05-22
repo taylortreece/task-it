@@ -1,0 +1,28 @@
+<h1>Sign up</h1>
+
+    <%= form_for @user do |user_builder| %>
+    First Name: <%= user_builder.text_field :first_name %><br><br>
+    Last Name: <%= user_builder.text_field :last_name %><br><br>
+    Email: <%= user_builder.text_field :email %><br><br>
+    Password: <%= user_builder.password_field :password %><br><br>
+    Re-Password: <%= user_builder.password_field :password_confirmation %><br><br>
+
+        <%= user_builder.fields_for :company, @user.build_company do |company_attribues| %><br><br>
+    Company Name: <%= company_attribues.text_field :name %><br><br>
+    Company Industry: <%= company_attribues.text_field :industry %><br><br>
+    Company Address: <%= company_attribues.text_field :address %><br><br>
+    Company City: <%= company_attribues.text_field :city %><br><br>
+    Company State: <%= company_attribues.text_field :state %><br><br>
+    Company Phone Number: <%= company_attribues.text_field :phone_number %><br><br>
+    Company Email: <%= company_attribues.text_field :email %><br><br>
+        <% end %>
+
+        <%= user_builder.submit "Create Profile and Company" %>
+    <% end %>
+
+
+
+
+
+
+   
