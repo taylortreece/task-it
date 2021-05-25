@@ -10,8 +10,8 @@ class SegmentsController < ApplicationController
     def create
         @segment = Segment.new(segment_params)
         @project = Project.find_by(id: params[:segment][:project_id])
-        params[:segment][:team_id] ? @team=(Team.find_by(id: params[:segment][:team_id])) : @team=(@segment.build_team(name: params[:segment][:team][:name], description: params[:segment][:team][:description], user: current_user, company: current_user.company))
-
+        params[:segment][:team_id].nil? ? @team=(Team.find_by(id: params[:segment][:team_id])) : @team=(@segment.build_team(name: params[:segment][:team][:name], description: params[:segment][:team][:description], user: current_user, company: current_user.company))
+        binding.pry
         if @team.save
             @segment.update(team: @team, user: current_user)
            if @segment.save
@@ -27,7 +27,10 @@ class SegmentsController < ApplicationController
 
         if params[:show_task_form]=="true"
             @task = @segment.tasks.build
-            binding.pry
+        elsif params[:show_task_and_user_form] == "true"
+            @task = @segment.tasks.build
+            @user = @task.build_user
+        else
         end
     end
 
