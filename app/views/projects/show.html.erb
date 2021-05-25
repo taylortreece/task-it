@@ -1,0 +1,15 @@
+<h1><%= @project.title %><br><br></h1>
+<%= @project.deadline %><br><br>
+<%= @project.description %><br><br>
+
+    <% if @project.segments == [] %>
+        <p>You have no segments for this project</p>
+    <% else %>
+         <% @project.segments.each do |segment| %>
+            <%= segment.title %>
+        <% end %>
+    <% end %>
+
+<%= link_to "Add Segments", project_path(@project, :project_id => @project.id, :show_segment_form => true)%>
+
+<%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %>

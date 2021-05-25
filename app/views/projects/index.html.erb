@@ -1,0 +1,5 @@
+<% @projects.each do |project| %>
+    <%= link_to "#{project.title}", project_path(project)%><br><br>
+    <%= project.deadline %><br><br>
+    <%= project.description %><br><br>
+<% end %>

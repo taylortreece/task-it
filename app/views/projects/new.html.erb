@@ -1,1 +1,16 @@
 <h1>New Project View</h1>
+
+<%= link_to 'Home', root_path %>
+
+<%= form_for @project do |project_builder| %>
+    Title: <br>
+    <%= project_builder.text_field :title %><br><br>
+    Deadline: <br>
+    <%= project_builder.date_select :deadline %><br><br>
+    Description: <br>
+    <%= project_builder.text_area :description %><br><br>
+
+    <%= project_builder.submit "Create Project" %><br><br>
+<% end %>
+
+    

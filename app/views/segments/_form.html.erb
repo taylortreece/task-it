@@ -1,0 +1,7 @@
+<%= form_for @project.segments.build do |segment_builder| %>
+    Title: <%= segment_builder.text_field :title %>
+    Deadline: <%= segment_builder.date_select :deadline %>
+    Description: <%= segment_builder.text_area :description %>
+
+    <%= segment_builder.submit "Create Segment" %>
+    <% end %>

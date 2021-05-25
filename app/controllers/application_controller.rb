@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
     before_action :logged_in?, only: [:home]
 
     def home
+        @current_user = current_user
     end
 
     private
