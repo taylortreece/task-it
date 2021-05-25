@@ -6,7 +6,14 @@ class ProjectsController < ApplicationController
 
     def show
         @project = Project.find_by(id: params[:id])
-        @segment = @project.segments.build if params[:show_segment_form] == "true"
+
+        if params[:show_segment_form] == "true"
+            @segment = @project.segments.build
+        elsif params[:show_segment_and_team_form] == "true"
+            @segment = @project.segments.build
+            @team = @segment.build_team
+        else
+        end
     end
 
     def new

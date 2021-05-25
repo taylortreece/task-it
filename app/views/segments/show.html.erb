@@ -1,0 +1,15 @@
+<h1><%= @segment.title %></h1>
+<h3><%= @segment.project.title %></h3>
+
+<%= link_to "Add Tasks", segment_path(@segment, :show_task_form => true) unless @task %>
+
+<% if @task %>
+<%= form_for @task do |task_builder| %>
+<% binding.pry %>
+    Title: <%= task_builder.text_field :title %>
+    Deadline: <%= task_builder.date_select :deadline %>
+    Description: <%= task_builder.text_area :description %>
+
+    <%= task_builder.submit "Create Task" %>
+    <% end %>
+<% end %>

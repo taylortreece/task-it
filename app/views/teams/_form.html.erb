@@ -1,0 +1,7 @@
+<%= form_for @team do |team_builder| %>
+Team Name: <%= team_builder.text_field :name %>
+Team Description: <%= team_builder.text_area :description %><br><br>
+
+<%= team_builder.submit "Create Team" %>
+
+<% end %>

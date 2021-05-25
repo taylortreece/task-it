@@ -6,10 +6,12 @@
         <p>You have no segments for this project</p>
     <% else %>
          <% @project.segments.each do |segment| %>
-            <%= segment.title %>
+            <%= link_to "#{segment.title}", segment_path(segment) unless segment.id.nil?%><br><br>
         <% end %>
     <% end %>
 
-<%= link_to "Add Segments", project_path(@project, :project_id => @project.id, :show_segment_form => true)%>
+<%= link_to "Add Segments", project_path(@project, :show_segment_form => true ) unless @segment %>
 
 <%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %>
+
+<%= link_to "Add Team", project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? %>

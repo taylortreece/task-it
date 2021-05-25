@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :teams
   resources :segments
+  resources :tasks
 
   resources :users
 end
