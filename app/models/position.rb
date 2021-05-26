@@ -4,7 +4,12 @@ class Position < ApplicationRecord
     has_many :tasks
     has_many :segments, through: :tasks
 
-    def assign_user
+    def assigned_user=(user)
+        @assigned_user = user
+    end
+
+    def assigned_user
+        @assigned_user
     end
 
 end

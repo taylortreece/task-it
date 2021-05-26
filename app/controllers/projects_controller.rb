@@ -8,9 +8,9 @@ class ProjectsController < ApplicationController
         @project = Project.find_by(id: params[:id])
 
         if params[:show_segment_form] == "true"
-            @segment = @project.segments.build
+            @segment = Segment.new
         elsif params[:show_segment_and_team_form] == "true"
-            @segment = @project.segments.build
+            @segment = Segment.new
             @team = @segment.build_team
         else
         end

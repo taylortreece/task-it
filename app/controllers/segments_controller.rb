@@ -11,7 +11,6 @@ class SegmentsController < ApplicationController
         @segment = Segment.new(segment_params)
         @project = Project.find_by(id: params[:segment][:project_id])
         params[:segment][:team_id].nil? ? @team=(Team.find_by(id: params[:segment][:team_id])) : @team=(@segment.build_team(name: params[:segment][:team][:name], description: params[:segment][:team][:description], user: current_user, company: current_user.company))
-        binding.pry
         if @team.save
             @segment.update(team: @team, user: current_user)
            if @segment.save

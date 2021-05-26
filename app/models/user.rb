@@ -14,6 +14,7 @@ class User < ApplicationRecord
     has_many :tasks
 
     accepts_nested_attributes_for :company
+    accepts_nested_attributes_for :positions
 
     # users need to have many projects, segments, and tasks.
 
