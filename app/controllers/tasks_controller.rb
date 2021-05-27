@@ -10,9 +10,9 @@ class TasksController < ApplicationController
     def create
         @segment = Segment.find_by(id: params[:task][:segment_id])
         @task = @segment.tasks.build(task_params)
+        assign_position_to @task
         if @task.save
-          assign_position_to_user
-            if @task.save then redirect_to segment_path(@segment) end
+            redirect_to segment_path(@segment)
         else
             render 'segments/show'
         end
@@ -33,8 +33,10 @@ class TasksController < ApplicationController
 
     private
 
+    # changed params to accept assigned_user_id instead of user_id
+
     def task_params
-        params.require(:task).permit(:title, :deadline, :description, :segment_id,
+        params.require(:task).permit(:title, :deadline, :description, :segment_id, :position_id,
         user_attributes: [
             :first_name,
             :last_name,
@@ -50,9 +52,8 @@ class TasksController < ApplicationController
         ]).with_defaults(user_id: current_user.id)
     end
 
-    def assign_position_to_user
-        @task.position.assigned_user = @task.assigned_user.id
-        binding.pry
+    def assign_position_to(task)
+        task.assigned_user = task.position.assigned_user
     end
 
 end

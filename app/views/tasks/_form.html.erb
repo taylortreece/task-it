@@ -6,7 +6,7 @@
     Description: <%= task_builder.text_area :description %>
 
       <% if @segment.team.positions != []%>
-        Pick a Team Member to complete this task<%= task_builder.collection_select :user_id, @segment.team.positions, :id, :title %>
+        Pick a Team Member to complete this task<%= task_builder.collection_select :position_id, @segment.team.positions, :id, :title, {:include_blank => true} %>
         <%= task_builder.submit "Create Task" unless @user %>
       <% end %>
 
