@@ -1,4 +1,5 @@
 <h3>New Segment</h3>
+
 <%= form_for @segment do |segment_builder| %>
     <%= segment_builder.hidden_field :project_id, :value => @project.id %>
     Title: <%= segment_builder.text_field :title %>
@@ -13,9 +14,9 @@
           <% if Team.all == [] %> <p>You currently have not created any teams. You need to create a team before you can create a segment.</p> <% end %>
         <% else %>
           <h3>New Team</h3>
-            <%= segment_builder.fields_for @team do |team_builder| %>
+            <%= segment_builder.fields_for :team, @team do |team_builder| %>
             Team Name: <%= team_builder.text_field :name %>
-            Team Description: <%= team_builder.text_area :description %><br><br>         
+            Team Description: <%= team_builder.text_area :description %>        
             <% end %>
           <% end %>
         <%= segment_builder.submit "Create Segment" if @team %>

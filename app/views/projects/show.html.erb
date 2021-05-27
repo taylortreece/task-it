@@ -7,10 +7,11 @@
     <% else %>
          <% @project.segments.each do |segment| %>
             <%=link_to "#{segment.title}", segment_path(segment) %><br><br>
+            <%= segment.description %>
         <% end %>
     <% end %>
 
-<%= link_to "Add Segments", project_path(@project, :show_segment_form => true ) unless @segment %>
+<br><br><%= link_to "Add Segments", project_path(@project, :show_segment_form => true ) unless @segment %>
 
 <%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %>
 

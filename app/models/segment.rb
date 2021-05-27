@@ -7,6 +7,9 @@ class Segment < ApplicationRecord
     has_many :segment_comments
     has_many :users, through: :segment_comments
 
-    accepts_nested_attributes_for :team
-    accepts_nested_attributes_for :tasks
+   # accepts_nested_attributes_for :team
+
+    def team_attributes=(team_attributes)
+        self.build_team(team_attributes.with_defaults(user_id: self.user_id, company_id: self.user.company.id))
+    end
 end

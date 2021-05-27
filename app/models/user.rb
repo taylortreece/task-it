@@ -23,8 +23,10 @@ class User < ApplicationRecord
     end
 
     def assigned_tasks
+        Task.all.select { |t| t.assigned_task == self}
     end
 
     def assigned_positions
+        Position.all.select { |p| p.assigned_position == self}
     end
 end
