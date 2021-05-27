@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :teams
   resources :segments
   resources :tasks
-
+  resources :project_comments
+  resources :segment_comments
+  resources :task_comments
   resources :users
 end

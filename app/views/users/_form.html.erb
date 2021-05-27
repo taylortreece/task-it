@@ -4,10 +4,14 @@
     Email: <%= user_builder.text_field :email %><br><br>
     Password: <%= user_builder.password_field :password %><br><br>
     Re-Password: <%= user_builder.password_field :password_confirmation %><br><br>
-    Privlages: <%= user_builder.radio_button :privilege, :checked => "Admin"%>
-               <%= user_builder.radio_button :privilege, :checked => "Team Leader"%>
-               <%= user_builder.radio_button :privilege, :checked => "Team Member"%>
+    Privlages: <br>
+    Admin: <%= user_builder.radio_button :privilege, :checked => "Admin"%><br>
+    Team Leader: <%= user_builder.radio_button :privilege, :checked => "Team Leader"%><br>
+    Team Member: <%= user_builder.radio_button :privilege, :checked => "Team Member"%><br>
                
-
-    <%= user_builder.submit "Create Profile" %>
+    <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
+        Position Title: <%= position_builder.text_field :title %>
+        Position Description: <%= position_builder.text_field :description %>
+        <% end %>
+    <%= user_builder.submit "Create User" %>
 <% end %>

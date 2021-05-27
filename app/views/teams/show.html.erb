@@ -1,0 +1,13 @@
+<h1><%= @team.name %></h1>
+
+<% if !@team.positions.empty? %>
+<% @team.positions.each do |position| %>
+<%= link_to "#{position.assigned_user.full_name}", user_path(position.assigned_user) %>
+    <% end %>
+<% else %>
+    <p>You don't have any members in this team.</p>
+<% end %>
+
+<br><br><%= link_to "Create New User", team_path(@team, :show_user_form => true ) unless @user %>
+
+<%= render :partial => 'users/form', :locals => { :user => @user } if @user %>

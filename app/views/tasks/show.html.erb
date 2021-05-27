@@ -1,0 +1,18 @@
+<h1><%= @task.title %></h1>
+<%= @task.description %>
+Assigned Team Member: <%= @task.assigned_user.full_name %>
+
+<%= render :partial => 'task_comments/form', :locals => { :subject => @task } %>
+
+<br><br>Comments: <br><br>
+
+<% @task.task_comments.each do |comment| %>
+  <% if @task.task_comments.empty? %>
+    <p>There are no comments to view on this post. <%= link_to "Create Comment", new_task_comment_path %>
+  <% else %>
+      <% if !comment.id.nil? || !comment.content.nil?%>
+        <%= comment.user.full_name %><br>
+        <%= comment.content %>
+    <% end %><br><br>
+  <% end %>
+<% end %>

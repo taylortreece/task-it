@@ -3,23 +3,25 @@ class UsersController < ApplicationController
     def index
     end
 
+    def show
+        @user = User.find_by(id: params[:id])
+    end
+
     def new
         @user = User.new
     end
 
     def create
+        binding.pry
         @user = User.new(user_params)
 
         if @user.save
-            login(@user)
+            login(@user) unless current_user
             redirect_to '/'
         else
             flash[:error] = "Oops! Something went wrong. Try again."
             render :new
         end
-    end
-
-    def show
     end
 
     def edit

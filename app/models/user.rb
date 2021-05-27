@@ -14,9 +14,11 @@ class User < ApplicationRecord
     has_many :tasks
 
     accepts_nested_attributes_for :company
-    accepts_nested_attributes_for :positions
+   # accepts_nested_attributes_for :positions
 
-    # users need to have many projects, segments, and tasks.
+    def position_attributes=(position_attributes)
+        self.build.positions(positon_attributes)
+    end
 
     def full_name
         self.first_name + " " + self.last_name

@@ -4,7 +4,7 @@ Assigned Team: <%= @segment.team.name %><br><br>
 
 <% @segment.tasks.each do |task| %>
     <% if !task.id.nil? || !task.assigned_user_id.nil? %>
-    Task: <%= task.title %>,
+    Task: <%= link_to "#{task.title}", task_path(task) %>,
     Assigned Team Member: <%= link_to "#{task.assigned_user.full_name}", user_path(task.assigned_user) %> - <%= task.position.title %>
     <% end %><br><br>
 <% end %>
@@ -14,3 +14,18 @@ Assigned Team: <%= @segment.team.name %><br><br>
 <%= render :partial => 'tasks/form', :locals => { :task => @task } if @task %>
 
 <%= link_to "Add User", segment_path(@segment, :show_task_and_user_form => true) if @task && @user.nil? %>
+
+<%= render :partial => 'segment_comments/form', :locals => { :subject => @segment } %>
+
+<br><br>Comments: <br><br>
+
+<% @segment.segment_comments.each do |comment| %>
+  <% if @segment.segment_comments.empty? %>
+    <p>There are no comments to view on this post. <%= link_to "Create Comment", new_segment_comment_path %>
+  <% else %>
+      <% if !comment.id.nil? || !comment.content.nil?%>
+        <%= comment.user.full_name %><br>
+        <%= comment.content %>
+    <% end %>
+  <% end %>
+<% end %>

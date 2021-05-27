@@ -16,3 +16,18 @@
 <%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %>
 
 <%= link_to "Add Team", project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? %>
+
+<%= render :partial => 'project_comments/form', :locals => { :subject => @project } %>
+
+<br><br>Comments: <br><br>
+
+<% @project.project_comments.each do |comment| %>
+  <% if @project.project_comments.empty? %>
+    <p>There are no comments to view on this post. <%= link_to "Create Comment", new_project_comment_path %>
+  <% else %>
+      <% if !comment.id.nil? || !comment.content.nil?%>
+        <%= comment.user.full_name %><br>
+        <%= comment.content %>
+    <% end %>
+  <% end %>
+<% end %>
