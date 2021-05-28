@@ -5,7 +5,6 @@ class SegmentsController < ApplicationController
 
     def show
         @segment = Segment.find_by(id: params[:id])
-
         if params[:show_task_form]=="true"
             @task = @segment.tasks.build
         elsif params[:show_task_and_user_form] == "true"

@@ -10,7 +10,9 @@ class TasksController < ApplicationController
     def create
         @segment = Segment.find_by(id: params[:task][:segment_id])
         @task = @segment.tasks.build(task_params)
-        assign_position_to @task
+        binding.pry
+        assign_existing_user
+        binding.pry
         if @task.save
             redirect_to segment_path(@segment)
         else
@@ -52,8 +54,12 @@ class TasksController < ApplicationController
         ]).with_defaults(user_id: current_user.id)
     end
 
-    def assign_position_to(task)
-        task.assigned_user = task.position.assigned_user
+    def assign_existing_user
+        if @task.position.assigned_user_id.nil?
+            @task.position.assigned_user_id = @task.assigned_user.id
+        elsif @task.assigned_user_id.nil?
+            @task.assigned_user_id = @task.position.assigned_user.id
+        else
+        end
     end
-
 end

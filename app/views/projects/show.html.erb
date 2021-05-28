@@ -6,7 +6,7 @@
         <p>You have no segments for this project</p>
     <% else %>
          <% @project.segments.each do |segment| %>
-            <%=link_to "#{segment.title}", segment_path(segment) %><br><br>
+            <%=link_to "#{segment.title}", project_segment_path(@project.id, segment.id) %><br><br>
             <%= segment.description %>
         <% end %>
     <% end %>
