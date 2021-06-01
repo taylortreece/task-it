@@ -1,6 +1,6 @@
 class User < ApplicationRecord
     has_secure_password
-    validates :first_name, presence: true
+    
     has_one :company
     has_many :teams
     has_many :positions
@@ -12,12 +12,18 @@ class User < ApplicationRecord
     has_many :projects
     has_many :segments
     has_many :tasks
+    
+    validates :first_name, presence: true
+    validates :last_name, presence: true
+    validates :email, presence: true, uniqueness: true
 
     accepts_nested_attributes_for :company
-   # accepts_nested_attributes_for :positions
+    accepts_nested_attributes_for :positions
 
     def position_attributes=(position_attributes)
-        self.build.positions(positon_attributes)
+        self.save
+        position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id, user_id: self.user_id))
+        position.save
     end
 
     def full_name
@@ -30,5 +36,9 @@ class User < ApplicationRecord
 
     def assigned_positions
         Position.all.select { |p| p.assigned_position == self}
+    end
+
+    def update_user(params)
+        #self.first_name = params[:]
     end
 end

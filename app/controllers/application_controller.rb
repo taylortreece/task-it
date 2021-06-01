@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
     before_action :logged_in?, only: [:home]
+    before_action :current_user
+    skip_before_action :verify_authenticity_token
 
     def home
-        @current_user = current_user
     end
 
     private
@@ -13,6 +14,10 @@ class ApplicationController < ActionController::Base
 
     def current_user
         @current_user = User.find_by(id: session[:user_id])
+    end
+
+    def company
+        @company = current_user.company
     end
 
     def logged_in?

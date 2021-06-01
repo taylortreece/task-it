@@ -5,6 +5,10 @@ class Task < ApplicationRecord
     has_many :task_comments
     has_many :users, through: :task_comments
 
+    validates :title, presence: true
+    validates :deadline, presence: true
+    validates :description, presence: true
+
     def user_attributes=(user_attributes)
         @user = User.new(user_attributes)
         @user.save

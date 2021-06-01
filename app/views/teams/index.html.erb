@@ -1,0 +1,8 @@
+<br><br><h1><%= @current_user.company.name %> Teams</h1>
+
+<% @company.teams.each do |team| %>
+    <%= link_to "#{team.name}", team_path(team) %><br>
+    <%= team.description %><br>
+    <%end%><br>
+
+    <%= link_to "Add Team", new_team_path %>

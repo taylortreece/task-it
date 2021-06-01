@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+    before_action :current_user
 
     def index
     end
@@ -10,9 +11,7 @@ class TasksController < ApplicationController
     def create
         @segment = Segment.find_by(id: params[:task][:segment_id])
         @task = @segment.tasks.build(task_params)
-        binding.pry
         assign_existing_user
-        binding.pry
         if @task.save
             redirect_to segment_path(@segment)
         else
@@ -34,8 +33,6 @@ class TasksController < ApplicationController
     end
 
     private
-
-    # changed params to accept assigned_user_id instead of user_id
 
     def task_params
         params.require(:task).permit(:title, :deadline, :description, :segment_id, :position_id,

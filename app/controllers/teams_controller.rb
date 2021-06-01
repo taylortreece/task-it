@@ -1,7 +1,8 @@
 class TeamsController < ApplicationController
-    
+    before_action :current_user, :company
 
     def index
+        binding.pry
     end
 
     def show
@@ -17,13 +18,10 @@ class TeamsController < ApplicationController
     end
 
     def create
-        binding.pry
         @team = Team.new(team_params)
         if @team.save
-            binding.pry
             redirect_to @team
         else
-            binding.pry
             render :new
         end
     end

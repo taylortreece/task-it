@@ -11,6 +11,13 @@
   </head>
 
   <body>
+  <ul>
+    <li style="font-size:40px;"><%= link_to "Company Name", root_path %></li>
+    <li><%= link_to "Company Projects", projects_path %></li>
+    <li><%= link_to "Company Teams", teams_path %></li>
+    <li><%= link_to "Profile", user_path(@current_user) %></li>
+    <li><%= link_to "Logout", '/logout' %></li>
+  </ul>
     <%= yield %>
   </body>
 </html>

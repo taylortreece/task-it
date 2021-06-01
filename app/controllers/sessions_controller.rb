@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
+    layout "login"
+    #before_action :current_user
 
     def login
-
     end
 
     def create

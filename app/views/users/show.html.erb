@@ -1,1 +1,5 @@
 <h1><%= @user.full_name %></h1>
+<%= @user.email %><br><br>
+<%= @user.positions == [] ? "This user has no assigned positions." : @user.positions.last.title %>
+
+<%= link_to "Edit User", edit_team_user_path(@team, @user) %>

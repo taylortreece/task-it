@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
+    before_action :current_user, :company
     
     def index
-        @projects = current_user.projects.all
+        @projects = company.projects.all
     end
 
     def show

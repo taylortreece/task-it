@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#logout'
+  get '/signup', to: 'users#new'
 
   resources :projects
   resources :projects, only: [:show] do
@@ -16,12 +17,20 @@ Rails.application.routes.draw do
     resources :tasks, only: [:show, :new, :create, :edit, :update, :destroy]
   end
 
-  post '/projects/1/segments/new', to: "segments#create"
+  post '/projects/:id/segments/new', to: "segments#create"
 
   resources :teams
-  #resources :tasks
+  resources :teams, only: [:show] do
+    resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
+  end
+
+  post "/teams/teams/:id/users/new", to: 'users#create'
+
   resources :project_comments
   resources :segment_comments
   resources :task_comments
-  resources :users
+
+  resources :users, only: [:show, :new, :create]
+  post "/users/new", to: "users#create"
+  patch "/teams/:id/users/:id/edit", to: "users#update"
 end
