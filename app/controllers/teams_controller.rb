@@ -2,7 +2,6 @@ class TeamsController < ApplicationController
     before_action :current_user, :company
 
     def index
-        binding.pry
     end
 
     def show

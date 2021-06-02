@@ -2,7 +2,7 @@
 
 <% if !@team.positions.empty? %>
 <% @team.positions.each do |position| %>
-    <% if !position.id.nil? || !position.assigned_user.nil? %>
+    <% if !position.id.nil? && !position.assigned_user.nil? %>
         <%= link_to "#{position.assigned_user.full_name}", team_user_path(@team.id, position.assigned_user.id) %>
     <% end %>
   <% end %>

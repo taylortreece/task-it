@@ -19,11 +19,18 @@ class User < ApplicationRecord
 
     accepts_nested_attributes_for :company
     accepts_nested_attributes_for :positions
+    
 
     def position_attributes=(position_attributes)
         self.save
-        position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id, user_id: self.user_id))
-        position.save
+        if !self.assigned_position.nil?
+            self.assigned_position.update(position_attributes.with_defaults(assigned_user_id: self.id))
+        else
+            position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
+            position.user_id = self.user_id # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
+            position.save
+            self.assigned_position_id = position.id
+        end
     end
 
     def full_name
@@ -34,11 +41,7 @@ class User < ApplicationRecord
         Task.all.select { |t| t.assigned_task == self}
     end
 
-    def assigned_positions
-        Position.all.select { |p| p.assigned_position == self}
-    end
-
-    def update_user(params)
-        #self.first_name = params[:]
+    def assigned_position
+        Position.all.find_by(id: self.assigned_position_id)
     end
 end

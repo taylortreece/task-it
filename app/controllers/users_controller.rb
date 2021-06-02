@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(id: params[:id])
-        @team = @user.positions.last.team
+        @team = @user.assigned_position.team
     end
 
     def new
@@ -30,42 +30,29 @@ class UsersController < ApplicationController
         else
             @user = User.new(created_user_params)
             @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
-            @position = @user.positions.find_by(team_id: params[:user][:position_attributes][:team_id])
+            @position = @user.assigned_position
             if @user.save
-                @user = User.new
-                render 'teams/show'
+                redirect_to @team
             else
                 render "/teams/1?show_user_form=true"
             end
         end
     end
 
-    # def create_new_team_member
-    #     @user = User.new(created_user_params)
-    #     @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
-    #     @position = @user.positions.last
-    #     if @user.save
-    #         @user = User.new
-    #         render 'teams/show'
-    #     else
-    #         render "/teams/1?show_user_form=true"
-    #     end
-    # end
-
     def edit
         @team = Team.find_by(id: params[:team_id])
         @user = User.find_by(id: params[:id])
-        @position = @user.positions.find_by(team_id: params[:team_id])
+        @position = @user.assigned_position
     end
 
     def update
-        @team = Team.find_by(params[:team_id])
-        @user = User.find_by(params[:id])
+        @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
+        @user = User.find_by(id: params[:id])
         if @user.update(created_user_params)
             redirect_to team_user_path(@team, @user)
         else
-            @position = @user.positions.last
-            render :edit
+            @position = @user.assigned_position
+            render "/teams/1?show_user_form=true"
         end
     end
 
@@ -85,7 +72,7 @@ class UsersController < ApplicationController
                 :state,
                 :phone_number,
                 :email
-        ],
+            ],
             position_attributes: [
                 :title,
                 :description,
@@ -101,6 +88,6 @@ class UsersController < ApplicationController
                 :description,
                 :team_id
             ]
-        ).with_defaults(user_id: current_user.id, company: current_user.company)
+        ).with_defaults(user_id: current_user.id)
     end
 end
