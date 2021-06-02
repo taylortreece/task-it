@@ -13,7 +13,6 @@ class Task < ApplicationRecord
         @user = User.new(user_attributes)
         @user.save
         self.assigned_user_id = @user.id
-        binding.pry
     end
 
     def position_attributes=(position_attributes)
@@ -29,7 +28,4 @@ class Task < ApplicationRecord
     def assigned_user
         User.find_by(id: self.assigned_user_id)
     end
-
-
-
 end

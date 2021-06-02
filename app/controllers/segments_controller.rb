@@ -24,7 +24,6 @@ class SegmentsController < ApplicationController
         @segment = Segment.new(segment_params)
         @project = Project.find_by(id: params[:segment][:project_id])
         @team = Team.find_by(id: params[:segment][:team_id])
-        if @team then @segment.update(team: @team, user: current_user) end
         if @segment.save
             redirect_to project_path(@project)
         else
@@ -48,8 +47,4 @@ class SegmentsController < ApplicationController
         :title, :deadline, :description, :project_id, :user_id, :team_id)
         .with_defaults(user_id: current_user.id)
     end
-
-    # def find_team(arg)
-    #     arg.nil? ? return(nil) : @team=(Team.find_by(arg))
-    # end
 end

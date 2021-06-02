@@ -34,7 +34,7 @@ class UsersController < ApplicationController
             if @user.save
                 redirect_to @team
             else
-                render "/teams/1?show_user_form=true"
+                render "teams/show"
             end
         end
     end
@@ -48,6 +48,7 @@ class UsersController < ApplicationController
     def update
         @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
         @user = User.find_by(id: params[:id])
+        
         if @user.update(created_user_params)
             redirect_to team_user_path(@team, @user)
         else

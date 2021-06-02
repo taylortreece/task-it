@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
     def home
     end
 
+    def notfound
+        render file: "#{Rails.root}/public/404.html"
+    end
+
     private
 
     def login(user)

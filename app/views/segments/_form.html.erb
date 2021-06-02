@@ -1,6 +1,6 @@
 <h3>New Segment</h3>
 
-<%= form_for @segment, :url => "/projects/#{@project.id}/segments/new" do |segment_builder| %>
+<%= form_for [@project, @segment] do |segment_builder| %>
     <%= segment_builder.hidden_field :project_id, :value => @project.id %>
     Title: <%= segment_builder.text_field :title %>
     Deadline: <%= segment_builder.date_select :deadline %>

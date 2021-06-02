@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
     def position_attributes=(position_attributes)
         self.save
-        if !self.assigned_position.nil?
+        if self.assigned_position
             self.assigned_position.update(position_attributes.with_defaults(assigned_user_id: self.id))
         else
             position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
