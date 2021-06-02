@@ -1,4 +1,4 @@
-<h1><%= @team.name %></h1>
+<h1><%= @team.name %></h1><%= link_to "Edit Team", edit_team_path(@team)%><br><br>
 
 <% if !@team.positions.empty? %>
 <% @team.positions.each do |position| %>

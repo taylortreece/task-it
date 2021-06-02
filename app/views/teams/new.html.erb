@@ -1,8 +1,3 @@
 <h1>New Team</h1>
 
-<%= form_for @team do |team_builder| %>
-    Name: <%= team_builder.text_field :name %>
-    Description: <%= team_builder.text_field :description %>
-
-    <%= team_builder.submit "Create Team" %>
-    <% end %>
+<%= render :partial => "form" %>
