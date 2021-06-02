@@ -33,12 +33,21 @@ class ProjectsController < ApplicationController
     end
 
     def edit
+        @project = Project.find_by(id: params[:id])
     end
 
     def update
+        @project = Project.find_by(id: params[:id])
+        if @project.update(project_params)
+            redirect_to @project
+        else
+            render :edit
+        end
     end
 
     def destroy
+        Project.find_by(id: params[:id]).destroy
+        redirect_to '/'
     end
 
     private

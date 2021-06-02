@@ -39,6 +39,8 @@ class TeamsController < ApplicationController
     end
 
     def destroy
+        Team.find_by(id: params[:id]).destroy
+        redirect_to "/"
     end
 
     private

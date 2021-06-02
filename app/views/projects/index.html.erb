@@ -4,4 +4,6 @@
     <%= link_to "#{project.title}", project_path(project)%><br><br>
     <%= project.deadline %><br><br>
     <%= project.description %><br><br>
-<% end %>
+<% end %><br>
+
+<%= link_to "Add Projects", new_project_path %>

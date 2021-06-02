@@ -1,4 +1,4 @@
-<h1><%= @project.title %><br><br></h1>
+<h1><%= @project.title %></h1><%= link_to "Update Project", edit_project_path(@project) %><br><br><%= link_to "Delete Project", @project, :method => :delete %><br><br>
 <%= @project.deadline %><br><br>
 <%= @project.description %><br><br>
 
