@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(id: params[:id])
-        @team = @user.assigned_position.team
+        @team = @user.team
     end
 
     def new
@@ -58,6 +58,8 @@ class UsersController < ApplicationController
     end
 
     def destroy
+        User.find_by(id: params[:id]).delete
+        redirect_to '/'
     end
 
     private

@@ -2,4 +2,4 @@
 <%= @user.email %><br><br>
 <%= @user.positions == [] ? "This user has no assigned positions." : @user.positions.last.title %>
 
-<%= link_to "Edit User", edit_team_user_path(@team, @user) %>
+<%= link_to "Edit User", edit_team_user_path(@team, @user) %><%= link_to "Delete User", [@team, @user], :method => :delete %>
