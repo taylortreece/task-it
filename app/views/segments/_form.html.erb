@@ -1,9 +1,7 @@
-<h3>New Segment</h3>
-
 <%= form_for [@project, @segment] do |segment_builder| %>
     <%= segment_builder.hidden_field :project_id, :value => @project.id %>
     Title: <%= segment_builder.text_field :title %>
-    Deadline: <%= segment_builder.date_select :deadline %>
+    Deadline: <%= segment_builder.date_field :deadline %>
     Description: <%= segment_builder.text_area :description %><br><br>
       <% if Team.all != [] %>
            Pick a Team<%= segment_builder.collection_select :team_id, Team.all, :id, :name, {:include_blank => true} %>

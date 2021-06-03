@@ -21,6 +21,7 @@ class SegmentsController < ApplicationController
     end
 
     def create
+        binding.pry
         @segment = Segment.new(segment_params)
         @project = Project.find_by(id: params[:segment][:project_id])
         @team = Team.find_by(id: params[:segment][:team_id])
@@ -32,12 +33,23 @@ class SegmentsController < ApplicationController
     end
 
     def edit
+        @segment = Segment.find_by(id: params[:id])
+        @project = @segment.project
+        @team = Team.new
     end
 
     def update
+        @segment = Segment.find_by(id: params[:id])
+        if @segment.update(segment_params)
+            redirect_to @segment
+        else
+            render :edit
+        end
     end
 
     def destroy
+        Segment.find_by(id: params[:id]).destroy
+        redirect_to '/'
     end
 
     private

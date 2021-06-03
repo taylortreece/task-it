@@ -1,9 +1,9 @@
-<h1><%= @segment.title %></h1>
+<h1><%= @segment.title %></h1><%= link_to "Update Segment", edit_project_segment_path(@segment.project, @segment) %><%= link_to "Delete Segment", @segment, :method => :delete %>
 <h3><%= @segment.project.title %></h3>
 Assigned Team: <%= @segment.team.name %><br><br>
 
 <% @segment.tasks.each do |task| %>
-    <% if !task.id.nil? || !task.assigned_user_id.nil? %>
+    <% if !task.id.nil? && !task.assigned_user_id.nil? %>
     Task: <%= link_to "#{task.title}", segment_task_path(@segment.id, task.id) %>,
     Assigned Team Member: <%= link_to "#{task.assigned_user.full_name}", team_user_path(task.assigned_user) %> - <%= task.position.title %>
     <% end %><br><br>

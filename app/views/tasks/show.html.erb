@@ -1,4 +1,6 @@
 <h1><%= @task.title %></h1>
+<%= link_to "Update Task", edit_segment_task_path(@task) %>
+<%= link_to "Delete Task", [@segment, @task], :method => :delete %><br>
 <%= @task.description %>
 Assigned Team Member: <%= @task.assigned_user.full_name %>
 

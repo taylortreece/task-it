@@ -21,15 +21,28 @@ class TasksController < ApplicationController
 
     def show
         @task = Task.find_by(id: params[:id])
+        @segment = @task.segment
     end
 
     def edit
+        @task = Task.find_by(id: params[:id])
+        @segment = @task.segment
+        @user = User.new
+        @position = Position.new
     end
 
     def update
+        @task = Task.find_by(id: params[:id])
+        if @task.update(task_params)
+            redirect_to @task.segment
+        else
+            render :edit
+        end
     end
 
     def destroy
+        Task.find_by(id: params[:id]).destroy
+        redirect_to '/'
     end
 
     private

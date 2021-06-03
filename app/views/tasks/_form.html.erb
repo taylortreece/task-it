@@ -1,8 +1,7 @@
-<h3>New Task</h3>
-<%= form_for @task, :url => "/segments/#{@segment.id}/tasks" do |task_builder| %>
+<%= form_for [@segment, @task] do |task_builder| %>
     <%= task_builder.hidden_field :segment_id, :value => @segment.id %>
     Title: <%= task_builder.text_field :title %>
-    Deadline: <%= task_builder.date_select :deadline %>
+    Deadline: <%= task_builder.date_field :deadline %>
     Description: <%= task_builder.text_area :description %>
 
       <% if @segment.team.positions != []%>
@@ -33,5 +32,5 @@
         <% end %>
       <% end %>
     <% end %>
-  <br><br><%= task_builder.submit "Create Task" if @user || @segment.team.positions != nil %>
+  <br><br><%= task_builder.submit "Submit Task" if @user || @segment.team.positions != nil %>
 <% end %>
