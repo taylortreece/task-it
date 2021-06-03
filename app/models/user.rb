@@ -48,4 +48,8 @@ class User < ApplicationRecord
     def team
         Position.find_by(assigned_user_id: self.id).team
     end
+
+    def position
+        Position.find_by(assigned_user_id: self.id)
+    end
 end

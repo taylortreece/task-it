@@ -39,7 +39,11 @@ class TeamsController < ApplicationController
     end
 
     def destroy
-        Team.find_by(id: params[:id]).destroy
+        Team.find_by(id: params[:id]).positions.each do |position|
+            position.assigned_user.delete
+            position.delete
+        end
+        Team.find_by(id: params[:id]).delete
         redirect_to "/"
     end
 

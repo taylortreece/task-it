@@ -1,6 +1,15 @@
 <h1><%= @project.title %></h1><%= link_to "Update Project", edit_project_path(@project) %><br><br><%= link_to "Delete Project", @project, :method => :delete %><br><br>
 <%= @project.deadline %><br><br>
 <%= @project.description %><br><br>
+<%= form_for @project do |f| %>
+  <% if @project.completed == false %>
+    Mark if project is completed: 
+    <%= f.radio_button :completed, true, { onchange: 'this.form.submit();' } %>
+  <% else %>
+    Mark if project is incomplete:
+    <%= f.radio_button :completed, false, { onchange: 'this.form.submit();' } %>
+  <% end %>
+<% end %>
 
     <% if @project.segments == [] %>
         <p>You have no segments for this project</p>

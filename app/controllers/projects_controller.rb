@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
     private
 
     def project_params
-    params.require(:project).permit(:title, :deadline, :description, company: current_user.company,
+    params.require(:project).permit(:title, :deadline, :description, :completed, company: current_user.company,
         :segment_attributes => [
             :title,
             :deadline,

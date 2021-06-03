@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_02_005510) do
+ActiveRecord::Schema.define(version: 2021_06_03_200632) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_005510) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "completed", default: false
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -97,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_005510) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "completed", default: false
     t.index ["project_id"], name: "index_segments_on_project_id"
     t.index ["team_id"], name: "index_segments_on_team_id"
     t.index ["user_id"], name: "index_segments_on_user_id"
@@ -122,6 +124,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_005510) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "assigned_user_id"
+    t.boolean "completed", default: false
     t.index ["position_id"], name: "index_tasks_on_position_id"
     t.index ["segment_id"], name: "index_tasks_on_segment_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"

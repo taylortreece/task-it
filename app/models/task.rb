@@ -2,7 +2,7 @@ class Task < ApplicationRecord
     belongs_to :segment
     belongs_to :position 
     belongs_to :user
-    has_many :task_comments
+    has_many :task_comments, dependent: :destroy
     has_many :users, through: :task_comments
 
     validates :title, presence: true
@@ -15,6 +15,7 @@ class Task < ApplicationRecord
         @user = User.create(user_attributes.with_defaults(user_id: self.user_id))
         self.assigned_user_id = @user.id
        end
+       # a user is not updated through this method.
     end
 
     def position_attributes=(position_attributes)
@@ -38,12 +39,4 @@ class Task < ApplicationRecord
     def assigned_user
         User.find_by(id: self.assigned_user_id)
     end
-
-    # def assign_self_to_user
-    #     @user.tasks << self
-    # end
-
-    # def validate_user_attributes(user_attributes)
-    #     user_attributes
-    # end
 end

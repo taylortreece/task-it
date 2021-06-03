@@ -2,6 +2,16 @@
 <h3><%= @segment.project.title %></h3>
 Assigned Team: <%= @segment.team.name %><br><br>
 
+<%= form_for [@segment.project, @segment] do |f| %>
+<% if @segment.completed == false %>
+    Mark if segment is completed: 
+    <%= f.radio_button :completed, true, { onchange: 'this.form.submit();' } %>
+  <% else %>
+    Mark if segment is incomplete:
+    <%= f.radio_button :completed, false, { onchange: 'this.form.submit();' } %>
+  <% end %>
+<% end %>
+
 <% @segment.tasks.each do |task| %>
     <% if !task.id.nil? && !task.assigned_user_id.nil? %>
     Task: <%= link_to "#{task.title}", segment_task_path(@segment.id, task.id) %>,

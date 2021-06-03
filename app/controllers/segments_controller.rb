@@ -21,7 +21,6 @@ class SegmentsController < ApplicationController
     end
 
     def create
-        binding.pry
         @segment = Segment.new(segment_params)
         @project = Project.find_by(id: params[:segment][:project_id])
         @team = Team.find_by(id: params[:segment][:team_id])
@@ -56,7 +55,7 @@ class SegmentsController < ApplicationController
 
     def segment_params
         params.require(:segment).permit({:team_attributes => [:name, :description]}, 
-        :title, :deadline, :description, :project_id, :user_id, :team_id)
+        :title, :deadline, :description, :project_id, :user_id, :team_id, :completed)
         .with_defaults(user_id: current_user.id)
     end
 end
