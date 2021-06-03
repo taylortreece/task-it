@@ -27,6 +27,9 @@ class ProjectCommentsController < ApplicationController
     end
 
     def destroy
+        @project = ProjectComment.find_by(id: params[:id]).project
+        ProjectComment.find_by(id: params[:id]).delete
+        redirect_to project_path(@project)
     end
 
     private
