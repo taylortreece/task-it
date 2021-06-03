@@ -14,7 +14,7 @@ class TaskCommentsController < ApplicationController
         @task = Task.find_by(id: params[:task_comment][:task_id])
         @task_comment = @task.task_comments.build(task_comment_params)
         if @task_comment.save
-            redirect_to task_path(@task)
+            redirect_to segment_task_path(@task.segment, @task)
         else
             render 'tasks/show'
         end
@@ -27,6 +27,9 @@ class TaskCommentsController < ApplicationController
     end
 
     def destroy
+        @task = TaskComment.find_by(id: params[:id]).task
+        TaskComment.find_by(id: params[:id]).delete
+        redirect_to segment_task_path(@task.segment, @task)
     end
 
     private
