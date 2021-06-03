@@ -1,0 +1,13 @@
+<br><br>Comments: <br><br>
+
+<% @segment.segment_comments.each do |comment| %>
+  <% if @segment.segment_comments.all == [] %>
+    <p>There are no comments to view on this post</p>
+  <% else %>
+      <% if !comment.id.nil? || !comment.content.nil?%>
+        <%= link_to "#{comment.user.full_name}", team_user_path(comment.user.team.id, comment.user.id) %><br>
+        <%= comment.content %>
+        <%= link_to "delete", comment, :method => :delete %>
+    <% end %>
+  <% end %>
+<% end %>

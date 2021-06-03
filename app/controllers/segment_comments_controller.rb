@@ -27,6 +27,9 @@ class SegmentCommentsController < ApplicationController
     end
 
     def destroy
+        @segment = SegmentComment.find_by(id: params[:id]).segment
+        SegmentComment.find_by(id: params[:id]).delete
+        redirect_to segment_path(@segment)
     end
 
     private
