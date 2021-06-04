@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
   end
 
+  get '/profile/:id', to: 'users#profile'
+  get '/profile/:id/:edit', to: 'users#profile'
+  patch '/profile/:id', to: 'users#update'
+
   resources :project_comments
   resources :segment_comments
   resources :task_comments

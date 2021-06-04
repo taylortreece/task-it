@@ -10,6 +10,17 @@ class UsersController < ApplicationController
         @team = @user.team
     end
 
+    def profile
+        @user = current_user
+        if params[:edit] == "edit"
+            @edit_my_profile = true
+            @position = @user.positions.build
+            @team = @position.build_team
+        else
+            @edit_my_profile = false
+        end
+    end
+
     def new
         @user = User.new
         render layout: false
