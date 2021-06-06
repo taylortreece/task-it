@@ -20,16 +20,45 @@ class User < ApplicationRecord
     accepts_nested_attributes_for :company
     accepts_nested_attributes_for :positions
     
+    def team_attributes=(team_attributes)
+        # selecting a team from a dropbox
+        if team_attributes[:id] != ""
+            @team = Team.find_by(id: team_attributes[:id]) 
+        # updating an existing team
+        elsif self.position && team_attributes[:name]!="" && team_attributes[:profile].nil?
+                self.team.update(team_attributes.with_defaults(company: self.company, user_id: self.user_id))
+                @team = self.team
+        else
+        # creating a team from the profile page
+            if team_attributes[:profile] == "profile"
+                @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.company, user_id: self.user_id))
+                @team.save
+        # creating a team
+            elsif team_attributes[:name] != ''
+                @team = Team.new(team_attributes.with_defaults(company: self.company, user_id: self.user_id))
+                @team.save
+            else
+            end
+        end
+        @position = self.position if self.position
+        @position.update(team_id: @team.id) if @position
+        binding.pry
+    end
 
     def position_attributes=(position_attributes)
-        self.save
-        if self.assigned_position
-            self.assigned_position.update(position_attributes.with_defaults(assigned_user_id: self.id))
+            self.save
+        if self.position
+            @position = self.assigned_position
+            @position.team = @team if @team
+            @position.save
+            self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
+        binding.pry
         else
-            position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
-            position.user_id = self.user_id # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
-            position.save
-            self.assigned_position_id = position.id
+            @position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
+            @position.user_id = self.user_id # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
+            @position.team = @team if @team
+            @position.save
+        binding.pry
         end
     end
 
@@ -42,7 +71,7 @@ class User < ApplicationRecord
     end
 
     def assigned_position
-        Position.all.find_by(id: self.assigned_position_id)
+        Position.find_by(assigned_user_id: self.id)
     end
 
     def team

@@ -12,13 +12,24 @@ class UsersController < ApplicationController
 
     def profile
         @user = current_user
-        if params[:edit] == "edit"
+        if !params[:show_form].nil? && params[:edit] == "edit"
+            @edit_my_profile = true
+            @position = @user.positions.build
+            @team = @position.build_team
+            @show_form = params[:show_form]
+        elsif params[:edit] == "edit"
             @edit_my_profile = true
             @position = @user.positions.build
             @team = @position.build_team
         else
             @edit_my_profile = false
         end
+    end
+
+    def profile_form_handler
+        @user = User.find_by(id: params[:id])
+        @user.update(created_user_params)
+        redirect_to "/profile/#{current_user.id}"
     end
 
     def new
@@ -61,10 +72,16 @@ class UsersController < ApplicationController
         @user = User.find_by(id: params[:id])
         
         if @user.update(created_user_params)
+            @team = @user.team
             redirect_to team_user_path(@team, @user)
         else
             @position = @user.assigned_position
+            if @user.id == current_user.id
+                @edit_my_profile = "true"
+                render :profile
+            else
             render "/teams/1?show_user_form=true"
+            end
         end
     end
 
@@ -78,7 +95,6 @@ class UsersController < ApplicationController
 
     def signup_user_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :privilege,
-
             company_attributes: [
                 :name,
                 :industry,
@@ -91,18 +107,24 @@ class UsersController < ApplicationController
             position_attributes: [
                 :title,
                 :description,
-                :team_id
+                :team_id,
             ]
         )
     end
 
     def created_user_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :privilege,
+            :team_attributes => [
+                :name,
+                :description,
+                :id,
+                :profile #for determining if the form came from the profile page. Do not allow into update or create method for team
+            ],
             position_attributes: [
                 :title,
                 :description,
-                :team_id
-            ]
+                :team_id,
+            ],
         ).with_defaults(user_id: current_user.id)
     end
 end

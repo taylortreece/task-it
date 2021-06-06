@@ -1,5 +1,6 @@
 <h1><%= @user.full_name %></h1>
 <%= @user.email %><br><br>
-<%= @user.positions == [] ? "This user has no assigned positions." : @user.positions.last.title %>
+<%= @user.assigned_position ? @user.assigned_position.title : "This user has no assigned positions." %><br><br>
 
-<%= link_to "Edit User", edit_team_user_path(@team, @user) %><%= link_to "Delete User", [@team, @user], :method => :delete %>
+<%= link_to "Edit User", edit_team_user_path(@team, @user) %><br>
+<%= link_to "Delete User", [@team, @user], :method => :delete %><br>

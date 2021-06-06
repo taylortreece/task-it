@@ -24,8 +24,9 @@ Rails.application.routes.draw do
   end
 
   get '/profile/:id', to: 'users#profile'
+  patch '/profile/:id', to: 'users#profile_form_handler'
   get '/profile/:id/:edit', to: 'users#profile'
-  patch '/profile/:id', to: 'users#update'
+  get '/profile/:id/:edit/:show_form', to: 'users#profile'
 
   resources :project_comments
   resources :segment_comments
