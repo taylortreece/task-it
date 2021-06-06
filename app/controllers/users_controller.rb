@@ -11,7 +11,8 @@ class UsersController < ApplicationController
     end
 
     def profile
-        @user = current_user
+        @current_user = current_user
+        params[:id] ? @user=(User.find_by(id: params[:id])) : @user=(current_user)
         if !params[:show_form].nil? && params[:edit] == "edit"
             @edit_my_profile = true
             @position = @user.positions.build
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
     def profile_form_handler
         @user = User.find_by(id: params[:id])
         @user.update(created_user_params)
-        redirect_to "/profile/#{current_user.id}"
+        redirect_to "/profile/#{@user.id}"
     end
 
     def new

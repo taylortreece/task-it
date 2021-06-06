@@ -31,7 +31,7 @@ class User < ApplicationRecord
         else
         # creating a team from the profile page
             if team_attributes[:profile] == "profile"
-                @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.company, user_id: self.user_id))
+                @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.creator.company, user_id: self.user_id))
                 @team.save
         # creating a team
             elsif team_attributes[:name] != ''
@@ -40,6 +40,7 @@ class User < ApplicationRecord
             else
             end
         end
+        binding.pry
         @position = self.position if self.position
         @position.update(team_id: @team.id) if @position
         binding.pry
@@ -81,4 +82,9 @@ class User < ApplicationRecord
     def position
         Position.find_by(assigned_user_id: self.id)
     end
+
+    def creator
+        User.find_by(id: self.user_id) unless self.user_id.nil?
+    end
+
 end
