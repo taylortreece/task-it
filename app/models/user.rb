@@ -22,7 +22,7 @@ class User < ApplicationRecord
     
     def team_attributes=(team_attributes)
         # selecting a team from a dropbox
-        if team_attributes[:id] != ""
+        if !team_attributes[:id].nil?
             @team = Team.find_by(id: team_attributes[:id]) 
         # updating an existing team
         elsif self.position && team_attributes[:name]!="" && team_attributes[:profile].nil?
@@ -31,19 +31,17 @@ class User < ApplicationRecord
         else
         # creating a team from the profile page
             if team_attributes[:profile] == "profile"
-                @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.creator.company, user_id: self.user_id))
+            @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.creator.company, user_id: self.user_id))
                 @team.save
         # creating a team
             elsif team_attributes[:name] != ''
-                @team = Team.new(team_attributes.with_defaults(company: self.company, user_id: self.user_id))
+            @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.company, user_id: self.user_id))
                 @team.save
             else
             end
         end
-        binding.pry
         @position = self.position if self.position
         @position.update(team_id: @team.id) if @position
-        binding.pry
     end
 
     def position_attributes=(position_attributes)
@@ -53,13 +51,12 @@ class User < ApplicationRecord
             @position.team = @team if @team
             @position.save
             self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
-        binding.pry
         else
             @position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
             @position.user_id = self.user_id # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
             @position.team = @team if @team
+            self.assigned_position_id = @position.id
             @position.save
-        binding.pry
         end
     end
 

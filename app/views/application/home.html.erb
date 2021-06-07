@@ -9,7 +9,8 @@
 
     <div class="col-lg-8" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
       <p style="border-style: solid;"><%= link_to "Create Project", new_project_path %></p>
-        <%= link_to "#{Project.all.last.title}", project_path(Project.all.last) unless Project.all == []%>
+        <%= link_to "#{@project.title}", project_path(Project.all.last) unless Project.all == []%><br>
+          <%= render :partial => "projects/show_segments" %>
     </div>
     
     <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">

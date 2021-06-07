@@ -35,4 +35,23 @@ Rails.application.routes.draw do
   # match must be last route
 
   match '*path', to: "application#notfound", via: [:get, :post]
+
+  # Which routes need to be namespaced??
+
+  # Admin Routes:
+
+  #  All routes should be accessable to admin
+
+
+
+  # Team Leader Routes:
+
+  # Team leaders can only create tasks, create users, mark tasks and segments completed
+
+
+  # Team Member Routes:
+
+  # Team members can only edit their profile, mark tasks as completed, and comment.
+
+  # routes that edit 
 end

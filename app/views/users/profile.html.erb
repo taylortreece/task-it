@@ -1,8 +1,11 @@
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 <% if @edit_my_profile == false %>
 
 <h1><%= @user.full_name %>'s Profile</h1>
 <h4><%= @user.email %></h4>
-<h4><%= @user.assigned_position.title %> - <%= @user.team.name %></h4>
+<h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= @user.team.name unless @user.assigned_position.nil? %></h4>
 
 <%= link_to "Edit Profile", "/profile/#{@user.id}/edit" %>
 
@@ -11,4 +14,7 @@
 <%= render :partial => "users/edit_my_profile" %>
 
 <% end %>
+        </div>
+    </div>
+</div>
 

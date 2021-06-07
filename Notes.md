@@ -6,13 +6,12 @@
 
 2. Design
 
-2.2. Begin setting up show pages to output all data.
-    - Project, Segments, Tasks
-        -hide new user form in update tasks
-        
+2.2. Begin setting up show pages to output all data.        
     - Teams, Users
         -Team Index/Show Pages
+    
+    -Home Page
+        -Projects
 
 3. Bugs
     - URL changes when clicking "Completed" radio button.
-    - Update User's position from Task Update Page

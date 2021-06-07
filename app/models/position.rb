@@ -14,4 +14,8 @@ class Position < ApplicationRecord
     def assigned_user
         User.find_by(id: self.assigned_user_id)
     end
+
+    def team
+        Team.find_by(id: self.team_id)
+    end
 end

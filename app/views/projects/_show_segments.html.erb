@@ -1,4 +1,5 @@
-<% if @project.segments == [] %>
+<% if @project.nil? %>
+<% elsif @project.segments == [] %>
     <p>"You have no segments for this project"</p>
 <% else %>
     <% @project.segments.each do |segment| %>
