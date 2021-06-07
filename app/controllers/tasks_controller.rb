@@ -9,6 +9,7 @@ class TasksController < ApplicationController
     end
 
     def create
+        binding.pry
         @segment = Segment.find_by(id: params[:task][:segment_id])
         @task = @segment.tasks.build(task_params)
         assign_existing_user
@@ -27,11 +28,15 @@ class TasksController < ApplicationController
     def edit
         @task = Task.find_by(id: params[:id])
         @segment = @task.segment
-        @user = User.new
-        @position = Position.new
+        @task.assigned_user.nil? ? @user=(User.new) : @user=(@task.assigned_user)
+        @user.assigned_position.nil? ? @position=(Position.new) : @position=(@user.assigned_position)
+        if params[:show_user_form]
+            @show_user_form = params[:show_user_form]
+        end
     end
 
     def update
+        binding.pry
         @task = Task.find_by(id: params[:id])
         if @task.update(task_params)
             redirect_to @task.segment
@@ -55,7 +60,8 @@ class TasksController < ApplicationController
             :email,
             :password,
             :password_confirmation,
-            :privilege
+            :privilege,
+            :user_param_value
         ],
         position_attributes: [
             :title,

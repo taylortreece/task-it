@@ -1,15 +1,22 @@
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+
 <h1><%= @segment.title %></h1>
 <h3><%= link_to "#{@segment.project.title}", project_path(@segment.project) %></h3>
-Assigned Team: <%= link_to "#{@segment.team.name}", team_path(@segment.team) %><br><br>
+Assigned Team: <%= link_to "#{@segment.team.name}", team_path(@segment.team) %><br>
 
-<%= link_to "Update Segment", edit_project_segment_path(@segment.project, @segment) %><br><br>
-<%= link_to "Delete Segment", @segment, :method => :delete %><br><br>
+<%= render :partial => "completed_form" %><br><br>
 
-<%= render :partial => "completed_form" %>
-
+<h2>Tasks</h2>
 <%= render :partial => "show_tasks" %><br>
 
-<%= link_to "Add Tasks", project_segment_path(@segment, :show_task_form => true) unless @task %>
+<%= link_to "Add Tasks", project_segment_path(@segment, :show_task_form => true) unless @task %>&nbsp&nbsp
+<%= link_to "Update Segment", edit_project_segment_path(@segment.project, @segment) %>&nbsp&nbsp
+<%= link_to "Delete Segment", @segment, :method => :delete %>
+        </div>
+    </div>
+</div>
 
 <%= render :partial => 'tasks/form', :locals => { :task => @task } if @task %>
 

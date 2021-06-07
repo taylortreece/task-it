@@ -1,19 +1,23 @@
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 <h1><%= @project.title %></h1>
-<%= @project.deadline %><br><br>
+<%= pretty_deadline(@project) %><br><br>
 <%= @project.description %><br><br>
-
-<%= link_to "Update Project", edit_project_path(@project) %><br><br>
-<%= link_to "Delete Project", @project, :method => :delete %><br><br>
 
 <%= render :partial => "completed_form" %><br>
 
+<h3>Segments:</h3>
 <%= render :partial => "show_segments" %>
 
-<br><br><%= link_to "Add Segments", project_path(@project, :show_segment_form => true ) unless @segment %>
 
-<%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %>
-
-<%= link_to "Add Team", project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? %>
+<%= link_to "Add Segments", project_path(@project, :show_segment_form => true ) unless @segment %>&nbsp&nbsp
+<%= link_to "Update Project", edit_project_path(@project) %>&nbsp&nbsp
+<%= link_to "Delete Project", @project, :method => :delete %>
+        </div>
+    </div>
+</div>
+<%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %><br>
 
 <%= render :partial => 'project_comments/form', :locals => { :subject => @project } %>
 

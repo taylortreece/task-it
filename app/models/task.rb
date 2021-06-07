@@ -10,12 +10,18 @@ class Task < ApplicationRecord
     validates :description, presence: true
 
     def user_attributes=(user_attributes)
-        #if a new user and position is created for a task.
-       if !!user_attributes[:first_name]
-        @user = User.create(user_attributes.with_defaults(user_id: self.user_id))
-        self.assigned_user_id = @user.id
-       end
-       # a user is not updated through this method.
+        binding.pry
+       if user_attributes[:user_param_value] == "edit_user"
+        self.assigned_user.update(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id))
+        @user = self.assigned_user
+        binding.pry
+       elsif user_attributes[:user_param_value] == "create_user"
+          if !!user_attributes[:first_name]
+           @user = User.create(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id))
+           self.assigned_user_id = @user.id
+          end
+        else
+        end
     end
 
     def position_attributes=(position_attributes)
@@ -23,9 +29,13 @@ class Task < ApplicationRecord
        if self.position.nil? && !!position_attributes[:title]
         self.position = Position.create(position_attributes.with_defaults(user_id: self.user_id, team_id: self.segment.team.id, assigned_user_id: self.assigned_user.id))
         #if a person updates a task with a newly created team_member and position
-       elsif self.position && position_attributes[:title] != ""
-        self.position = Position.create(position_attributes.with_defaults(user_id: self.user_id, team_id: self.segment.team.id, assigned_user_id: self.assigned_user.id))
-        #if a person selects to update a task's position from the drop down box
+    #    elsif self.position && position_attributes[:title] != ""
+    #     self.position = Position.create(position_attributes.with_defaults(user_id: self.user_id, team_id: self.segment.team.id, assigned_user_id: self.assigned_user.id))
+        #if a person selects to update a task's position from the drop down box\
+       elsif @user.assigned_position
+        @user.assigned_position.update(position_attributes.with_defaults(user_id: self.user_id, team_id: self.segment.team.id, assigned_user_id: @user.id))
+        @user.save
+        self.position = @user.assigned_position
        else
         self.assigned_user_id = self.position.assigned_user_id
        end

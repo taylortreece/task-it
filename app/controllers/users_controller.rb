@@ -11,8 +11,8 @@ class UsersController < ApplicationController
     end
 
     def profile
+        @user=(User.find_by(id: params[:id])) if params[:id]
         @current_user = current_user
-        params[:id] ? @user=(User.find_by(id: params[:id])) : @user=(current_user)
         if !params[:show_form].nil? && params[:edit] == "edit"
             @edit_my_profile = true
             @position = @user.positions.build
