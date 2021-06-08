@@ -1,0 +1,16 @@
+<h1><%= @user.full_name %></h1>
+<%= @user.email %><br><br>
+<%= @user.assigned_position ? @user.assigned_position.title : "This user has no assigned positions." %><br><br>
+
+<%#= link_to "(old link) Edit User", edit_team_user_path(@team, @user) %><br>
+<%#= link_to "Delete User", [@team, @user], :method => :delete %><br>
+
+<% if @edit_my_profile.nil? %>
+
+<%= link_to "(new link) Edit Profile", "/profile/#{@user.id}/edit" %>
+
+<% else %>
+
+<%= render :partial => "edit_my_profile" %>
+
+<% end %>

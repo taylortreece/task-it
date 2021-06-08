@@ -1,4 +1,4 @@
-class SegmentCommentsController < ApplicationController
+class Admin::SegmentCommentsController < ApplicationController
     before_action :current_user
 
     def index

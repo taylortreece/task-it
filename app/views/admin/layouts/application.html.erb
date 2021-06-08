@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TaskIt</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <ul>
+    <li style="font-size:40px;"><%= link_to "Company Name", root_path %></li>
+    <li><%= link_to "Company Projects", projects_path %></li>
+    <li><%= link_to "Company Teams", teams_path %></li>
+    <li><%= link_to "Logout", '/logout' %></li>
+    <li><%= link_to "Profile", "/profile/#{@current_user.id}" %>
+  </ul>
+    <%= yield %>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-class SegmentsController < ApplicationController
+class Admin::SegmentsController < ApplicationController
     before_action :current_user
 
     def index

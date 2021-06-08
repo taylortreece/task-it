@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+class Admin::TasksController < ApplicationController
     before_action :current_user
 
     def index

@@ -1,4 +1,4 @@
-class TeamsController < ApplicationController
+class Admin::TeamsController < ApplicationController
     before_action :current_user, :company
 
     def index

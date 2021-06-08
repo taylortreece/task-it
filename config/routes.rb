@@ -1,36 +1,42 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
-  root to: 'application#home'
-
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#logout'
   get '/signup', to: 'users#new'
   post '/signup', to: "users#create"
 
-  resources :projects
-  resources :projects, only: [:show] do
-    resources :segments, only: [:show, :new, :create, :edit, :update, :destroy]
-  end
+  root to: "application#home"
 
-  resources :segments, only: [:show] do
-    resources :tasks, only: [:show, :new, :create, :edit, :update, :destroy]
-  end
-
-  resources :teams
-  resources :teams, only: [:show] do
-    resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
-  end
-
+  scope module: 'admin' do
+  get '/', to: "application#home"
   get '/profile/:id', to: 'users#profile'
   patch '/profile/:id', to: 'users#profile_form_handler'
   get '/profile/:id/:edit', to: 'users#profile'
   get '/profile/:id/:edit/:show_form', to: 'users#profile'
+  end
 
-  resources :project_comments
-  resources :segment_comments
-  resources :task_comments
+  namespace :admin do
+    resources :projects
+
+    resources :projects, only: [:show] do
+      resources :segments, only: [:show, :new, :create, :edit, :update, :destroy]
+    end
+
+    resources :segments, only: [:show] do
+      resources :tasks, only: [:show, :new, :create, :edit, :update, :destroy]
+    end
+
+    resources :teams
+
+    resources :teams, only: [:show] do
+      resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
+    end
+
+    resources :project_comments
+    resources :segment_comments
+    resources :task_comments
+end
 
   # match must be last route
 

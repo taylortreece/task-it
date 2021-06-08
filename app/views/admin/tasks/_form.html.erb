@@ -1,0 +1,58 @@
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+<%= form_for [@segment, @task] do |task_builder| %>
+    <%= task_builder.hidden_field :segment_id, :value => @segment.id %>
+    Title: <%= task_builder.text_field :title %>
+    Deadline: <%= task_builder.date_field :deadline %>
+    Description: <%= task_builder.text_area :description %><br><br>
+
+      <% if @segment.team.positions != []%>
+        Pick a Team Member: <%= task_builder.collection_select :position_id, @segment.team.positions, :id, :title, {:include_blank => true} %>
+        <%= task_builder.submit "Create Task" unless @user %>
+      <% end %>
+
+      <% if @task.assigned_user.nil? %>
+        <% if @segment.team.positions == [] %>
+        <p>You currently have not created any team members in this team. You need to create a team member before you can create a task.</p>
+        <% end %>
+      <% else %>
+        <% if @task.assigned_user %>
+          <br><br><%= link_to "Edit Task's Assigned Team Member", edit_segment_task_path(@task.segment, @task, :show_user_form => "edit_user") unless @show_user_form %>
+        <% else %>
+          <br><br><%= link_to "Edit Task's Assigned Team Member", edit_segment_task_path(@task.segment, @task, :show_user_form => "create_user") unless @show_user_form %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+
+        <% if @show_user_form || @task.assigned_user.nil?%>
+        <div id="container-fluid">
+      <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+
+        <br><h3><%= @user.id.nil? ? "New Team Member" : "Edit Team Member" %></h3>
+        <%= task_builder.fields_for :user, @user do |user_builder| %>
+        <%= user_builder.hidden_field :user_param_value, :value => "#{@show_user_form}" %>
+        First Name: <%= user_builder.text_field :first_name %><br><br>
+        Last Name: <%= user_builder.text_field :last_name %><br><br>
+        Email: <%= user_builder.text_field :email %><br><br>
+        Password: <%= user_builder.password_field :password, :placeholder => "Not required for edit..." %><br><br>
+        Re-Password: <%= user_builder.password_field :password_confirmation, :placeholder => "Not required for edit..." %><br><br>
+        Privlages: <br><br>
+        Admin: <%= user_builder.radio_button :privilege, "Admin"%><br>
+        Team Leader: <%= user_builder.radio_button :privilege, "Team Leader"%><br>
+        Team Member: <%= user_builder.radio_button :privilege, "Team Member"%><br><br>
+
+        <%= task_builder.fields_for :position, @position do |position_builder| %>
+        Position Title: <%= position_builder.text_field :title %>
+        Position Description: <%= position_builder.text_area :description %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <br><br><%= task_builder.submit "Submit Task" if @user || @segment.team.positions != nil %>
+    </div>
+  </div>
+</div>
+<% end %>

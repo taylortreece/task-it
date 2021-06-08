@@ -1,0 +1,5 @@
+<br><br><h1><%= @current_user.company.name %> Teams</h1>
+
+<%= render :partial => "show_all_teams" %>
+
+<%= link_to "Add Team", new_team_path %>

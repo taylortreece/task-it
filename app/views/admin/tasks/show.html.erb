@@ -1,0 +1,18 @@
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <h1><%= @task.title %></h1>
+    <%= @task.description %>
+    Assigned Team Member: <%= @task.assigned_user.full_name %><br><br>
+
+    <%= render :partial => "completed_form" %><br>
+
+    <%= link_to "Update Task", edit_segment_task_path(@task) %>
+    <%= link_to "Delete Task", [@segment, @task], :method => :delete %>
+    </div>
+  </div>
+</div>
+
+<%= render :partial => 'task_comments/form', :locals => { :subject => @task } %>
+
+<%= render :partial => "show_comments" %><br>
