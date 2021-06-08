@@ -4,7 +4,7 @@
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
     <h1>New Project</h1>
 
-    <%= form_for @project do |project_builder| %>
+    <%= form_for [:admin, @project] do |project_builder| %>
     Title: <br>
     <%= project_builder.text_field :title %><br><br>
     Deadline: <br>

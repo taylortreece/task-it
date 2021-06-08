@@ -1,7 +1,8 @@
 class Admin::UsersController < ApplicationController
     before_action :current_user, only: [:index, :show, :edit, :update, :delete,] 
-    before_action :company, only: [:show]
-
+    before_action :company
+    layout "admin_layout"
+    
     def index
     end
 

@@ -11,8 +11,8 @@
 <%= render :partial => "show_segments" %>
 
 
-<%= link_to "Add Segments", project_path(@project, :show_segment_form => true ) unless @segment %>&nbsp&nbsp
-<%= link_to "Update Project", edit_project_path(@project) %>&nbsp&nbsp
+<%= link_to "Add Segments", admin_project_path(@project, :show_segment_form => true ) unless @segment %>&nbsp&nbsp
+<%= link_to "Update Project", edit_admin_project_path(@project) %>&nbsp&nbsp
 <%= link_to "Delete Project", @project, :method => :delete %>
         </div>
     </div>

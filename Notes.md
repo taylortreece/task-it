@@ -2,16 +2,13 @@
 
 1. Function
 
-*1.1 Hide password fields in _edit_my_profile form with link.
+    - *Hide password fields in _edit_my_profile form with link.
 
-2. Design
-
-2.2. Begin setting up show pages to output all data.        
-    - Teams, Users
-        -Team Index/Show Pages
-    
-    -Home Page
-        -Projects
+2. Namespacing
+    - Get admin application layout to show on all admin pages.
 
 3. Bugs
     - URL changes when clicking "Completed" radio button.
+    - "edit_my_profile" line 24, line 28. 
+        Error: "invalide method "id" for Array<#.......>"
+         -- this happened after I began namespacing. 

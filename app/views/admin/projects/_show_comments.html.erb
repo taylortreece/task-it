@@ -6,9 +6,9 @@ Comments: <br><br>
     <p>There are no comments to view on this post.</p>
   <% else %>
       <% if !comment.id.nil? || !comment.content.nil?%>
-        <%= link_to "#{comment.user.full_name}", team_user_path(comment.user) %><br>
+        <%= link_to "#{comment.user.full_name}", admin_team_user_path(comment.user) %><br>
         <%= comment.content %><br>
-        <%= link_to "delete", comment, :method => :delete %>
+        <%= link_to "delete", [:admin, comment], confirm: "Are you sure?", :method => :delete %>
     <% end %>
   <% end %>
 <% end %>

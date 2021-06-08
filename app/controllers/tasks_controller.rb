@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-    before_action :current_user
+    before_action :current_user, :company
 
     def index
     end

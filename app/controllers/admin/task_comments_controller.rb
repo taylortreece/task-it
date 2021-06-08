@@ -1,5 +1,6 @@
 class Admin::TaskCommentsController < ApplicationController
     before_action :current_user
+    layout "admin_layout"
 
     def index
     end

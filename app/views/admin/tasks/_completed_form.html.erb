@@ -1,4 +1,4 @@
-<%= form_for [@task.segment, @task] do |f| %>
+<%= form_for [:admin, @task.segment, @task] do |f| %>
 <% if @task.completed == false %>
     Mark if task is completed: 
     <%= f.radio_button :completed, true, { onchange: 'this.form.submit();' } %>

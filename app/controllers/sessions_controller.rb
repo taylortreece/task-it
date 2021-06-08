@@ -1,4 +1,4 @@
-class Admin::SessionsController < ApplicationController
+class SessionsController < ApplicationController
     layout "login"
     #before_action :current_user
 
@@ -10,7 +10,7 @@ class Admin::SessionsController < ApplicationController
         if @user && @user.authenticate(params[:user][:password])
             session[:user_id] = @user.id
             @current_user = @user
-            redirect_to '/'
+            determine_route(@current_user)
         else
             render :login
         end
@@ -21,5 +21,9 @@ class Admin::SessionsController < ApplicationController
         redirect_to '/login'
     end
 
-    private
+    def determine_route(current_user)
+        redirect_to "/admin/home" if current_user.privilege == "checked Admin" || current_user.privilege == "Admin"
+        redirect_to "/" if current_user.privilege == "checked Team Member"
+    end
+        
 end

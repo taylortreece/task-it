@@ -1,4 +1,4 @@
-<%= form_for @project do |f| %>
+<%= form_for [:admin, @project] do |f| %>
   <% if @project.completed == false %>
     Mark if project is completed: 
     <%= f.radio_button :completed, true, { onchange: 'this.form.submit();' } %>

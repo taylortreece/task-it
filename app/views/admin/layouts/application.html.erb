@@ -12,9 +12,9 @@
 
   <body>
   <ul>
-    <li style="font-size:40px;"><%= link_to "Company Name", root_path %></li>
-    <li><%= link_to "Company Projects", projects_path %></li>
-    <li><%= link_to "Company Teams", teams_path %></li>
+    <li style="font-size:40px;"><%= link_to "Company Name", admin_root_path %></li>
+    <li><%= link_to "Company Projects", admin_projects_path %></li>
+    <li><%= link_to "Company Teams", admin_teams_path %></li>
     <li><%= link_to "Logout", '/logout' %></li>
     <li><%= link_to "Profile", "/profile/#{@current_user.id}" %>
   </ul>

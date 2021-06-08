@@ -3,7 +3,7 @@
     <p>"You have no segments for this project"</p>
 <% else %>
     <% @project.segments.each do |segment| %>
-        <%= link_to("#{segment.title}", project_segment_path(@project.id, segment.id)) %><br>
+        <%= link_to("#{segment.title}", admin_project_segment_path(@project.id, segment.id)) %><br>
         <%= "#{segment.description}" %><br><br>
     <% end %>
 <% end %>

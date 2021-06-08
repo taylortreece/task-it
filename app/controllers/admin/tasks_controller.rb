@@ -1,6 +1,7 @@
 class Admin::TasksController < ApplicationController
     before_action :current_user
-
+    layout "admin_layout"
+    
     def index
     end
     

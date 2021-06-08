@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :current_user, only: [:index, :show, :edit, :update, :delete,] 
-    before_action :company, only: [:show]
+    before_action :current_user
+    before_action :company
 
     def index
     end
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     end
 
     def profile
+        @company = current_user.company
         @user=(User.find_by(id: params[:id])) if params[:id]
         @current_user = current_user
         if !params[:show_form].nil? && params[:edit] == "edit"

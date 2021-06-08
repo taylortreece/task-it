@@ -7,8 +7,8 @@
 
     <%= render :partial => "completed_form" %><br>
 
-    <%= link_to "Update Task", edit_segment_task_path(@task) %>
-    <%= link_to "Delete Task", [@segment, @task], :method => :delete %>
+    <%= link_to "Update Task", edit_admin_segment_task_path(@task) %>
+    <%= link_to "Delete Task", [:admin, @segment, @task], confirm: "Are you sure?", :method => :delete %>
     </div>
   </div>
 </div>

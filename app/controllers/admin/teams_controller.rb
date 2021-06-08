@@ -1,5 +1,6 @@
 class Admin::TeamsController < ApplicationController
     before_action :current_user, :company
+    layout "admin_layout"
 
     def index
     end
