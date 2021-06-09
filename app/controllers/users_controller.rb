@@ -29,7 +29,6 @@ class UsersController < ApplicationController
     end
 
     def profile_form_handler
-        binding.pry
         @user = User.find_by(id: params[:id])
         @user.update(created_user_params)
         redirect_to "/profile/#{@user.id}"

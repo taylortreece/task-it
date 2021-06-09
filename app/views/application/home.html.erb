@@ -2,19 +2,24 @@
   <div class="row">
     <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
       <p style="border-style: solid;"><%= link_to "My team", team_path(@user.team) %></p>
-      <% @current_user.teams.each do |team| %>
-        <%=link_to "#{team.name}", team_path(team) %><br><br>
-        <% end %>
+        <%= link_to "#{@user.team.name}", team_path(@user.team) %><br><br>
     </div>
 
     <div class="col-lg-8" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;"><%= link_to "My Tasks", task_path(@tasks.last) unless @tasks.empty? %></p>
-        <%= link_to "#{@tasks.last.title}", task_path(@user.assigned_tasks.last) unless @tasks.empty? %><br>
+      <p style="border-style: solid;"><%= link_to "My Tasks", tasks_path unless @tasks.empty? %></p>
+
+      <% @tasks.each do |task|%>
+        <% @task = task %>
+        <%= link_to "#{task.title}", segment_task_path(task.segment, task) unless task.id.nil? %><br>
+        <%= task.deadline %><br>
+        <%= task.description %><br><br>
+        <%= render :partial => "tasks/completed_form" %><br>
+        <% end %>
           <%= render :partial => "projects/show_segments" %>
     </div>
     
     <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;">Company Activity</p>
+      <p style="border-style: solid;">Messages</p>
     </div>
 
   </div>

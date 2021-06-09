@@ -1,10 +1,4 @@
 <h1><%= @team.name %></h1>
 
-<%= link_to "Edit Team", edit_team_path(@team)%><br><br>
-<%= link_to "Delete Team", @team, :method => :delete %><br><br>
-
 <%= render :partial => "show_team" %>
 
-<br><br><%= link_to "Create New User", team_path(@team, :show_user_form => true ) unless @user %>
-
-<%= render :partial => 'users/form', :locals => { :user => @user } if @user %>

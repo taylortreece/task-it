@@ -70,7 +70,7 @@ class User < ApplicationRecord
     end
 
     def assigned_tasks
-        Task.all.select { |t| t.assigned_task == self}
+        Task.all.select { |t| t.assigned_user == self}
     end
 
     def assigned_position
@@ -87,6 +87,10 @@ class User < ApplicationRecord
 
     def creator
         User.find_by(id: self.user_id) unless self.user_id.nil?
+    end
+
+    def user_company
+        Company.find_by(user_id: self.user_id)
     end
 
 end

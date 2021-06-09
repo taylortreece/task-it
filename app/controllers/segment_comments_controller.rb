@@ -1,5 +1,5 @@
 class SegmentCommentsController < ApplicationController
-    before_action :current_user, :company
+    before_action :current_user, :user_company
 
     def index
     end

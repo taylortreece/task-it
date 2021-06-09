@@ -23,7 +23,8 @@ class SessionsController < ApplicationController
 
     def determine_route(current_user)
         redirect_to "/admin/home" if current_user.privilege == "checked Admin" || current_user.privilege == "Admin"
-        redirect_to "/" if current_user.privilege == "checked Team Member"
+        redirect_to "/" if current_user.privilege == "checked Team Member" || current_user.privilege == "Team Member"
+        redirect_to "/team-leader/home" if current_user.privilege == "checked Team Leader" || current_user.privilege == "Team Leader"
     end
         
 end

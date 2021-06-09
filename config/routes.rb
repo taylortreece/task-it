@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   root to: "application#home"
 
+  # admin ----------------------------------------
+
   get '/admin/home', to: "application#admin_home"
 
   scope module: 'admin' do
@@ -39,9 +41,34 @@ Rails.application.routes.draw do
     resources :task_comments
 end
 
-resources :teams, only: [:index, :show]
-resources :tasks, only: [:index, :show]
+# Team Member ----------------------------------------
+
 resources :projects, only: [:index, :show]
+
+    resources :projects, only: [:show] do
+      resources :segments, only: [:show]
+    end
+
+    resources :segments, only: [:show] do
+      resources :tasks, only: [:show, :edit, :update]
+    end
+
+    resources :teams, only: [:index, :show]
+
+    resources :teams, only: [:show] do
+      resources :users, only: [:show]
+    end
+
+    resources :tasks, only: [:index]
+
+    resources :project_comments
+    resources :segment_comments
+    resources :task_comments
+
+  get '/profile/:id', to: 'users#profile'
+  patch '/profile/:id', to: 'users#profile_form_handler'
+  get '/profile/:id/:edit', to: 'users#profile'
+  get '/profile/:id/:edit/:show_form', to: 'users#profile'
 
   # match must be last route
 

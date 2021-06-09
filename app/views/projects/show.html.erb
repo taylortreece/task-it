@@ -5,19 +5,12 @@
 <%= pretty_deadline(@project) %><br><br>
 <%= @project.description %><br><br>
 
-<%= render :partial => "completed_form" %><br>
-
 <h3>Segments:</h3>
 <%= render :partial => "show_segments" %>
 
-
-<%= link_to "Add Segments", project_path(@project, :show_segment_form => true ) unless @segment %>&nbsp&nbsp
-<%= link_to "Update Project", edit_project_path(@project) %>&nbsp&nbsp
-<%= link_to "Delete Project", @project, :method => :delete %>
         </div>
     </div>
 </div>
-<%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %><br>
 
 <%= render :partial => 'project_comments/form', :locals => { :subject => @project } %>
 

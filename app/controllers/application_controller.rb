@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     layout "admin_layout", only: [:admin_home]
 
     def home
-        @tasks = current_user.tasks
+        @tasks = current_user.position.tasks
         @user = current_user
         redirect_to admin_home_path if @user.privilege == "checked Admin" || current_user.privilege == "Admin"
     end
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     end
 
     def company
-        @company = current_user.company
+        @company = current_user.company || current_user.user_company
     end
 
     def logged_in?

@@ -8,6 +8,6 @@
 
 2. Namespacing
     - Continue debugging and fixing namespaced routes and partials
+    - fix radio button return value for user privilege (take off ":checked =>")
 
 3. Bugs
-    - New User form not showing up in New Task form on Segment Show Page

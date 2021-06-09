@@ -13,6 +13,7 @@ class Admin::SegmentsController < ApplicationController
             @task = @segment.tasks.build
             @user = @task.build_user
             @positon = @task.build_position
+            @show_task_and_user_form = true
         else
         end
     end
