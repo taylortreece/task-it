@@ -1,7 +1,7 @@
-class Admin::UsersController < ApplicationController
+class TeamLeader::UsersController < ApplicationController
     before_action :current_user, only: [:index, :show, :edit, :update, :delete,] 
     before_action :company
-    layout "admin_layout"
+    layout "team_leader_layout"
     
     def index
     end
@@ -31,7 +31,7 @@ class Admin::UsersController < ApplicationController
     def profile_form_handler
         @user = User.find_by(id: params[:id])
         @user.update(created_user_params)
-        redirect_to "/admin/profile/#{@user.id}"
+        redirect_to "/team_leader/profile/#{@user.id}"
     end
 
     def new
@@ -50,15 +50,15 @@ class Admin::UsersController < ApplicationController
                 flash[:error] = "Oops! Something went wrong. Try again."
                 render :new
             end
-        #create a new user as an admin
+        #create a new user as an team_leader
         else
             @user = User.new(created_user_params)
             @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
             @position = @user.assigned_position
             if @user.save
-                redirect_to admin_team_path(@team)
+                redirect_to team_leader_team_path(@team)
             else
-                render "/admin/teams/show"
+                render "/team_leader/teams/show"
             end
         end
     end
@@ -75,14 +75,14 @@ class Admin::UsersController < ApplicationController
         
         if @user.update(created_user_params)
             @team = @user.team
-            redirect_to admin_team_user_path(@team, @user)
+            redirect_to team_leader_team_user_path(@team, @user)
         else
             @position = @user.assigned_position
             if @user.id == current_user.id
                 @edit_my_profile = "true"
                 render :profile
             else
-            render "/admin/teams/1?show_user_form=true"
+            render "/team_leader/teams/1?show_user_form=true"
             end
         end
     end
@@ -91,7 +91,7 @@ class Admin::UsersController < ApplicationController
         @user = User.find_by(id: params[:id])
         @team = @user.team
         @user.position.delete && @user.delete
-        redirect_to admin_team_path(@team)
+        redirect_to team_leader_team_path(@team)
     end
 
     private

@@ -1,6 +1,6 @@
-class Admin::SegmentCommentsController < ApplicationController
+class TeamLeader::SegmentCommentsController < ApplicationController
     before_action :current_user
-    layout "admin_layout"
+    layout "team_leader_layout"
 
     def index
     end
@@ -15,9 +15,9 @@ class Admin::SegmentCommentsController < ApplicationController
         @segment = Segment.find_by(id: params[:segment_comment][:segment_id])
         @segment_comment = @segment.segment_comments.build(segment_comment_params)
         if @segment_comment.save
-            redirect_to admin_segment_path(@segment)
+            redirect_to team_leader_segment_path(@segment)
         else
-            render 'admin/segments/show'
+            render 'team_leader/segments/show'
         end
     end
 
@@ -30,7 +30,7 @@ class Admin::SegmentCommentsController < ApplicationController
     def destroy
         @segment = SegmentComment.find_by(id: params[:id]).segment
         SegmentComment.find_by(id: params[:id]).delete
-        redirect_to admin_segment_path(@segment)
+        redirect_to team_leader_segment_path(@segment)
     end
 
     private

@@ -7,11 +7,11 @@
 <h4><%= @user.email %></h4>
 <h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= @user.team.name unless @user.assigned_position.nil? %></h4>
 
-<%= link_to "Edit Profile", "/profile/#{@user.id}/edit" %>
+<%= link_to "Edit Profile", "/team_leader/profile/#{@user.id}/edit" %>
 
 <% else %>
 
-<%= render :partial => "users/edit_my_profile" %>
+<%= render :partial => "/team_leader/users/edit_my_profile" %>
 
 <% end %>
         </div>

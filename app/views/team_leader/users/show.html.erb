@@ -1,3 +1,13 @@
 <h1><%= @user.full_name %></h1>
 <%= @user.email %><br><br>
 <%= @user.assigned_position ? @user.assigned_position.title : "This user has no assigned positions." %><br><br>
+
+<% if @edit_my_profile.nil? %>
+
+<%= link_to "Edit Profile", "/team_leader/profile/#{@user.id}/edit" %>
+
+<% else %>
+
+<%= render :partial => "edit_my_profile" %>
+
+<% end %>

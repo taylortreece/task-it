@@ -12,11 +12,11 @@
 
   <body>
   <ul>
-    <li style="font-size:40px;"><%= link_to "Company Name", admin_root_path %></li>
-    <li><%= link_to "Company Projects", admin_projects_path %></li>
-    <li><%= link_to "Company Teams", admin_teams_path %></li>
+    <li style="font-size:40px;"><%= link_to "Company Name", team_leader_home_path %></li>
+    <li><%= link_to "Company Projects", team_leader_projects_path %></li>
+    <li><%= link_to "Company Teams", team_leader_teams_path %></li>
     <li><%= link_to "Logout", '/logout' %></li>
-    <li><%= link_to "Profile", "/profile/#{@current_user.id}" %>
+    <li><%= link_to "Profile", "/team_leader/profile/#{@current_user.id}" %>
   </ul>
     <%= yield %>
   </body>

@@ -72,16 +72,17 @@ resources :projects, only: [:index, :show]
 
   # Team Leader ----------------------------------------
 
+  get '/team-leader/home', to: "application#team_leader_home"
+  
   scope module: 'team_leader' do
-    get '/admin/profile/:id', to: 'users#profile'
-    patch '/admin/profile/:id', to: 'users#profile_form_handler'
-    get '/admin/profile/:id/:edit', to: 'users#profile'
-    get '/admin/profile/:id/:edit/:show_form', to: 'users#profile'
+    get '/team_leader/profile/:id', to: 'users#profile'
+    patch '/team_leader/profile/:id', to: 'users#profile_form_handler'
+    get '/team_leader/profile/:id/:edit', to: 'users#profile'
+    get '/team_leader/profile/:id/:edit/:show_form', to: 'users#profile'
     end
   
     namespace :team_leader do
-
-      resources :projects, only: [:show] do
+      resources :projects, only: [:index, :show] do
         resources :segments, only: [:show, :edit, :update]
       end
   

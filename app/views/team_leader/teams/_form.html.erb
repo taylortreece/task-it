@@ -1,4 +1,4 @@
-<%= form_for @team do |team_builder| %>
+<%= form_for [:team_leader, @team] do |team_builder| %>
 Team Name: <%= team_builder.text_field :name %>
 Team Description: <%= team_builder.text_area :description %><br><br>
 

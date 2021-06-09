@@ -1,4 +1,4 @@
-<%= form_for [@project, @segment] do |segment_builder| %>
+<%= form_for [:team_leader, @project, @segment] do |segment_builder| %>
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
@@ -11,7 +11,7 @@
            Pick a Team<%= segment_builder.collection_select :team_id, Team.all, :id, :name, {:include_blank => true} %>
            <%= segment_builder.submit "Create Segment" unless @team %><br><br>
       <% end %><br>
-        <%= link_to "Create New Team", project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? %>
+        <%= link_to "Create New Team", team_leader_project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? %>
     </div>
   </div>
 </div>
@@ -28,8 +28,9 @@
             Team Description: <%= team_builder.text_area :description %>     
             <% end %>
           <% end %><br><br>
+          <%binding.pry%>
         <%= segment_builder.submit "Create Segment" if @team %>
          </div>
     </div>
   </div>    
-    <% end %>
+<% end %>

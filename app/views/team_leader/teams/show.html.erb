@@ -1,4 +1,7 @@
 <h1><%= @team.name %></h1>
 
-<%= render :partial => "show_team" %>
+<%= render :partial => "team_leader/teams/show_team" %>
 
+<br><br><%= link_to "Create New User", team_leader_team_path(@team, :show_user_form => true ) unless @user || @current_user.team.id != @team.id %>
+
+<%= render :partial => 'team_leader/users/form', :locals => { :user => @user } if @user %>

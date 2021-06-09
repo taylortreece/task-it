@@ -1,6 +1,6 @@
-class Admin::SegmentsController < ApplicationController
+class TeamLeader::SegmentsController < ApplicationController
     before_action :current_user
-    layout "admin_layout"
+    layout "team_leader_layout"
 
     def index
     end
@@ -27,9 +27,9 @@ class Admin::SegmentsController < ApplicationController
         @project = Project.find_by(id: params[:segment][:project_id])
         @team = Team.find_by(id: params[:segment][:team_id])
         if @segment.save
-            redirect_to admin_project_path(@project)
+            redirect_to team_leader_project_path(@project)
         else
-            render "admin/projects/show"
+            render "team_leader/projects/show"
         end
     end
 
@@ -42,7 +42,7 @@ class Admin::SegmentsController < ApplicationController
     def update
         @segment = Segment.find_by(id: params[:id])
         if @segment.update(segment_params)
-            redirect_to admin_segment_path(@segment)
+            redirect_to team_leader_segment_path(@segment)
         else
             render :edit
         end
@@ -52,7 +52,7 @@ class Admin::SegmentsController < ApplicationController
         @segment = Segment.find_by(id: params[:id])
         @project = @segment.project
         @segment.destroy
-        redirect_to admin_project_path(@project)
+        redirect_to team_leader_project_path(@project)
     end
 
     private

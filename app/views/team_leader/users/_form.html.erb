@@ -1,11 +1,10 @@
-<%= form_for [@team, @user] do |user_builder| %>
+<%= form_for [:team_leader, @team, @user] do |user_builder| %>
     First Name: <%= user_builder.text_field :first_name %><br><br>
     Last Name: <%= user_builder.text_field :last_name %><br><br>
     Email: <%= user_builder.text_field :email %><br><br>
     Password: <%= user_builder.password_field :password %><br><br>
     Re-Password: <%= user_builder.password_field :password_confirmation %><br><br>
     Privlages: <br>
-    Admin: <%= user_builder.radio_button :privilege, :checked => "Admin"%><br>
     Team Leader: <%= user_builder.radio_button :privilege, :checked => "Team Leader"%><br>
     Team Member: <%= user_builder.radio_button :privilege, :checked => "Team Member"%><br>
                

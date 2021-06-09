@@ -1,6 +1,6 @@
-class Admin::ProjectCommentsController < ApplicationController
+class TeamLeader::ProjectCommentsController < ApplicationController
     before_action :current_user
-    layout "admin_layout"
+    layout "team_leader_layout"
 
     def index
     end
@@ -15,9 +15,9 @@ class Admin::ProjectCommentsController < ApplicationController
         @project = Project.find_by(id: params[:project_comment][:project_id])
         @project_comment = @project.project_comments.build(project_comment_params)
         if @project_comment.save
-            redirect_to admin_project_path(@project)
+            redirect_to team_leader_project_path(@project)
         else
-            render 'admin/project/show'
+            render 'team_leader/project/show'
         end
     end
 
@@ -30,7 +30,7 @@ class Admin::ProjectCommentsController < ApplicationController
     def destroy
         @project = ProjectComment.find_by(id: params[:id]).project
         ProjectComment.find_by(id: params[:id]).delete
-        redirect_to admin_project_path(@project)
+        redirect_to team_leader_project_path(@project)
     end
 
     private

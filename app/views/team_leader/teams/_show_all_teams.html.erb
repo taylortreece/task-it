@@ -1,5 +1,5 @@
 <% @company.teams.each do |team| %>
-    <%= link_to "#{team.name}", team_path(team) %><br>
+    <%= link_to "#{team.name}", team_leader_team_path(team) %><br>
     <%= team.description %><br>
     <!-- add team leader -->
 <%end%><br>

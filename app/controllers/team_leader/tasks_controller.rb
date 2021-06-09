@@ -1,6 +1,6 @@
-class Admin::TasksController < ApplicationController
+class TeamLeader::TasksController < ApplicationController
     before_action :current_user
-    layout "admin_layout"
+    layout "team_leader_layout"
     
     def index
     end

@@ -1,6 +1,6 @@
-class Admin::ProjectsController < ApplicationController
+class TeamLeader::ProjectsController < ApplicationController
     before_action :current_user, :company
-    layout "admin_layout"
+    layout "team_leader_layout"
     
     def index
         @projects = company.projects.all
@@ -27,7 +27,7 @@ class Admin::ProjectsController < ApplicationController
         @project.company = current_user.company
 
         if @project.save
-            redirect_to admin_project_path(@project)
+            redirect_to team_leader_project_path(@project)
         else
             render :new
         end
@@ -42,7 +42,7 @@ class Admin::ProjectsController < ApplicationController
         @project = Project.find_by(id: params[:id])
         if @project.update(project_params)
         binding.pry
-        redirect_to admin_project_path(@project)
+        redirect_to team_leader_project_path(@project)
         else
         binding.pry
         render :edit
@@ -51,7 +51,7 @@ class Admin::ProjectsController < ApplicationController
 
     def destroy
         Project.find_by(id: params[:id]).destroy
-        redirect_to admin_projects_path
+        redirect_to team_leader_projects_path
     end
 
     private

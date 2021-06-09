@@ -6,12 +6,12 @@
 <%= @project.description %><br><br>
 
 <h3>Segments:</h3>
-<%= render :partial => "show_segments" %>
+<%= render :partial => "team_leader/projects/show_segments" %>
 
         </div>
     </div>
 </div>
 
-<%= render :partial => 'project_comments/form', :locals => { :subject => @project } %>
+<%= render :partial => 'team_leader/project_comments/form', :locals => { :subject => @project } %>
 
-<br><%= render :partial => "show_comments" %>
+<br><%= render :partial => "team_leader/projects/show_comments" %>

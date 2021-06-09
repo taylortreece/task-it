@@ -1,4 +1,4 @@
-<%= form_for @project.project_comments.build do |comment_builder| %>
+<%= form_for [:team_leader, @project.project_comments.build] do |comment_builder| %>
 <%= comment_builder.hidden_field :project_id, :value => @project.id %>
 Comment on this <%= @project.class %><br>
 <%= comment_builder.text_area :content %><br>

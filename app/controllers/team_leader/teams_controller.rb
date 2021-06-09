@@ -1,12 +1,13 @@
-class Admin::TeamsController < ApplicationController
+class TeamLeader::TeamsController < ApplicationController
     before_action :current_user, :company
-    layout "admin_layout"
+    layout "team_leader_layout"
 
     def index
     end
 
     def show
         @team = Team.find_by(id: params[:id])
+        @current_user = current_user
         if params[:show_user_form] == "true"
             @position = @team.positions.build
             @user = @position.build_user
@@ -20,7 +21,7 @@ class Admin::TeamsController < ApplicationController
     def create
         @team = Team.new(team_params)
         if @team.save
-            redirect_to admin_team_path(@team)
+            redirect_to team_leader_team_path(@team)
         else
             render :new
         end
@@ -33,7 +34,7 @@ class Admin::TeamsController < ApplicationController
     def update
         @team = Team.find_by(id: params[:id])
         if @team.update(team_params)
-            redirect_to admin_team_path(@team)
+            redirect_to team_leader_team_path(@team)
         else
             render :edit
         end
@@ -45,7 +46,7 @@ class Admin::TeamsController < ApplicationController
             position.delete
         end
         Team.find_by(id: params[:id]).delete
-        redirect_to admin_teams_path
+        redirect_to team_leader_teams_path
     end
 
     private

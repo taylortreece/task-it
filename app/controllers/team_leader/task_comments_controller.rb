@@ -1,6 +1,6 @@
-class Admin::TaskCommentsController < ApplicationController
+class TeamLeader::TaskCommentsController < ApplicationController
     before_action :current_user
-    layout "admin_layout"
+    layout "team_leader_layout"
 
     def index
     end
@@ -15,9 +15,9 @@ class Admin::TaskCommentsController < ApplicationController
         @task = Task.find_by(id: params[:task_comment][:task_id])
         @task_comment = @task.task_comments.build(task_comment_params)
         if @task_comment.save
-            redirect_to admin_segment_task_path(@task.segment, @task)
+            redirect_to team_leader_segment_task_path(@task.segment, @task)
         else
-            render 'admin/tasks/show'
+            render 'team_leader/tasks/show'
         end
     end
 
@@ -30,7 +30,7 @@ class Admin::TaskCommentsController < ApplicationController
     def destroy
         @task = TaskComment.find_by(id: params[:id]).task
         TaskComment.find_by(id: params[:id]).delete
-        redirect_to admin_segment_task_path(@task.segment, @task)
+        redirect_to team_leader_segment_task_path(@task.segment, @task)
     end
 
     private

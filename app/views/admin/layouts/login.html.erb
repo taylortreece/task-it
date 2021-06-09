@@ -1,8 +1,0 @@
-<h1>Login</h1>
-
-<%= form_tag '/login', method: :post %>
-    Email: <%= text_field_tag :'user[email]' %>
-    Password: <%= text_field_tag :'user[password]' %>
-<%= submit_tag "Log In" %>
-
-or <%= link_to 'Signup', '/signup' %>

@@ -1,7 +1,7 @@
 <% if !@team.positions.empty? %>
 <% @team.positions.each do |position| %>
     <% if !position.id.nil? && !position.assigned_user.nil? %> <!-- take out one conditional after testing is complete -->
-        <%= link_to "#{position.assigned_user.full_name}", team_user_path(@team.id, position.assigned_user.id) %>
+        <%= link_to "#{position.assigned_user.full_name}", team_leader_team_user_path(@team.id, position.assigned_user.id) %>
     <% end %>
   <% end %>
 <% else %>
