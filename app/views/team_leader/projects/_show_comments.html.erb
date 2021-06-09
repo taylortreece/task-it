@@ -1,0 +1,14 @@
+Comments: <br><br>
+  
+  <% @project.project_comments.each do |comment| %>
+  <% comment.delete if comment.id.nil?%>
+  <% if @project.project_comments.all == [] %>
+    <p>There are no comments to view on this post.</p>
+  <% else %>
+      <% if !comment.id.nil? || !comment.content.nil?%>
+        <%= link_to "#{comment.user.full_name}", team_user_path(comment.user) %><br>
+        <%= comment.content %><br>
+        <%= link_to "delete", comment, :method => :delete %>
+    <% end %>
+  <% end %>
+<% end %>

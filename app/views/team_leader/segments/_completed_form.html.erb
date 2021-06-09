@@ -1,0 +1,9 @@
+<%= form_for [@segment.project, @segment] do |f| %>
+<% if @segment.completed == false %>
+    Mark if segment is completed: 
+    <%= f.radio_button :completed, true, { onchange: 'this.form.submit();' } %>
+  <% else %>
+    Mark if segment is incomplete:
+    <%= f.radio_button :completed, false, { onchange: 'this.form.submit();' } %>
+  <% end %>
+<% end %>

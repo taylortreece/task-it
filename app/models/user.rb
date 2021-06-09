@@ -21,6 +21,7 @@ class User < ApplicationRecord
     accepts_nested_attributes_for :positions
     
     def team_attributes=(team_attributes)
+        self.update(user_id: self.id) unless !self.user_id.nil?
         # selecting a team from a dropbox
         if !team_attributes[:id].nil?
             @team = Team.find_by(id: team_attributes[:id]) 

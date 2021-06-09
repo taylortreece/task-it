@@ -1,7 +1,23 @@
-class TasksController < ApplicationController
-    before_action :current_user, :company
-
+class Admin::TasksController < ApplicationController
+    before_action :current_user
+    layout "admin_layout"
+    
     def index
+    end
+    
+    def new
+        @task = @segment.tasks.build
+    end
+
+    def create
+        @segment = Segment.find_by(id: params[:task][:segment_id])
+        @task = @segment.tasks.build(task_params)
+        assign_existing_user
+        if @task.save
+            redirect_to admin_segment_path(@segment)
+        else
+            render 'admin/segments/show'
+        end
     end
 
     def show
@@ -11,20 +27,28 @@ class TasksController < ApplicationController
 
     def edit
         @task = Task.find_by(id: params[:id])
+        @segment = @task.segment
+        @task.assigned_user.nil? ? @user=(User.new) : @user=(@task.assigned_user)
+        @user.assigned_position.nil? ? @position=(Position.new) : @position=(@user.assigned_position)
+        if params[:show_user_form]
+            @show_user_form = params[:show_user_form]
+        end
     end
 
     def update
         @task = Task.find_by(id: params[:id])
         if @task.update(task_params)
-            redirect_to segment_task_path(@task)
+            redirect_to admin_segment_task_path(@task)
         else
-            render :show
+            render :edit
         end
     end
 
     def destroy
-        Task.find_by(id: params[:id]).destroy
-        redirect_to '/'
+        @task = Task.find_by(id: params[:id])
+        @segment = @task.segment
+        @task.destroy
+        redirect_to admin_segment_path(@segment)
     end
 
     private

@@ -1,0 +1,17 @@
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+
+<h1><%= @segment.title %></h1>
+<h3><%= link_to "#{@segment.project.title}", project_path(@segment.project) %></h3>
+Assigned Team: <%= link_to "#{@segment.team.name}", team_path(@segment.team) %><br>
+
+<h2>Tasks</h2>
+<%= render :partial => "show_tasks" %><br>
+        </div>
+    </div>
+</div>
+
+<%= render :partial => 'segment_comments/form', :locals => { :subject => @segment } %>
+
+<%= render :partial => "show_comments" %>

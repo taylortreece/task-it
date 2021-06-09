@@ -53,7 +53,7 @@ resources :projects, only: [:index, :show]
       resources :tasks, only: [:show, :edit, :update]
     end
 
-    resources :teams, only: [:index, :show]
+    resources :teams, only: [:index]
 
     resources :teams, only: [:show] do
       resources :users, only: [:show]
@@ -69,6 +69,35 @@ resources :projects, only: [:index, :show]
   patch '/profile/:id', to: 'users#profile_form_handler'
   get '/profile/:id/:edit', to: 'users#profile'
   get '/profile/:id/:edit/:show_form', to: 'users#profile'
+
+  # Team Leader ----------------------------------------
+
+  scope module: 'team_leader' do
+    get '/admin/profile/:id', to: 'users#profile'
+    patch '/admin/profile/:id', to: 'users#profile_form_handler'
+    get '/admin/profile/:id/:edit', to: 'users#profile'
+    get '/admin/profile/:id/:edit/:show_form', to: 'users#profile'
+    end
+  
+    namespace :team_leader do
+
+      resources :projects, only: [:show] do
+        resources :segments, only: [:show, :edit, :update]
+      end
+  
+      resources :segments, only: [:show] do
+        resources :tasks, only: [:show, :new, :create, :edit, :update, :destroy]
+      end
+      resources :teams, only: [:index]
+    
+      resources :teams, only: [:show] do
+        resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
+      end
+  
+      resources :project_comments
+      resources :segment_comments
+      resources :task_comments
+  end
 
   # match must be last route
 
