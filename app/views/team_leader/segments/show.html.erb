@@ -12,8 +12,6 @@ Assigned Team: <%= link_to "#{@segment.team.name}", team_leader_team_path(@segme
 <%= render :partial => "show_tasks" %><br>
 
 <%= link_to "Add Tasks", team_leader_project_segment_path(@segment, :show_task_form => true) unless @task %>&nbsp&nbsp
-<%= link_to "Update Segment", edit_team_leader_project_segment_path(@segment.project, @segment) %>&nbsp&nbsp
-<%= link_to "Delete Segment", team_leader_project_segment_path(@segment), :method => :delete %>
         </div>
     </div>
 </div>

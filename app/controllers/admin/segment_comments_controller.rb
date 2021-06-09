@@ -1,5 +1,5 @@
 class Admin::SegmentCommentsController < ApplicationController
-    before_action :current_user
+    before_action :current_user, :company, :admin?
     layout "admin_layout"
 
     def index

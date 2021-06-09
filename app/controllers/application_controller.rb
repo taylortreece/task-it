@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     end
 
     def team_leader_home
-        @segments = true 
+        @segments = current_user.team.segments
     end
 
     def admin_home
@@ -42,17 +42,12 @@ class ApplicationController < ActionController::Base
         !current_user ? redirect_to('/login') : !!current_user
     end
 
-    def validation_status
-        if current_user.admin
-            @admin = true
-        elsif
-            current_user.team_leader
-            @team_leader = true
-        elsif
-            current_user.team_member
-            @team_member = true
-        else
-            redirect_to '/login'
-        end
+    def admin?
+        redirect_to root if current_user.privilege == "Team Member"
+        redirect_to team_leader_home_path if current_user.privilege == "Team Leader" 
+    end
+
+    def team_leader?
+        redirect_to root if current_user.privilege == "Team Member"
     end
 end

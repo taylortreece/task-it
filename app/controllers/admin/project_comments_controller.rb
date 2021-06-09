@@ -1,5 +1,5 @@
 class Admin::ProjectCommentsController < ApplicationController
-    before_action :current_user
+    before_action :current_user, :admin?
     layout "admin_layout"
 
     def index

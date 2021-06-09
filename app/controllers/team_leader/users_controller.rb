@@ -1,5 +1,6 @@
 class TeamLeader::UsersController < ApplicationController
-    before_action :current_user, only: [:index, :show, :edit, :update, :delete,] 
+    before_action :current_user, only: [:index, :show, :edit, :update, :delete,]
+    before_action :team_leader?, only: [:index, :show, :edit, :update, :delete,]
     before_action :company
     layout "team_leader_layout"
     

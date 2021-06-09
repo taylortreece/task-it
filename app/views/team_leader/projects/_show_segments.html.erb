@@ -1,9 +1,13 @@
-<% if @project.nil? %>
-<% elsif @project.segments == [] %>
-    <p>"You have no segments for this project"</p>
+<% if @segments.empty? %>
+    <p>Your team has no segments to complete</p>
 <% else %>
-    <% @project.segments.each do |segment| %>
-        <%= link_to("#{segment.title}", team_leader_project_segment_path(@project.id, segment.id)) %><br>
+    <% @segments.each do |segment| %>
+    <% @segment = segment %>
+        <%= link_to "#{segment.project.title}", team_leader_project_path(segment.project) %><br>
+        <%= link_to("#{segment.title}", team_leader_project_segment_path(segment.project.id, segment.id)) %><br>
+        <%= "#{segment.deadline}" %><br>
         <%= "#{segment.description}" %><br><br>
+        <%= render :partial => "team_leader/segments/completed_form" %><br><br>
+
     <% end %>
 <% end %>
