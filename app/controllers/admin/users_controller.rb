@@ -31,7 +31,7 @@ class Admin::UsersController < ApplicationController
     def profile_form_handler
         @user = User.find_by(id: params[:id])
         @user.update(created_user_params)
-        redirect_to "/profile/#{@user.id}"
+        redirect_to "/admin/profile/#{@user.id}"
     end
 
     def new
@@ -56,9 +56,9 @@ class Admin::UsersController < ApplicationController
             @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
             @position = @user.assigned_position
             if @user.save
-                redirect_to @team
+                redirect_to admin_team_path(@team)
             else
-                render "teams/show"
+                render "/admin/teams/show"
             end
         end
     end
@@ -75,22 +75,23 @@ class Admin::UsersController < ApplicationController
         
         if @user.update(created_user_params)
             @team = @user.team
-            redirect_to team_user_path(@team, @user)
+            redirect_to admin_team_user_path(@team, @user)
         else
             @position = @user.assigned_position
             if @user.id == current_user.id
                 @edit_my_profile = "true"
                 render :profile
             else
-            render "/teams/1?show_user_form=true"
+            render "/admin/teams/1?show_user_form=true"
             end
         end
     end
 
     def destroy
         @user = User.find_by(id: params[:id])
+        @team = @user.team
         @user.position.delete && @user.delete
-        redirect_to '/'
+        redirect_to admin_team_path(@team)
     end
 
     private

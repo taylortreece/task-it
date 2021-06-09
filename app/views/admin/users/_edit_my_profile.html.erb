@@ -13,20 +13,19 @@
 
     <br>
     <% if @show_form != "new-team-and-new-position" %>
-    <%= user_builder.fields_for :team_attributes, [:admin, @team] do |team_builder| %>
+    <%= user_builder.fields_for :team_attributes, @team do |team_builder| %>
             <%= team_builder.hidden_field :profile, :value => "profile" %>
-        <% if @company.teams.all == [] %>
+        <% if @company.teams == [] %>
             <br><h3>Create a New Team:</h3>
         Team Name: <%= team_builder.text_field :name %>
         Team Description: <%= team_builder.text_area :description %><br><br>
         <% else %>
             <% if @show_form == "new-position" %>
-               Change Team: <%= team_builder.collection_select :id, @company.teams, :id, :name, {:include_blank => true} %>
+               Change Team: <%= team_builder.collection_select(:id, @company.teams, :id, :name, {:include_blank => true}) %>
                Or <%= link_to "Create a new Team", "/admin/profile/#{@user.id}/edit/new-team-and-new-position" %><br><br>
             <% elsif @show_form == "new-team" %>
             <% else %>
-            <% binding.pry %>
-               Change Team: <%= team_builder.collection_select :id, @company.teams, :id, :name, {:include_blank => true} %>
+               Change Team: <%= team_builder.collection_select(:id, @company.teams, :id, :name, {:include_blank => true}) %>
                Or <%= link_to "Create a new Team", "/admin/profile/#{@user.id}/edit/new-team" %><br><br>
             <% end %>
         <% end %>
@@ -60,18 +59,18 @@
   <% end %>
     
         <% else %>
-            <%= user_builder.fields_for :team_attributes, [:admin, @team] do |team_builder| %>
+            <%= user_builder.fields_for :team_attributes, @team do |team_builder| %>
                 <%= team_builder.hidden_field :profile, :value => "profile" %>
                 <br><h3>Create a New Team:</h3>
                 Team Name: <%= team_builder.text_field :name %>
                 Team Description: <%= team_builder.text_area :description %><br><br>
             
-            <%= user_builder.fields_for :position_attributes, [:admin, @position] do |position_builder| %>
+            <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
                <br><h3>Create a Position:</h3>
                 Position Title: <%= position_builder.text_field :title %>
                 Position Description: <%= position_builder.text_area :description %>
         <% end %>
-      <% end %><br><br>        
+      <% end %><br><br>  
     <br><br><%= user_builder.submit "Submit User" %>
   <% end %>
 <% end %>

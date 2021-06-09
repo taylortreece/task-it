@@ -13,15 +13,15 @@ Assigned Team: <%= link_to "#{@segment.team.name}", admin_team_path(@segment.tea
 
 <%= link_to "Add Tasks", admin_project_segment_path(@segment, :show_task_form => true) unless @task %>&nbsp&nbsp
 <%= link_to "Update Segment", edit_admin_project_segment_path(@segment.project, @segment) %>&nbsp&nbsp
-<%= link_to "Delete Segment", @segment, :method => :delete %>
+<%= link_to "Delete Segment", admin_project_segment_path(@segment), :method => :delete %>
         </div>
     </div>
 </div>
 
-<%= render :partial => 'tasks/form', :locals => { :task => @task } if @task %>
+<%= render :partial => 'admin/tasks/form', :locals => { :task => @task } if @task %>
 
 <%= link_to "Add User", admin_project_segment_path(@segment, :show_task_and_user_form => true) if @task && @user.nil? %>
 
-<%= render :partial => 'segment_comments/form', :locals => { :subject => @segment } %>
+<%= render :partial => 'admin/segment_comments/form', :locals => { :subject => @segment } %>
 
 <%= render :partial => "show_comments" %>

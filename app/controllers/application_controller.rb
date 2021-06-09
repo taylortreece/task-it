@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     def home
         @tasks = current_user.tasks
         @user = current_user
+        redirect_to admin_home_path if @user.privilege == "checked Admin" || current_user.privilege == "Admin"
     end
 
     def admin_home

@@ -15,9 +15,9 @@ class Admin::SegmentCommentsController < ApplicationController
         @segment = Segment.find_by(id: params[:segment_comment][:segment_id])
         @segment_comment = @segment.segment_comments.build(segment_comment_params)
         if @segment_comment.save
-            redirect_to segment_path(@segment)
+            redirect_to admin_segment_path(@segment)
         else
-            render 'segments/show'
+            render 'admin/segments/show'
         end
     end
 
@@ -30,7 +30,7 @@ class Admin::SegmentCommentsController < ApplicationController
     def destroy
         @segment = SegmentComment.find_by(id: params[:id]).segment
         SegmentComment.find_by(id: params[:id]).delete
-        redirect_to segment_path(@segment)
+        redirect_to admin_segment_path(@segment)
     end
 
     private

@@ -26,37 +26,42 @@ class User < ApplicationRecord
             @team = Team.find_by(id: team_attributes[:id]) 
         # updating an existing team
         elsif self.position && team_attributes[:name]!="" && team_attributes[:profile].nil?
-                self.team.update(team_attributes.with_defaults(company: self.company, user_id: self.user_id))
+        self.team.update(team_attributes.with_defaults(company: self.company, user_id: self.user_id))
                 @team = self.team
         else
         # creating a team from the profile page
             if team_attributes[:profile] == "profile"
-            @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.creator.company, user_id: self.user_id))
+        @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.creator.company, user_id: self.user_id))
                 @team.save
         # creating a team
             elsif team_attributes[:name] != ''
-            @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.company, user_id: self.user_id))
+        @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.company, user_id: self.user_id))
                 @team.save
             else
             end
         end
         @position = self.position if self.position
-        @position.update(team_id: @team.id) if @position
+
+        if @position
+        @position.update(team_id: @team.id) if @team 
+        end
     end
 
     def position_attributes=(position_attributes)
             self.save
-        if self.position
-            @position = self.assigned_position
-            @position.team = @team if @team
-            @position.save
-            self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
-        else
-            @position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
-            @position.user_id = self.user_id # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
-            @position.team = @team if @team
-            self.assigned_position_id = @position.id
-            @position.save
+        if position_attributes[:title] != ""
+            if self.position
+                @position = self.assigned_position
+                @position.team = @team if @team
+                @position.save
+                self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
+            else
+                @position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
+                @position.user_id = self.user_id # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
+                @position.team = @team if @team
+                self.assigned_position_id = @position.id
+                @position.save
+            end
         end
     end
 

@@ -9,7 +9,6 @@ class TasksController < ApplicationController
     end
 
     def create
-        binding.pry
         @segment = Segment.find_by(id: params[:task][:segment_id])
         @task = @segment.tasks.build(task_params)
         assign_existing_user

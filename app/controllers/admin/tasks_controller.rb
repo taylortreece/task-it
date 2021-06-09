@@ -10,14 +10,13 @@ class Admin::TasksController < ApplicationController
     end
 
     def create
-        binding.pry
         @segment = Segment.find_by(id: params[:task][:segment_id])
         @task = @segment.tasks.build(task_params)
         assign_existing_user
         if @task.save
-            redirect_to segment_path(@segment)
+            redirect_to admin_segment_path(@segment)
         else
-            render 'segments/show'
+            render 'admin/segments/show'
         end
     end
 
@@ -37,18 +36,19 @@ class Admin::TasksController < ApplicationController
     end
 
     def update
-        binding.pry
         @task = Task.find_by(id: params[:id])
         if @task.update(task_params)
-            redirect_to @task.segment
+            redirect_to admin_segment_task_path(@task)
         else
             render :edit
         end
     end
 
     def destroy
-        Task.find_by(id: params[:id]).destroy
-        redirect_to '/'
+        @task = Task.find_by(id: params[:id])
+        @segment = @task.segment
+        @task.destroy
+        redirect_to admin_segment_path(@segment)
     end
 
     private

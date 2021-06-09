@@ -7,7 +7,7 @@
       <% if !comment.id.nil? || !comment.content.nil?%>
         <%= comment.user.full_name %><br>
         <%= comment.content %>
-        <%= link_to "delete", [:admin, comment], confirm: "Are you sure?" :method => "delete" %>
+        <%= link_to "delete", [:admin, comment], confirm: "Are you sure?", :method => "delete" %>
     <% end %><br><br>
   <% end %>
 <% end %>

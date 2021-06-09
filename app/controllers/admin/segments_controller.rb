@@ -26,9 +26,9 @@ class Admin::SegmentsController < ApplicationController
         @project = Project.find_by(id: params[:segment][:project_id])
         @team = Team.find_by(id: params[:segment][:team_id])
         if @segment.save
-            redirect_to project_path(@project)
+            redirect_to admin_project_path(@project)
         else
-            render "projects/show"
+            render "admin/projects/show"
         end
     end
 
@@ -41,15 +41,17 @@ class Admin::SegmentsController < ApplicationController
     def update
         @segment = Segment.find_by(id: params[:id])
         if @segment.update(segment_params)
-            redirect_to @segment
+            redirect_to admin_segment_path(@segment)
         else
             render :edit
         end
     end
 
     def destroy
-        Segment.find_by(id: params[:id]).destroy
-        redirect_to '/'
+        @segment = Segment.find_by(id: params[:id])
+        @project = @segment.project
+        @segment.destroy
+        redirect_to admin_project_path(@project)
     end
 
     private

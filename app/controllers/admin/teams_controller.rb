@@ -20,7 +20,7 @@ class Admin::TeamsController < ApplicationController
     def create
         @team = Team.new(team_params)
         if @team.save
-            redirect_to @team
+            redirect_to admin_team_path(@team)
         else
             render :new
         end
@@ -33,7 +33,7 @@ class Admin::TeamsController < ApplicationController
     def update
         @team = Team.find_by(id: params[:id])
         if @team.update(team_params)
-            redirect_to @team
+            redirect_to admin_team_path(@team)
         else
             render :edit
         end
@@ -45,7 +45,7 @@ class Admin::TeamsController < ApplicationController
             position.delete
         end
         Team.find_by(id: params[:id]).delete
-        redirect_to "/"
+        redirect_to admin_teams_path
     end
 
     private

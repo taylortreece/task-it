@@ -27,7 +27,7 @@ class Admin::ProjectsController < ApplicationController
         @project.company = current_user.company
 
         if @project.save
-            redirect_to @project
+            redirect_to admin_project_path(@project)
         else
             render :new
         end
@@ -38,17 +38,20 @@ class Admin::ProjectsController < ApplicationController
     end
 
     def update
+        binding.pry
         @project = Project.find_by(id: params[:id])
         if @project.update(project_params)
-            redirect_to @project
+        binding.pry
+        redirect_to admin_project_path(@project)
         else
-            render :edit
+        binding.pry
+        render :edit
         end
     end
 
     def destroy
         Project.find_by(id: params[:id]).destroy
-        redirect_to '/'
+        redirect_to admin_projects_path
     end
 
     private

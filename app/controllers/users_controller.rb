@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     before_action :current_user
-    before_action :company
+    before_action :company, only: [:index, :show, :edit, :update, :delete,]
 
     def index
     end
@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     end
 
     def profile_form_handler
+        binding.pry
         @user = User.find_by(id: params[:id])
         @user.update(created_user_params)
         redirect_to "/profile/#{@user.id}"
