@@ -2,15 +2,26 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+
+    
     <h1>New Project</h1>
+
+<% if @project.errors.full_messages.any? %>
+    <h3>Errors:</h3>
+    <% @project.errors.full_messages.each do |message| %>
+        <ul>
+            <li><%= message %>
+        </ul>
+    <% end %>
+<% end %>
 
     <%= form_for [:admin, @project] do |project_builder| %>
     Title: <br>
-    <%= project_builder.text_field :title %><br><br>
+    <%= project_builder.text_field :title, required: true, placeholder: "Enter the new Project's title..." %><br><br>
     Deadline: <br>
-    <%= project_builder.date_field :deadline %><br><br>
+    <%= project_builder.date_field :deadline, required: true %><br><br>
     Description: <br>
-    <%= project_builder.text_area :description %><br><br>
+    <%= project_builder.text_area :description, required: true, placeholder: "Enter the new Project's description..." %><br><br>
 
     <%= project_builder.submit "Create Project" %><br><br>
     <% end %>

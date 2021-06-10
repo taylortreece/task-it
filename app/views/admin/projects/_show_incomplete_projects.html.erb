@@ -1,0 +1,8 @@
+<% if Project.incomplete.empty? %>
+    <p>There are no incomplete Projects!</p>
+<% else %>
+    <% Project.incomplete.each do |project| %>
+        <%= link_to "#{project.title}", admin_project_path(project) %><br>
+        <%= pretty_deadline(project) %>
+    <% end %>
+<% end %>

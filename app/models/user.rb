@@ -13,12 +13,16 @@ class User < ApplicationRecord
     has_many :segments
     has_many :tasks
     
-    validates :first_name, presence: true
-    validates :last_name, presence: true
+    validates :last_name, presence: { message: "All fields are required and must be at least two characters."}, length: { minimum: 2 }
     validates :email, presence: true, uniqueness: true
 
     accepts_nested_attributes_for :company
     accepts_nested_attributes_for :positions
+
+    scope :team_leaders, -> { where(privilege: "Team Leader")}
+    scope :admins, -> { where(privilege: "Admin")}
+    scope :team_members, -> { where(privilege: "Team Member")}
+    scope :leaders, -> { where.not(privilege: "Team Member" )}
     
     def team_attributes=(team_attributes)
         self.update(user_id: self.id) unless !self.user_id.nil?
@@ -94,4 +98,15 @@ class User < ApplicationRecord
         Company.find_by(user_id: self.user_id)
     end
 
+    def completed_tasks
+        self.position.tasks.completed
+    end
+
+    def incomplete_tasks
+        self.position.tasks.incomplete
+    end
+
+    def ordered_tasks
+        self.position.tasks.ordered
+    end
 end

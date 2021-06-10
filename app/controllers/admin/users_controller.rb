@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
     before_action :current_user, only: [:index, :show, :edit, :update, :delete,] 
-    before_action :company, only: [:index, :show, :edit, :update, :delete,]
-    before_action :admin, only: [:index, :show, :edit, :update, :delete,]
+    before_action :company, only: [:index, :show, :edit, :update, :delete, :profile, :profile_form_handler]
+    before_action :admin?, only: [:index, :show, :edit, :update, :delete,]
     layout "admin_layout"
     
     def index
@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def profile
-        @user=(User.find_by(id: params[:id])) if params[:id]
+        @user = (User.find_by(id: params[:id])) if params[:id]
         @current_user = current_user
         if !params[:show_form].nil? && params[:edit] == "edit"
             @edit_my_profile = true
@@ -48,7 +48,6 @@ class Admin::UsersController < ApplicationController
                 login(@user)
                 redirect_to '/'
             else
-                flash[:error] = "Oops! Something went wrong. Try again."
                 render :new
             end
         #create a new user as an admin

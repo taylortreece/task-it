@@ -7,8 +7,8 @@
     Password: <%= user_builder.password_field :password %><br><br>
     Re-Password: <%= user_builder.password_field :password_confirmation %><br><br>
     Privlages: <br>
-    Team Leader: <%= user_builder.radio_button :privilege, :checked => "Team Leader"%><br>
-    Team Member: <%= user_builder.radio_button :privilege, :checked => "Team Member"%>
+    Team Leader: <%= user_builder.radio_button :privilege, "Team Leader"%><br>
+    Team Member: <%= user_builder.radio_button :privilege, "Team Member"%>
 
     <br>
     <%= link_to "Update Position", "/team_leader/profile/#{@user.id}/edit/new-position" unless @show_form == "new-position" %>

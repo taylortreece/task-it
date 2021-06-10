@@ -1,7 +1,7 @@
 <% if @segments.empty? %>
     <p>Your team has no segments to complete</p>
 <% else %>
-    <% @segments.each do |segment| %>
+    <% @segments.ordered.each do |segment| %>
     <% @segment = segment %>
         <%= link_to "#{segment.project.title}", team_leader_project_path(segment.project) %><br>
         <%= link_to("#{segment.title}", team_leader_project_segment_path(segment.project.id, segment.id)) %><br>

@@ -1,12 +1,22 @@
-<%= form_for [:admin, @project, @segment] do |segment_builder| %>
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+
+<% if @segment.errors.full_messages.any? %>
+    <h3>Errors:</h3>
+    <% @segment.errors.full_messages.each do |message| %>
+        <ul>
+            <li><%= message %>
+        </ul>
+    <% end %>
+<% end %>
+
+<%= form_for [:admin, @project, @segment] do |segment_builder| %>
     <h4>Add Segment:</h4>
     <%= segment_builder.hidden_field :project_id, :value => @project.id %>
-    Title: <%= segment_builder.text_field :title %>
+    Title: <%= segment_builder.text_field :title, required: true, placeholder: "Enter the new Segment's title..." %>
     Deadline: <%= segment_builder.date_field :deadline %>
-    Description: <%= segment_builder.text_area :description %><br><br>
+    Description: <%= segment_builder.text_area :description, required: true, placeholder: "Enter the new Segment's description..." %><br><br>
       <% if Team.all != [] %>
            Pick a Team<%= segment_builder.collection_select :team_id, Team.all, :id, :name, {:include_blank => true} %>
            <%= segment_builder.submit "Create Segment" unless @team %><br><br>
@@ -24,11 +34,10 @@
       <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
           <h3>New Team</h3>
             <%= segment_builder.fields_for :team, @team do |team_builder| %>
-            Team Name: <%= team_builder.text_field :name %>
-            Team Description: <%= team_builder.text_area :description %>     
+            Team Name: <%= team_builder.text_field :name, required: true, placeholder: "Enter the new Team's name..." %>
+            Team Description: <%= team_builder.text_area :description, required: true, placeholder: "Enter the new Team's description..." %>     
             <% end %>
           <% end %><br><br>
-          <%binding.pry%>
         <%= segment_builder.submit "Create Segment" if @team %>
          </div>
     </div>

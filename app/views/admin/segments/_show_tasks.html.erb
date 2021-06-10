@@ -1,8 +1,10 @@
-<% @segment.tasks.each do |task| %>
+
+<% @segment.tasks.ordered.each do |task| %>
     <% if !task.id.nil? && !task.assigned_user_id.nil? %>
     <strong>Task</strong>: <%= link_to "#{task.title}", admin_segment_task_path(@segment.id, task.id) %><br>
     <strong>Assigned Team Member</strong>: <%= link_to "#{task.assigned_user.full_name}", admin_team_user_path(task.position.team.id, task.assigned_user.id) %> - <%= task.position.title %><br>
     <strong>Description</strong>: <%= task.description %><br>
+    <strong>deadline</strong>: <%= pretty_deadline(task) %><br>
     <%= completed(task) %>
     <% else %>
         <p>You do not have any tasks associated with this segment.</p>

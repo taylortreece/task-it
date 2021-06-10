@@ -7,9 +7,4 @@ class SegmentsController < ApplicationController
     def show
         @segment = Segment.find_by(id: params[:id])
     end
-
-    def destroy
-        Segment.find_by(id: params[:id]).destroy
-        redirect_to '/'
-    end
 end

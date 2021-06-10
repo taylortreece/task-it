@@ -1,18 +1,18 @@
 <%= form_for [:admin, @team, @user] do |user_builder| %>
-    First Name: <%= user_builder.text_field :first_name %><br><br>
-    Last Name: <%= user_builder.text_field :last_name %><br><br>
-    Email: <%= user_builder.text_field :email %><br><br>
-    Password: <%= user_builder.password_field :password %><br><br>
-    Re-Password: <%= user_builder.password_field :password_confirmation %><br><br>
+    First Name: <%= user_builder.text_field :first_name, required: true, placeholder: "Enter Team Member's first name..." %><br><br>
+    Last Name: <%= user_builder.text_field :last_name, required: true, placeholder: "Enter Team Member's last name..." %><br><br>
+    Email: <%= user_builder.email_field :email, required: true, placeholder: "Enter Team Member's email..." %><br><br>
+    Password: <%= user_builder.password_field :password, required: true, placeholder: "Create Team Member's password..." %><br><br>
+    Re-Password: <%= user_builder.password_field :password_confirmation, required: true, placeholder: "Re-enter Team Member's password..." %><br><br>
     Privlages: <br>
-    Admin: <%= user_builder.radio_button :privilege, :checked => "Admin"%><br>
-    Team Leader: <%= user_builder.radio_button :privilege, :checked => "Team Leader"%><br>
-    Team Member: <%= user_builder.radio_button :privilege, :checked => "Team Member"%><br>
+    Admin: <%= user_builder.radio_button :privilege, "Admin" %><br>
+    Team Leader: <%= user_builder.radio_button :privilege, "Team Leader" %><br>
+    Team Member: <%= user_builder.radio_button :privilege, "Team Member "%><br>
                
     <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
         <%= position_builder.hidden_field :team_id, :value => @team.id %>
-        Position Title: <%= position_builder.text_field :title %>
-        Position Description: <%= position_builder.text_field :description %>
+        Position Title: <%= position_builder.text_field :title, required: true, placeholder: "Enter Team Member's Position title..." %>
+        Position Description: <%= position_builder.text_field :description, required: true, placeholder: "Enter Team Member's Position description..." %>
         <% end %>
     <%= user_builder.submit "Submit User" %>
 <% end %>

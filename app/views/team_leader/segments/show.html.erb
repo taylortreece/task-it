@@ -6,20 +6,20 @@
 <h3><%= link_to "#{@segment.project.title}", team_leader_project_path(@segment.project) %></h3>
 Assigned Team: <%= link_to "#{@segment.team.name}", team_leader_team_path(@segment.team) %><br>
 
-<%= render :partial => "completed_form" if @segment.team.id = @current_user.id%><br><br>
+<%= render :partial => "team_leader/segments/completed_form" if @segment.team.id = @current_user.id%><br><br>
 
 <h2>Tasks</h2>
-<%= render :partial => "show_tasks" %><br>
+<%= render :partial => "team_leader/segments/show_tasks" %><br>
 
-<%= link_to "Add Tasks", team_leader_project_segment_path(@segment, :show_task_form => true) unless @task %>&nbsp&nbsp
+<%= link_to "Add Tasks", team_leader_project_segment_path(@segment.project.id, @segment.id, :show_task_form => true) unless @task %>&nbsp&nbsp
         </div>
     </div>
 </div>
 
 <%= render :partial => 'team_leader/tasks/form', :locals => { :task => @task } if @task %>
 
-<%= link_to "Add User", team_leader_project_segment_path(@segment, :show_task_and_user_form => true) if @task && @user.nil? %>
+<%= link_to "Add User", team_leader_project_segment_path(@segment.project.id, @segment.id, :show_task_and_user_form => true) if @task && @user.nil? %>
 
 <%= render :partial => 'team_leader/segment_comments/form', :locals => { :subject => @segment } %>
 
-<%= render :partial => "show_comments" %>
+<%= render :partial => "team_leader/segments/show_comments" %>

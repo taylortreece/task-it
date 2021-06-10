@@ -9,18 +9,18 @@ Assigned Team: <%= link_to "#{@segment.team.name}", admin_team_path(@segment.tea
 <%= render :partial => "completed_form" %><br><br>
 
 <h2>Tasks</h2>
-<%= render :partial => "show_tasks" %><br>
+<%= render :partial => "admin/segments/show_tasks" %><br>
 
 <%= link_to "Add Tasks", admin_project_segment_path(@segment, :show_task_form => true) unless @task %>&nbsp&nbsp
 <%= link_to "Update Segment", edit_admin_project_segment_path(@segment.project, @segment) %>&nbsp&nbsp
-<%= link_to "Delete Segment", admin_project_segment_path(@segment), :method => :delete %>
+<%= link_to "Delete Segment", admin_project_segment_path(@segment.project, @segment), :method => :delete %>
         </div>
     </div>
 </div>
 
 <%= render :partial => 'admin/tasks/form', :locals => { :task => @task } if @task %>
 
-<%= link_to "Add User", admin_project_segment_path(@segment, :show_task_and_user_form => true) if @task && @user.nil? %>
+<%= link_to "Add User", admin_project_segment_path(@segment.project, @segment, :show_task_and_user_form => true) if @task && @user.nil? %>
 
 <%= render :partial => 'admin/segment_comments/form', :locals => { :subject => @segment } %>
 

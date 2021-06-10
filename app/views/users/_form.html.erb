@@ -5,9 +5,9 @@
     Password: <%= user_builder.password_field :password %><br><br>
     Re-Password: <%= user_builder.password_field :password_confirmation %><br><br>
     Privlages: <br>
-    Admin: <%= user_builder.radio_button :privilege, :checked => "Admin"%><br>
-    Team Leader: <%= user_builder.radio_button :privilege, :checked => "Team Leader"%><br>
-    Team Member: <%= user_builder.radio_button :privilege, :checked => "Team Member"%><br>
+    Admin: <%= user_builder.radio_button :privilege, "Admin"%><br>
+    Team Leader: <%= user_builder.radio_button :privilege, "Team Leader"%><br>
+    Team Member: <%= user_builder.radio_button :privilege, "Team Member"%><br>
                
     <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
         <%= position_builder.hidden_field :team_id, :value => @team.id %>

@@ -1,6 +1,6 @@
 <%= form_for @task.task_comments.build do |comment_builder| %>
 <%= comment_builder.hidden_field :task_id, :value => @task.id %>
 Comment on this <%= @task.class %><br>
-<%= comment_builder.text_area :content %><br>
+<%= comment_builder.text_area :content, required: true %><br>
 <%= comment_builder.submit "Submit Comment" %>
 <% end %>

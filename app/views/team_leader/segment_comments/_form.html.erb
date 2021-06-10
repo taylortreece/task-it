@@ -1,6 +1,6 @@
 <%= form_for [:team_leader, @segment.segment_comments.build] do |comment_builder| %>
 <%= comment_builder.hidden_field :segment_id, :value => @segment.id %>
 Comment on this <%= @project.class %><br>
-<%= comment_builder.text_area :content %><br>
+<%= comment_builder.text_area :content, required: true %><br>
 <%= comment_builder.submit "Submit Comment" %>
 <% end %>

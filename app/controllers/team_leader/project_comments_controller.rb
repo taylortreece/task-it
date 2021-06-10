@@ -1,5 +1,5 @@
 class TeamLeader::ProjectCommentsController < ApplicationController
-    before_action :current_user
+    before_action :current_user, :company, :team_leader?
     layout "team_leader_layout"
 
     def index

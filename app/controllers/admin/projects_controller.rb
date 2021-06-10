@@ -3,7 +3,7 @@ class Admin::ProjectsController < ApplicationController
     layout "admin_layout"
     
     def index
-        @projects = company.projects.all
+        @projects = company.projects.ordered
     end
 
     def show
@@ -38,13 +38,10 @@ class Admin::ProjectsController < ApplicationController
     end
 
     def update
-        binding.pry
         @project = Project.find_by(id: params[:id])
         if @project.update(project_params)
-        binding.pry
         redirect_to admin_project_path(@project)
         else
-        binding.pry
         render :edit
         end
     end

@@ -5,14 +5,14 @@
     <%= @task.description %>
     Assigned Team Member: <%= @task.assigned_user.full_name %><br><br>
 
-    <%= render :partial => "completed_form" %><br>
+    <%= render :partial => "team_leader/tasks/completed_form" %><br>
 
-    <%= link_to "Update Task", edit_team_leader_segment_task_path(@task) %>
-    <%= link_to "Delete Task", [:team_leader, @segment, @task], confirm: "Are you sure?", :method => :delete %>
+    <%= link_to "Update Task", edit_team_leader_segment_task_path(@task.segment, @task) %>
+    <%= link_to "Delete Task", [:team_leader, @task.segment, @task], confirm: "Are you sure?", :method => :delete %>
     </div>
   </div>
 </div>
 
 <%= render :partial => 'team_leader/task_comments/form', :locals => { :subject => @task } %>
 
-<%= render :partial => "show_comments" %><br>
+<%= render :partial => "team_leader/tasks/show_comments" %><br>

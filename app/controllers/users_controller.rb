@@ -36,19 +36,19 @@ class UsersController < ApplicationController
 
     def new
         @user = User.new
-        render layout: false
+        render :layout => false
     end
 
     def create
         #create a new user from signup
         if !current_user
+            @company = Company.new(company_params)
             @user = User.new(signup_user_params)
             if @user.save
                 login(@user)
                 redirect_to '/'
             else
-                flash[:error] = "Oops! Something went wrong. Try again."
-                render :new
+                render :new, :layout => false
             end
         #create a new user as an admin
         else
@@ -127,6 +127,18 @@ class UsersController < ApplicationController
                 :description,
                 :team_id,
             ],
+        )
+    end
+
+    def company_params
+        params.require(:user).require(:company_attributes).permit(
+            :name,
+            :industry,
+            :address,
+            :city,
+            :state,
+            :phone_number,
+            :email
         )
     end
 end

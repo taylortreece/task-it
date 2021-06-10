@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
     before_action :current_user, :company
     
     def index
-        @projects = company.projects.all
+        @projects = company.projects.ordered
     end
 
     def show

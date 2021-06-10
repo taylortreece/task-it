@@ -1,4 +1,4 @@
-<% @segment.tasks.each do |task| %>
+<% @segment.tasks.ordered.each do |task| %>
     <% if !task.id.nil? && !task.assigned_user_id.nil? %>
     <strong>Task</strong>: <%= link_to "#{task.title}", team_leader_segment_task_path(@segment.id, task.id) %><br>
     <strong>Assigned Team Member</strong>: <%= link_to "#{task.assigned_user.full_name}", team_leader_team_user_path(task.position.team.id, task.assigned_user.id) %> - <%= task.position.title %><br>

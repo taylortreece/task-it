@@ -7,7 +7,7 @@
         Check the completed radio button to get the code for automatically submitting a radio button.)
 
 2. Namespacing
-    - Continue debugging and fixing namespaced routes and partials
     - fix radio button return value for user privilege (take off ":checked =>")
 
 3. Bugs
+    - submit task button is not working properly

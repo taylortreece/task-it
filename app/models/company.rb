@@ -4,5 +4,9 @@ class Company < ApplicationRecord
     has_many :teams, dependent: :destroy
     has_many :projects, dependent: :destroy
 
-    validates :name, presence: true
+    validates :name, :industry, :address, :city, :state, :phone_number, :email, presence: { message: "All fields are required and must be at least two characters."}, length: { minimum: 2 }
+
+    # def full_error_message
+    #     self.errors.full_messages.first
+    # end
 end

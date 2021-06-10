@@ -4,8 +4,7 @@ class Position < ApplicationRecord
     has_many :tasks, dependent: :destroy
     has_many :segments, through: :tasks
 
-    validates :title, presence: true
-    validates :description, presence: true
+    validates :title, :description, presence: { message: "Position Fields must be filled and longer than 2 characters"}, length: { minimum: 2}
 
     def assigned_user=(user)
        self.assigned_user_id = user.id

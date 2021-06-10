@@ -3,7 +3,7 @@ class TeamLeader::ProjectsController < ApplicationController
     layout "team_leader_layout"
     
     def index
-        @projects = company.projects.all
+        @projects = company.projects.ordered
     end
 
     def show

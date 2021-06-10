@@ -2,22 +2,21 @@ class ApplicationController < ActionController::Base
     before_action :logged_in?, only: [:home]
     before_action :current_user
     skip_before_action :verify_authenticity_token
-    layout "admin_layout", only: [:admin_home]
-    layout "team_leader_layout", only: [:team_leader_home]
 
     def home
         @tasks = current_user.position.tasks
         @user = current_user
-        redirect_to admin_home_path if @user.privilege == "checked Admin" || @user.privilege == "Admin"
-        redirect_to team_leader_home_path if @user.privilege == "checked Team Leader" || @user.privilege == "Team Leader"
+        determine_route(current_user)
     end
 
     def team_leader_home
         @segments = current_user.team.segments
+        render layout: "team_leader_layout"
     end
 
     def admin_home
         @project = Project.all.last
+        render layout: "admin_layout"
     end
 
     def notfound
@@ -49,5 +48,11 @@ class ApplicationController < ActionController::Base
 
     def team_leader?
         redirect_to root if current_user.privilege == "Team Member"
+    end
+
+    def determine_route(current_user)
+        redirect_to "/admin/home" if current_user.privilege == "Admin"
+        redirect_to "/" if current_user.privilege == "Team Member"
+        redirect_to "/team-leader/home" if current_user.privilege == "Team Leader"
     end
 end
