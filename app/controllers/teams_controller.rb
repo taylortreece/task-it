@@ -2,6 +2,7 @@ class TeamsController < ApplicationController
     before_action :current_user, :company
 
     def index
+        @team_index_link = params[:team_index_link]
     end
 
     def show

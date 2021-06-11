@@ -1,3 +1,13 @@
-<br><br><h1><%= @company.name %> Projects</h1>
+<ul style="text-align: center;">
+    <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Projects", team_leader_projects_path %></li></strong>
+    <li><%= link_to "Completed Projects", team_leader_projects_path(:project_index_link => "complete") %></li>
+    <li><%= link_to "Incomplete Projects", team_leader_projects_path(:project_index_link => "incomplete") %></li>
+  </ul>
 
-<%= render :partial => "index_form" %>
+<% if @project_index_links == "complete" %>
+    <%= render :partial => "team_leader/projects/show_complete_projects" %>
+<% elsif @project_index_links == "incomplete" %>
+    <%= render :partial => "team_leader/projects/show_incomplete_projects" %>
+<% else %>
+    <%= render :partial => "team_leader/projects/index_form" %>
+<% end %>

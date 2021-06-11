@@ -4,9 +4,10 @@ class ApplicationController < ActionController::Base
     skip_before_action :verify_authenticity_token
 
     def home
+        binding.pry
         @tasks = current_user.position.tasks
         @user = current_user
-        determine_route(current_user)
+        determine_leader_route(current_user)
     end
 
     def team_leader_home
@@ -50,9 +51,8 @@ class ApplicationController < ActionController::Base
         redirect_to root if current_user.privilege == "Team Member"
     end
 
-    def determine_route(current_user)
+    def determine_leader_route(current_user)
         redirect_to "/admin/home" if current_user.privilege == "Admin"
-        redirect_to "/" if current_user.privilege == "Team Member"
         redirect_to "/team-leader/home" if current_user.privilege == "Team Leader"
     end
 end

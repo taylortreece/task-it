@@ -3,6 +3,7 @@ class TeamLeader::ProjectsController < ApplicationController
     layout "team_leader_layout"
     
     def index
+        @project_index_links = params[:project_index_link]
         @projects = company.projects.ordered
     end
 

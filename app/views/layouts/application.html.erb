@@ -12,11 +12,12 @@
 
   <body>
   <ul>
-    <li style="font-size:40px;"><%= link_to "Company Name", root_path %></li>
+    <li style="font-size:40px;"><%= link_to "Task It - #{@current_user.user_company.name}", root_path %></li>
     <li><%= link_to "My Projects", projects_path %></li>
     <li><%= link_to "Company Teams", teams_path %></li>
     <li><%= link_to "Logout", '/logout' %></li>
     <li><%= link_to "Profile", "/profile/#{@current_user.id}" unless @current_user.nil?%>
+    <li><%= link_to "Admin View", admin_home_path if @current_user.admin == true%></li>
   </ul>
     <%= yield %>
   </body>

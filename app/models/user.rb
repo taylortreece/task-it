@@ -109,4 +109,16 @@ class User < ApplicationRecord
     def ordered_tasks
         self.position.tasks.ordered
     end
+
+    def team_leader
+        self.privilege == "Team Leader"
+    end
+
+    def admin
+        true if self.privilege == "Admin"
+    end
+
+    def leader
+        self.privilege == "Team Leader" || self.privilege == "Admin"
+    end
 end

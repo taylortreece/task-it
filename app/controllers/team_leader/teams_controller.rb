@@ -3,6 +3,7 @@ class TeamLeader::TeamsController < ApplicationController
     layout "team_leader_layout"
 
     def index
+        @team_index_link = params[:team_index_link]
     end
 
     def show

@@ -1,3 +1,14 @@
-<br><br><h1><%= @company.name %> Teams</h1>
+<ul style="text-align: center;">
+    <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", team_leader_teams_path %></li></strong>
+    <li><%= link_to "Complete Segments", team_leader_teams_path(:team_index_link => "complete") %></li>
+    <li><%= link_to "Incomplete Segments", team_leader_teams_path(:team_index_link => "incomplete") %></li>
+  </ul>
 
-<%= render :partial => "show_all_teams" %>
+
+<% if @team_index_link == "complete" %>
+    <%= render :partial => "team_leader/teams/show_complete_projects" %>
+<% elsif @team_index_link == "incomplete" %>
+    <%= render :partial => "team_leader/teams/show_incomplete_projects" %>
+<% else %>
+    <%= render :partial => "team_leader/teams/show_all_teams" %>
+<% end %>

@@ -1,0 +1,36 @@
+<% @arr = []%>
+   
+<% @company.teams.each do |team| %>
+<% if team.segments.completed.empty?%>
+<% else%>
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+     <% @team = team %>
+       <%team.segments.completed.ordered.each do |segment| %>
+       <% @segment = segment %>
+       <% @arr << segment %>
+       
+       <h3>Team: <%= link_to "#{team.name}", team_path(team) %></h3><br>
+       <h4><%= link_to "#{segment.title}", project_segment_path(segment.project, segment)%></h4>
+       <%= pretty_deadline(segment) %><br>
+       <%= segment.description %><br>
+      
+       Project: <%= link_to "#{segment.project.title}", project_path(segment.project)%><br>
+       <%= pretty_deadline(segment.project) %><br><br>
+       
+       <h5>Tasks: </h5><% segment.tasks.completed.ordered.each do |task| %>
+       <% @task = task %>
+       <%= link_to "#{task.title}", segment_task_path(@segment, task) %><br>
+       <%= link_to "#{task.assigned_user.full_name}", team_user_path(@team, task.assigned_user) %><br>
+       <%= pretty_deadline(task)%><br>
+       <%= task.description %><br>
+       <%= render :partial => "tasks/completed_form" if task.assigned_user.id == @current_user.id %><br>
+           <% end %>
+         <% end %>
+       <% end %>
+        </div>
+    </div>
+</div>
+<% end %><br><br>
+<p style="text-align: center;"><%= "There are no complete segments!" if @arr.empty? %><p>

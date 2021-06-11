@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
     before_action :current_user, :company
     
     def index
+        @project_index_links = params[:project_index_link]
         @projects = company.projects.ordered
     end
 
