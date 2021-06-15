@@ -6,14 +6,18 @@
     </div>
 
     <div class="col-lg-8" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;"><%= link_to "My Tasks", tasks_path unless @tasks.empty? %></p>
+      <p style="border-style: solid;"><%= link_to "My Tasks", "/profile/#{@user.id}" %></p>
 
+      <% if @user.incomplete_tasks.empty? %>
+        <p>You do not have any incomplete tasks!</p>
+      <% else %>
       <% @tasks.each do |task|%>
         <% @task = task %>
         <%= link_to "#{task.title}", segment_task_path(task.segment, task) unless task.id.nil? %><br>
         <%= task.deadline %><br>
         <%= task.description %><br><br>
         <%= render :partial => "tasks/completed_form" %><br>
+        <% end %>
         <% end %>
           <%= render :partial => "projects/show_segments" %>
     </div>

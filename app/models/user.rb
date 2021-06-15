@@ -25,7 +25,8 @@ class User < ApplicationRecord
     scope :leaders, -> { where.not(privilege: "Team Member" )}
     
     def team_attributes=(team_attributes)
-        self.update(user_id: self.id) unless !self.user_id.nil?
+        self.update(user_id: self.id) if self.user_id.nil?
+        binding.pry
         # selecting a team from a dropbox
         if !team_attributes[:id].nil?
             @team = Team.find_by(id: team_attributes[:id]) 
@@ -36,16 +37,15 @@ class User < ApplicationRecord
         else
         # creating a team from the profile page
             if team_attributes[:profile] == "profile"
-        @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.creator.company, user_id: self.user_id))
-                @team.save
+                @team = Team.create(name: team_attributes[:name], description: team_attributes[:description], company: self.creator.company, user_id: self.user_id )
         # creating a team
             elsif team_attributes[:name] != ''
-        @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.company, user_id: self.user_id))
+                @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.company, user_id: self.user_id))
                 @team.save
             else
             end
         end
-        @position = self.position if self.position
+        self.update(assigned_position_id: @position.id) if self.position
 
         if @position
         @position.update(team_id: @team.id) if @team 
@@ -57,14 +57,14 @@ class User < ApplicationRecord
         if position_attributes[:title] != ""
             if self.position
                 @position = self.assigned_position
-                @position.team = @team if @team
+                @position.update(team_id: @team.id) if @team
                 @position.save
                 self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
             else
                 @position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
-                @position.user_id = self.user_id # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
-                @position.team = @team if @team
-                self.assigned_position_id = @position.id
+                @position.update(user_id: self.user_id) # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
+                @position.update(team_id: @team) if @team
+                self.update(assigned_position_id: @position.id)
                 @position.save
             end
         end

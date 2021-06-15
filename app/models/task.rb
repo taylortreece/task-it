@@ -20,7 +20,7 @@ class Task < ApplicationRecord
         elsif !self.assigned_user_id
           if !!user_attributes[:first_name]
         @user = User.create(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id))
-           self.assigned_user_id = @user.id
+           self.update(assigned_user_id: @user.id)
           end
         else
         end

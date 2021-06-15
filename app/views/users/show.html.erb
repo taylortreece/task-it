@@ -1,3 +1,20 @@
-<h1><%= @user.full_name %></h1>
-<%= @user.email %><br><br>
-<%= @user.assigned_position ? @user.assigned_position.title : "This user has no assigned positions." %><br><br>
+<h1 style="text-align: center;"><%= @user.full_name %></h1>
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+<%= @user.email %><br>
+<%= @user.assigned_position ? @user.assigned_position.title : "This user has no assigned positions." %> - <%= link_to "#{@user.team.name}", team_path(@user.team) %><br><br>
+
+Open Tasks:<br>
+  <% if @user.tasks.incomplete.empty? %>
+    <p>This user has no open tasks.</p>
+  <% else %>
+  <% @user.tasks.incomplete.each do |task| %>
+    <%= link_to "#{task.title}", segment_task_path(task.segment, task) %><br>
+    project: <%= link_to "#{task.segment.project.title}", project_segment_path(task.segment.project)%><br>
+    segment: <%= link_to "#{task.segment.title}", segment_task_path(task.segment)%><br><br>
+    <% end %>
+  <% end %>
+    </div>
+  </div>
+</div>

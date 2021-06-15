@@ -117,17 +117,17 @@ class Admin::UsersController < ApplicationController
 
     def created_user_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :privilege,
-            :team_attributes => [
-                :name,
-                :description,
-                :id,
-                :profile #for determining if the form came from the profile page. Do not allow into update or create method for team
-            ],
             position_attributes: [
                 :title,
                 :description,
                 :team_id,
             ],
+            :team_attributes => [
+                :name,
+                :description,
+                :id,
+                :profile #for determining if the form came from the profile page. Do not allow into update or create method for team
+            ]
         ).with_defaults(user_id: current_user.id)
     end
 end

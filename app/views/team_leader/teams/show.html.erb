@@ -1,7 +1,8 @@
-<h1><%= @team.name %></h1>
+<h1 style="text-align: center;"><%= @team.name %></h1>
+<ul style="text-align: center;">
+    <li><%= link_to "Create New User", team_leader_team_path(@team, :show_user_form => true ) unless @user || @team != @current_user.team%></li>
+</ul>
 
 <%= render :partial => "team_leader/teams/show_team" %>
-
-<br><br><%= link_to "Create New User", team_leader_team_path(@team, :show_user_form => true ) unless @user || @current_user.team.id != @team.id %>
 
 <%= render :partial => 'team_leader/users/form', :locals => { :user => @user } if @user %>
