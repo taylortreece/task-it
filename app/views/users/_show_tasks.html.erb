@@ -1,0 +1,14 @@
+Open Tasks:<br>
+  <% if @user.assigned_tasks.incomplete.empty? %>
+    <p>This user has no open tasks.</p>
+  <% else %>
+  <% @user.assigned_tasks.incomplete.each do |task| %>
+    <%= link_to "#{task.title}", segment_task_path(task.segment, task) %><br>
+    <%= render :partial => "completed_form" if @current_user.assigned_tasks.include?(task) %>
+    project: <%= link_to "#{task.segment.project.title}", project_segment_path(task.segment.project)%><br>
+    segment: <%= link_to "#{task.segment.title}", segment_task_path(task.segment)%><br><br>
+    <% end %>
+  <% end %>
+    </div>
+  </div>
+</div>

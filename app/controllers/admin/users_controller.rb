@@ -55,7 +55,7 @@ class Admin::UsersController < ApplicationController
             @user = User.new(created_user_params)
             @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
             @position = @user.assigned_position
-            if @user.save
+            if @user.valid?
                 redirect_to admin_team_path(@team)
             else
                 render "/admin/teams/show"
@@ -117,17 +117,17 @@ class Admin::UsersController < ApplicationController
 
     def created_user_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :privilege,
-            position_attributes: [
-                :title,
-                :description,
-                :team_id,
-            ],
             :team_attributes => [
                 :name,
                 :description,
                 :id,
                 :profile #for determining if the form came from the profile page. Do not allow into update or create method for team
-            ]
+            ],
+            position_attributes: [
+                :title,
+                :description,
+                :team_id,
+            ],
         ).with_defaults(user_id: current_user.id)
     end
 end

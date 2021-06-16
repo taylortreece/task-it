@@ -25,47 +25,27 @@ class User < ApplicationRecord
     scope :leaders, -> { where.not(privilege: "Team Member" )}
     
     def team_attributes=(team_attributes)
-        self.update(user_id: self.id) if self.user_id.nil?
-        binding.pry
-        # selecting a team from a dropbox
-        if !team_attributes[:id].nil?
-            @team = Team.find_by(id: team_attributes[:id]) 
-        # updating an existing team
-        elsif self.position && team_attributes[:name]!="" && team_attributes[:profile].nil?
-        self.team.update(team_attributes.with_defaults(company: self.company, user_id: self.user_id))
-                @team = self.team
-        else
-        # creating a team from the profile page
-            if team_attributes[:profile] == "profile"
-                @team = Team.create(name: team_attributes[:name], description: team_attributes[:description], company: self.creator.company, user_id: self.user_id )
-        # creating a team
-            elsif team_attributes[:name] != ''
-                @team = Team.new(team_attributes.except(:profile).with_defaults(company: self.company, user_id: self.user_id))
-                @team.save
-            else
-            end
-        end
-        self.update(assigned_position_id: @position.id) if self.position
+        self.update(user_id: self.id) if self.user_id.nil? #assigning self as self's creator in signup
+        @team = Team.find_by(id: team_attributes[:id]) #selecting from dropbox
 
-        if @position
-        @position.update(team_id: @team.id) if @team 
+        if team_attributes[:name]!=""
+            if self.position #update
+                self.team.update(team_attributes.with_defaults(company: self.company, user_id: self.user_id)) ? @team = self.team : @team = nil
+            else#create
+                @team = Team.create(team_attributes.except(:profile).with_defaults(company: self.creator.company, user_id: self.user_id))
+            end
         end
     end
 
     def position_attributes=(position_attributes)
-            self.save
+        @team ? team_id = @team.id : team_id = position_attributes[:team_id]
+        self.save if self.id.nil?
+
         if position_attributes[:title] != ""
-            if self.position
-                @position = self.assigned_position
-                @position.update(team_id: @team.id) if @team
-                @position.save
-                self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
-            else
-                @position = self.positions.build(position_attributes.with_defaults(assigned_user_id: self.id))
-                @position.update(user_id: self.user_id) # I'm not sure why this wouldn't work within the #with_defaults method, but hard coding it was required.
-                @position.update(team_id: @team) if @team
-                self.update(assigned_position_id: @position.id)
-                @position.save
+            if self.position #update
+                @team ? self.position.update(team_id: @team.id) : self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
+            else #create
+                self.update(assigned_position_id: Position.create(position_attributes.with_defaults(assigned_user_id: self.id, user_id: self.user_id)).id)
             end
         end
     end
@@ -75,7 +55,7 @@ class User < ApplicationRecord
     end
 
     def assigned_tasks
-        Task.all.select { |t| t.assigned_user == self}
+        self.position.tasks
     end
 
     def assigned_position

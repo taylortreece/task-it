@@ -1,8 +1,8 @@
 <ul style="text-align: center;">
-    <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", admin_teams_path %></li></strong>
-    <li><%= link_to "Complete Segments", admin_teams_path(:team_index_link => "complete") %></li>
-    <li><%= link_to "Incomplete Segments", admin_teams_path(:team_index_link => "incomplete") %></li>
-    <li><%= link_to "Add Team", new_admin_team_path %></li>
+    <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", admin_teams_path %></li></strong> | 
+    <li><%= link_to "Complete Segments", admin_teams_path(:team_index_link => "complete") %></li> | 
+    <li><%= link_to "Incomplete Segments", admin_teams_path(:team_index_link => "incomplete") %></li> | 
+    <li><%= link_to "Add Team", new_admin_team_path %></li> | 
   </ul>
 
 

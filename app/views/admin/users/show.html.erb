@@ -1,9 +1,13 @@
 <h1 style="text-align: center;"><%= @user.full_name %></h1>
+
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+
 <%= @user.email %><br><br>
 <%= @user.assigned_position ? @user.assigned_position.title : "This user has no assigned positions." %><br><br>
+
+<%= render :partial => "show_tasks" %>
 
 <% if @edit_my_profile.nil? %>
 
@@ -14,6 +18,7 @@
 <%= render :partial => "edit_my_profile" %>
 
 <% end %>
+
     </div>
   </div>
 </div>

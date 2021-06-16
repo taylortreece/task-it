@@ -5,16 +5,7 @@
 <%= @user.email %><br>
 <%= @user.assigned_position ? @user.assigned_position.title : "This user has no assigned positions." %> - <%= link_to "#{@user.team.name}", team_path(@user.team) %><br><br>
 
-Open Tasks:<br>
-  <% if @user.tasks.incomplete.empty? %>
-    <p>This user has no open tasks.</p>
-  <% else %>
-  <% @user.tasks.incomplete.each do |task| %>
-    <%= link_to "#{task.title}", segment_task_path(task.segment, task) %><br>
-    project: <%= link_to "#{task.segment.project.title}", project_segment_path(task.segment.project)%><br>
-    segment: <%= link_to "#{task.segment.title}", segment_task_path(task.segment)%><br><br>
-    <% end %>
-  <% end %>
+<%= render :partial => "show_tasks" %>
     </div>
   </div>
 </div>

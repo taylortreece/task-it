@@ -1,4 +1,4 @@
-  <% @arr = []%>
+<% @arr = []%>
   
 <% @company.teams.each do |team| %>
 
@@ -20,7 +20,6 @@
         <%= pretty_deadline(segment.project) %><br><br>
 
         <h5>Tasks: </h5><% segment.tasks.incomplete.ordered.each do |task| %>
-        <% binding.pry %>
         <% @task = task %>
         <%= link_to "#{task.title}", segment_task_path(@segment, task) %><br>
         <%= link_to "#{task.assigned_user.full_name}", team_user_path(@team, task.assigned_user) %><br>
@@ -34,5 +33,5 @@
     </div>
 </div>
 <% end %><br><br>
-hello
+
 <p style="text-align: center;"><%= "There are no incomplete segments!" if @arr.empty? %><p>

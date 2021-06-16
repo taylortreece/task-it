@@ -1,5 +1,5 @@
 <%= form_for [:admin, @team] do |team_builder| %>
-Team Name: <%= team_builder.text_field :name %>
+Team Name: <%= team_builder.text_field :name %><br><br>
 Team Description: <%= team_builder.text_area :description %><br><br>
 
 <%= team_builder.submit "Submit Team" %>

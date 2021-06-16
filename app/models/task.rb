@@ -14,36 +14,28 @@ class Task < ApplicationRecord
     scope :late, lambda { where('deadline < ?', Date.today) }
 
     def user_attributes=(user_attributes)
-        if self.assigned_user_id
-        self.assigned_user.update(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id))
-        @user = self.assigned_user
-        elsif !self.assigned_user_id
-          if !!user_attributes[:first_name]
-        @user = User.create(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id))
-           self.update(assigned_user_id: @user.id)
-          end
+        if self.assigned_user_id #update
+           self.assigned_user.update(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id))
+        elsif !self.assigned_user_id && !!user_attributes[:first_name] #create
+           self.update(assigned_user_id: User.create(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id).id))
         else
         end
+        @user = self.assigned_user
     end
 
     def position_attributes=(position_attributes)
-        # if a user creates a new task
        if self.position.nil? && !!position_attributes[:title]
-        position = Position.create(position_attributes.with_defaults(user_id: self.user_id, team_id: self.segment.team.id, assigned_user_id: self.assigned_user.id))
-        self.position_id = position.id
-        self.save
-        elsif @user.assigned_position
+        self.update(position: Position.create(position_attributes.with_defaults(user_id: self.user_id, team_id: self.segment.team.id, assigned_user_id: self.assigned_user.id)))
+       elsif @user.assigned_position
         @user.assigned_position.update(position_attributes.with_defaults(user_id: self.user_id, team_id: self.segment.team.id, assigned_user_id: @user.id))
-        self.position = @user.assigned_position
-        self.save
+        self.update(position: @user.assigned_position)
        else
-        self.assigned_user_id = self.position.assigned_user_id
+        self.update(assigned_user_id: self.position.assigned_user_id)
        end
     end
 
     def assigned_user=(user)
-        self.assigned_user_id = user.id
-        self.save
+        self.update(assigned_user_id: user.id)
     end
 
     def assigned_user

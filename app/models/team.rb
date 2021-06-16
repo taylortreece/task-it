@@ -6,7 +6,7 @@ class Team < ApplicationRecord
     has_many :segments, dependent: :destroy
     has_many :projects, through: :segments
 
-    validates :title, :description, presence: { message: "Position Fields must be filled and longer than 2 characters"}, length: { minimum: 2}
+    validates :name, :description, presence: { message: "Position Fields must be filled and longer than 2 characters"}, length: { minimum: 2}
 
     def completed_segments
         self.segments.completed

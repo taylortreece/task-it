@@ -5,6 +5,8 @@
     <li><%= link_to "Add Projects", new_admin_project_path %></li>
   </ul>
 
+<br><br><p style="text-align: center;"><%= link_to "Create Projects", new_admin_project_path if @company.projects.empty? %></p>
+
 <% if @project_index_links == "complete" %>
     <%= render :partial => "admin/projects/show_complete_projects" %>
 <% elsif @project_index_links == "incomplete" %>
