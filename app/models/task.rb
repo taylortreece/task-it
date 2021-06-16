@@ -17,7 +17,7 @@ class Task < ApplicationRecord
         if self.assigned_user_id #update
            self.assigned_user.update(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id))
         elsif !self.assigned_user_id && !!user_attributes[:first_name] #create
-           self.update(assigned_user_id: User.create(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id).id))
+           self.update(assigned_user_id: User.create(user_attributes.except(:user_param_value).with_defaults(user_id: self.user_id)).id)
         else
         end
         @user = self.assigned_user

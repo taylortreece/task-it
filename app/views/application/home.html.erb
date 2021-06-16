@@ -3,6 +3,7 @@
     <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
       <p style="border-style: solid;"><%= link_to "My team", team_path(@user.team) %></p>
         <%= link_to "#{@user.team.name}", team_path(@user.team) %><br><br>
+        <%= render :partial => "show_team" %>
     </div>
 
     <div class="col-lg-8" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">

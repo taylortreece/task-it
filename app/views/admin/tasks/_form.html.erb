@@ -1,7 +1,3 @@
-<div id="container-fluid">
-  <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-
   <% if @task.errors.full_messages.any? %>
     <h3>Errors:</h3>
     <% @task.errors.full_messages.each do |message| %>
@@ -19,7 +15,7 @@
 
       <% if @show_task_and_user_form.nil? && @segment.team.positions != [] %>
         <p>Pick a Team Member:<p> <%= task_builder.collection_select :position_id, @segment.team.positions, :id, :title, {:include_blank => true} %>
-        <%= task_builder.submit "Create Task" %>
+        or <%= link_to "Add User", admin_project_segment_path(@segment.project, @segment, :show_task_and_user_form => true) if @task && @user.nil? %>
       <% end %>
 
         <% if @segment.team.positions == [] %>
@@ -31,15 +27,8 @@
         <% else %>
           <br><br><%= link_to "Create Task's Assigned Team Member", edit_admin_segment_task_path(@task.segment, @task, :show_user_form => "create_user") unless @show_user_form || @task.id.nil?%>
         <% end %>
-              </div>
-            </div>
-          </div>
 
     <% if @show_user_form || @task.assigned_user.nil? %>
-
-    <div id="container-fluid">
-      <div class="row">
-        <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 
         <%= task_builder.fields_for :user, @user do |user_builder| %>
         <br><h3><%= @user.nil? || @user.id.nil? ? "New Team Member" : "Edit Team Member" %></h3><br>
@@ -57,12 +46,9 @@
         <%= task_builder.fields_for :position, @position do |position_builder| %>
         Position Title: <%= position_builder.text_field :title %>
         Position Description: <%= position_builder.text_area :description %>
-          <% end %>
+          <% end %><br>
       <% end %>
-      <br><br><%= task_builder.submit "Submit Task" %>
+      <br><%= task_builder.submit "Submit Task" %>
   <% end %>
-  
-    </div>
-  </div>
-</div>
+
 <% end %>

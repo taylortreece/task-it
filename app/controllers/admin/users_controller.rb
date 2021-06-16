@@ -70,6 +70,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def update
+        binding.pry
         @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
         @user = User.find_by(id: params[:id])
         
@@ -120,8 +121,7 @@ class Admin::UsersController < ApplicationController
             :team_attributes => [
                 :name,
                 :description,
-                :id,
-                :profile #for determining if the form came from the profile page. Do not allow into update or create method for team
+                :id
             ],
             position_attributes: [
                 :title,

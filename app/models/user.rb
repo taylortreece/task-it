@@ -26,19 +26,19 @@ class User < ApplicationRecord
     
     def team_attributes=(team_attributes)
         self.update(user_id: self.id) if self.user_id.nil? #assigning self as self's creator in signup
-        @team = Team.find_by(id: team_attributes[:id]) #selecting from dropbox
+        @team = Team.find_by(id: team_attributes[:id]) unless #selecting from dropbox
 
         if team_attributes[:name]!=""
             if self.position #update
-                self.team.update(team_attributes.with_defaults(company: self.company, user_id: self.user_id)) ? @team = self.team : @team = nil
-            else#create
-                @team = Team.create(team_attributes.except(:profile).with_defaults(company: self.creator.company, user_id: self.user_id))
+                self.team.update(team_attributes.except(:id).with_defaults(company: self.company, user_id: self.user_id)) ? @team = self.team : @team = nil
+            else #create
+                @team = Team.create(team_attributes.with_defaults(company: self.creator.company, user_id: self.user_id))
             end
         end
     end
 
     def position_attributes=(position_attributes)
-        @team ? team_id = @team.id : team_id = position_attributes[:team_id]
+        !!@team ? team_id = @team.id : team_id = position_attributes[:team_id]
         self.save if self.id.nil?
 
         if position_attributes[:title] != ""

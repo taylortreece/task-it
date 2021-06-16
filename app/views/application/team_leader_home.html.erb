@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
       <p style="border-style: solid;"><%= link_to "My Team", team_leader_team_path(@current_user.team) %></p>
+      <%= render :partial => "team_leader/teams/show_team" %>
     </div>
 
     <div class="col-lg-8" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">

@@ -5,7 +5,7 @@
     <h3><%= link_to "#{team.name}", team_leader_team_path(team) %></h3>
     <%= team.description %><br>
     <% if team.leaders.empty? %>
-        <p>This team has no assigned leaders</p>
+        <p>This team has no assigned leaders.</p>
     <% else %><br>
     <h5>Leaders</h5>
     <% team.leaders.each do |user| %>

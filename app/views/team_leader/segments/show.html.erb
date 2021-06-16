@@ -3,23 +3,25 @@
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 
 <h1><%= @segment.title %></h1>
+
+<%= link_to "Add Tasks", team_leader_project_segment_path(@segment, :show_task_form => true) unless @task || @segment.team != @current_user.team %>&nbsp&nbsp
+<%= link_to "Update Segment", edit_team_leader_project_segment_path(@segment.project, @segment) %>&nbsp&nbsp
+<%= link_to "Delete Segment", team_leader_project_segment_path(@segment.project, @segment), :method => :delete %><br><br>
+
 <h3><%= link_to "#{@segment.project.title}", team_leader_project_path(@segment.project) %></h3>
 Assigned Team: <%= link_to "#{@segment.team.name}", team_leader_team_path(@segment.team) %><br>
 
-<%= render :partial => "team_leader/segments/completed_form" if @segment.team.id = @current_user.id%><br><br>
+<%= render :partial => "completed_form" %><br><br>
 
 <h2>Tasks</h2>
 <%= render :partial => "team_leader/segments/show_tasks" %><br>
 
-<%= link_to "Add Tasks", team_leader_project_segment_path(@segment.project.id, @segment.id, :show_task_form => true) unless @task %>&nbsp&nbsp
-        </div>
-    </div>
-</div>
-
 <%= render :partial => 'team_leader/tasks/form', :locals => { :task => @task } if @task %>
 
-<%= link_to "Add User", team_leader_project_segment_path(@segment.project.id, @segment.id, :show_task_and_user_form => true) if @task && @user.nil? %>
+    </div>
+  </div>
+</div>
 
 <%= render :partial => 'team_leader/segment_comments/form', :locals => { :subject => @segment } %>
 
-<%= render :partial => "team_leader/segments/show_comments" %>
+<%= render :partial => "show_comments" %>
