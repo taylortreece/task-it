@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
 
     def home
         @tasks = current_user.position.tasks unless current_user.position.nil?
+        @team = current_user.team if current_user.team
         @user = current_user
-        determine_leader_route(current_user)
     end
 
     def team_leader_home

@@ -17,6 +17,7 @@
     <li><%= link_to "Company Teams", team_leader_teams_path %></li>
     <li><%= link_to "Logout", '/logout' %></li>
     <li><%= link_to "Profile", "/team_leader/profile/#{@current_user.id}" %>
+    <li><%= link_to "Team Member View", root_path %></li>
     <li><%= link_to "Admin View", admin_home_path if @current_user.admin == true %></li>
   </ul>
     <%= yield %>
