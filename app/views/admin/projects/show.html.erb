@@ -13,11 +13,11 @@
 <h3>Segments:</h3>
 <%= render :partial => "admin/projects/show_segments" %>
 
+<%= render :partial => 'admin/segments/form', :locals => { :segment => @segment } if @segment %><br>
+
         </div>
     </div>
 </div>
-<%= render :partial => 'admin/segments/form', :locals => { :segment => @segment } if @segment %><br>
-
 <%= render :partial => 'admin/project_comments/form', :locals => { :subject => @project } %>
 
 <br><%= render :partial => "admin/projects/show_comments" %>

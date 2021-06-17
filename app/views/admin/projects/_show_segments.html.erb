@@ -3,7 +3,10 @@
     <p>You have no segments for this project</p>
 <% else %>
     <% @project.segments.ordered.each do |segment| %>
+        <div class="inner-content">
         <%= link_to("#{segment.title}", admin_project_segment_path(@project.id, segment.id)) %><br>
+        Team: <%= link_to "#{segment.team.name}", admin_team_path(segment.team) %><br>
         <%= "#{segment.description}" %><br><br>
+        </div>
     <% end %>
 <% end %>

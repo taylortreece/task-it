@@ -24,7 +24,7 @@ class Admin::SegmentsController < ApplicationController
 
     def create
         @segment = Segment.new(segment_params)
-        @project = Project.find_by(id: params[:segment][:project_id])
+        @project = Project.find_by(id: params[:project_id])
         @team = Team.find_by(id: params[:segment][:team_id])
         if @segment.save
             redirect_to admin_project_path(@project)

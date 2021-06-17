@@ -9,7 +9,6 @@ class Admin::ProjectsController < ApplicationController
 
     def show
         @project = Project.find_by(id: params[:id])
-
         if params[:show_segment_form] == "true"
             @segment = Segment.new
         elsif params[:show_segment_and_team_form] == "true"

@@ -10,17 +10,20 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <header class="site-header">
+  <%= link_to "Task It - #{@current_user.company.name}", admin_home_path, class: "logo" %>
+  <%= link_to "Team Member View", root_path, class: "Views" %> | 
+  <%= link_to "Team Leader View", team_leader_home_path, { :class => "views" } %>
   <ul>
-    <li style="font-size:40px;"><%= link_to "Task It - #{@current_user.company.name}", admin_home_path %></li>
+    <!-- <li style="font-size:40px;text-align:left;font-family: Garamond, serif;"><%#= link_to "Task It - #{@current_user.company.name}", admin_home_path %></li> -->
     <li><%= link_to "Company Projects", admin_projects_path %></li>
     <li><%= link_to "Company Teams", admin_teams_path %></li>
     <li><%= link_to "Logout", '/logout' %></li>
     <li><%= link_to "Profile", "/admin/profile/#{@current_user.id}" %></li>
   </ul>
+  </header>
+  <body>
 
-  <p style="text-align: center;"><%= link_to "Team Member View", root_path %> | 
-  <%= link_to "Team Leader View", team_leader_home_path %></p>
     <%= yield %>
   </body>
 </html>
