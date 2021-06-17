@@ -6,8 +6,8 @@ Open Tasks:<br>
   <% @task = task %>
     <%= link_to "#{task.title}", segment_task_path(task.segment, task) %><br>
     <%= render :partial => "team_leader/tasks/completed_form" if @current_user.assigned_tasks.include?(task) || @current_user.team == @user.team %>
-    project: <%= link_to "#{task.segment.project.title}", project_segment_path(task.segment.project)%><br>
-    segment: <%= link_to "#{task.segment.title}", segment_task_path(task.segment)%><br><br>
+    project: <%= link_to "#{task.segment.project.title}", team_leader_project_path(task.segment.project)%><br>
+    segment: <%= link_to "#{task.segment.title}", team_leader_project_segment_path(task.segment.project, task.segment)%><br><br>
     <% end %>
   <% end %>
     </div>

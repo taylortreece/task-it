@@ -5,7 +5,7 @@
 <%= @user.email %><br><br>
 <h5><%= @user.assigned_position ? "Title: #{@user.assigned_position.title}" : "This user has no assigned positions." %><br><br></h5>
 
-<%= render :partial => "show_tasks" %>
+<%= render :partial => "users/show_tasks" %>
     </div>
   </div>
 </div>

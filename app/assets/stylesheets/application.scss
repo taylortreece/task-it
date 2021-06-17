@@ -16,12 +16,22 @@
 
  @import "bootstrap";
 
+  body {
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0.42908501291141454) 70%, rgba(1,0,0,0.42908501291141454) 99%);
+  }
+
  .col-lg, .col-lg-8 {
+    height: 90vh;
     border: 1px solid #000;
     border-radius: 5px;
     margin-top: 15px;
     margin-bottom: 15px;
     text-align: center;
+    font-family:Perpetua,Baskerville,Big Caslon,Palatino Linotype,Palatino,URW Palladio L,Nimbus Roman No9 L,serif;
+    font-size: 1.3em;
+    overflow: auto;
+    padding: 3px;
  }
 
  ul {
@@ -33,3 +43,23 @@
   li {
     display: inline;
   } 
+
+  a {
+    color: black;
+    font-weight: bold;
+  }
+
+  .home-col {
+    border-style: groove;
+    border-color: black;
+    border-width: 3px;
+  }
+
+  .left-col-content {
+    border-style: inset;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 10%;
+    padding: 1px;
+  }
+    

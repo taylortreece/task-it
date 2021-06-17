@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     def team_leader_home
         @segments = current_user.team.segments
         @team = current_user.team if current_user.team
+        @user = current_user
         render layout: "team_leader_layout"
     end
 

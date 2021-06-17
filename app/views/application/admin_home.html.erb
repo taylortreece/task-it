@@ -1,20 +1,23 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;"><%= link_to "Create Team", new_admin_team_path %></p>
-      <% @current_user.company.teams.each do |team| %>
+    <div class="col-lg">
+      <p class="home-col"><%= link_to "Create Team", new_admin_team_path %></p>
+      Current Teams:
+      <% @company.teams.each do |team| %>
+        <div class="left-col-content">
         <%=link_to "#{team.name}", admin_team_path(team) %><br><br>
+        </div>
         <% end %>
     </div>
 
-    <div class="col-lg-8" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;"><%= link_to "Create Project", new_admin_project_path %></p>
+    <div class="col-lg-8">
+      <p class="home-col"><%= link_to "Create Project", new_admin_project_path %></p>
         <%= link_to "#{@project.title}", admin_project_path(Project.all.last) unless Project.all == []%><br>
           <%= render :partial => "admin/projects/show_segments" %>
     </div>
     
-    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;">Late Projects</p>
+    <div class="col-lg">
+      <p class="home-col">Late Projects</p>
       <%= render :partial => "admin/projects/show_late_projects"%>
     </div>
 

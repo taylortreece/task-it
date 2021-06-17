@@ -27,9 +27,10 @@
             Team Name: <%= team_builder.text_field :name %>
             Team Description: <%= team_builder.text_area :description %>     
             <% end %>
+            <%= segment_builder.submit "Create Segment" if @team %>
           <% end %><br><br>
         <%= segment_builder.submit "Create Segment" if @team %>
          </div>
-    </div>
+     </div>
   </div>    
-    <% end %>
+<% end %>

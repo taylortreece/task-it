@@ -1,0 +1,11 @@
+<% if @team.segments.incomplete.empty? || @team.nil? %>
+    <p>There are no incomplete Projects!</p>
+<% else %>
+    <% @team.segments.incomplete.each do |segment| %>
+        <h4><%= link_to "#{segment.title}", team_leader_project_segment_path(segment.project, segment) %></h4>
+        <strong><%= pretty_deadline(segment) %></strong><br>
+        Project: <%= link_to "#{segment.project.title}", team_leader_project_path(segment.project)%><br>
+        <strong><%= pretty_deadline(segment.project) %></strong><br>
+        <%= segment.project.description %><br><br>
+        <% end %>
+<% end %><br><br>
