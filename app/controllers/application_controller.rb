@@ -22,9 +22,9 @@ class ApplicationController < ActionController::Base
         render layout: "admin_layout"
     end
 
-    def notfound
-        render file: "#{Rails.root}/public/404.html"
-    end
+    # def notfound
+    #     render file: "#{Rails.root}/public/404.html"
+    # end
 
     private
 

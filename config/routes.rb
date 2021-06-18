@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get '/auth/github/callback', to: 'sessions#create'
+
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#logout'
@@ -102,7 +104,7 @@ resources :projects, only: [:index, :show]
 
   # match must be last route
 
-  match '*path', to: "application#notfound", via: [:get, :post]
+  # match '*path', to: "application#notfound", via: [:get, :post]
 
   # Which routes need to be namespaced??
 
