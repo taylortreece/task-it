@@ -1,15 +1,15 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;"><%= link_to "My team", team_path(@user.team) %></p>
-        <%= link_to "#{@user.team.name}", team_path(@user.team) %><br><br>
-        <%= render :partial => "teams/show_team" %>
+      <p style="border-style: solid;"><%= link_to "My team", team_path(@user.team) unless @user.team.nil?%></p>
+        <%= link_to "#{@user.team.name}", team_path(@user.team) unless @user.team.nil? %><br><br>
+        <%= render :partial => "teams/show_team" unless @user.team.nil?%>
     </div>
 
     <div class="col-lg-8" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
       <p style="border-style: solid;"><%= link_to "My Tasks", "/profile/#{@user.id}" %></p>
 
-      <% if @user.incomplete_tasks.empty? %>
+      <% if @tasks.nil? %>
         <p>You do not have any incomplete tasks!</p>
       <% else %>
       <% @tasks.each do |task|%>

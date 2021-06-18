@@ -1,6 +1,6 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
 
 <% if @segment.errors.full_messages.any? %>
     <h3>Errors:</h3>
@@ -22,24 +22,19 @@
            <%= segment_builder.submit "Create Segment" unless @team %><br><br>
       <% end %><br>
         <%= link_to "Create New Team", admin_project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? %>
-    </div>
-  </div>
-</div>
 
         <% if @segment.team.nil? %>
-          <% if Team.all == [] %> <p>You currently have not created any teams. You need to create a team before you can create a segment.</p> <% end %>
+          <% if Team.all == [] %> <p>You currently have not created any teams. You need to create a team before you can create a segment. <% end %>
         <% else %>
-  <div id="container-fluid">
-    <div class="row">
-      <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+  
           <h3>New Team</h3>
             <%= segment_builder.fields_for :team, @team do |team_builder| %>
             Team Name: <%= team_builder.text_field :name, required: true, placeholder: "Enter the new Team's name..." %>
             Team Description: <%= team_builder.text_area :description, required: true, placeholder: "Enter the new Team's description..." %>     
             <% end %>
           <% end %><br><br>
-        <%= segment_builder.submit "Create Segment" if @team %>
+          <%= segment_builder.submit "Create Segment" if @team %>
          </div>
-    </div>
+      </div>
   </div>    
 <% end %>

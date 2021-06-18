@@ -6,13 +6,13 @@ class ApplicationController < ActionController::Base
 
     def home
         @tasks = current_user.position.tasks unless current_user.position.nil?
-        @team = current_user.team if current_user.team
+        @team = current_user.team 
         @user = current_user
     end
 
     def team_leader_home
-        @segments = current_user.team.segments
-        @team = current_user.team if current_user.team
+        @segments = current_user.team.segments unless current_user.team.nil?
+        @team = current_user.team if current_user.position
         @user = current_user
         render layout: "team_leader_layout"
     end

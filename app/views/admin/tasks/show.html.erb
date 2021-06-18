@@ -1,14 +1,15 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
     <h1><%= @task.title %></h1>
-    <%= @task.description %>
-    Assigned Team Member: <%= @task.assigned_user.full_name %><br><br>
+    <div class="col-content">
+    <%= link_to "Update Task", edit_admin_segment_task_path(@task) %>&nbsp&nbsp
+    <%= link_to "Delete Task", [:admin, @segment, @task], confirm: "Are you sure?", :method => :delete %><br><br>
+    <%= @task.description %><br>
+    Assigned Team Member: <%= link_to "#{@task.assigned_user.full_name}", admin_team_user_path(@task.assigned_user.team, @task.assigned_user) %><br><br>
 
     <%= render :partial => "completed_form" %><br>
-
-    <%= link_to "Update Task", edit_admin_segment_task_path(@task) %>
-    <%= link_to "Delete Task", [:admin, @segment, @task], confirm: "Are you sure?", :method => :delete %>
+      </div>
     </div>
   </div>
 </div>

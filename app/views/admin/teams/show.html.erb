@@ -1,18 +1,22 @@
-<h1 style="text-align: center;"><%= @team.name %></h1>
-<ul style="text-align: center;">
-    <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", admin_teams_path %></li></strong> | 
-    <li><%= link_to "Edit Team", edit_admin_team_path(@team)%></li> | 
-    <li><%= link_to "Delete Team", @team, :method => :delete %></li> | 
-    <li><%= link_to "Create New User", admin_team_path(@team, :show_user_form => true ) unless @user %></li>
-</ul>
 
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
+    <ul style="text-align: center;padding:20px;">
+        <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", admin_teams_path %></li></strong> | 
+        <li><%= link_to "Edit Team", edit_admin_team_path(@team)%></li> | 
+        <li><%= link_to "Delete Team", @team, :method => :delete %></li> | 
+        <li><%= link_to "Create New User", admin_team_path(@team, :show_user_form => true ) unless @user %></li>
+    </ul>
+
+<h1 style="text-align: center;"><%= @team.name %></h1>
 
 <%= render :partial => "admin/teams/show_team" %>
 
-<%= render :partial => 'admin/users/form', :locals => { :user => @user } if @user %>
+<% if @user %>
+  <h2>New User:</h2><br>
+  <%= render :partial => 'admin/users/form', :locals => { :user => @user } %>
+<% end %>
     </div>
   </div>
 </div>

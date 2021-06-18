@@ -1,4 +1,8 @@
-<ul style="text-align: center;">
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
+
+<ul style="text-align: center;padding:20px;">
     <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Projects", admin_projects_path %></li></strong> | 
     <li><%= link_to "Completed Projects", admin_projects_path(:project_index_link => "complete") %></li> | 
     <li><%= link_to "Incomplete Projects", admin_projects_path(:project_index_link => "incomplete") %></li> | 
@@ -14,3 +18,6 @@
 <% else %>
     <%= render :partial => "admin/projects/index_form" %>
 <% end %>
+</div>
+</div>
+</div>

@@ -30,9 +30,9 @@ class User < ApplicationRecord
 
         if team_attributes[:name]!=""
             if self.position #update
-                self.team.update(team_attributes.except(:id).with_defaults(company: self.company, user_id: self.user_id)) ? @team = self.team : @team = nil
+        self.team.update(team_attributes.except(:id).with_defaults(company: self.company, user_id: self.user_id)) ? @team = self.team : @team = nil
             else #create
-                @team = Team.create(team_attributes.with_defaults(company: self.creator.company, user_id: self.user_id))
+        @team = Team.create(team_attributes.with_defaults(company: self.creator.company, user_id: self.user_id))
             end
         end
     end
@@ -45,7 +45,7 @@ class User < ApplicationRecord
             if self.position #update
                 @team ? self.position.update(team_id: @team.id) : self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
             else #create
-                self.update(assigned_position_id: Position.create(position_attributes.with_defaults(assigned_user_id: self.id, user_id: self.user_id)).id)
+        self.update(assigned_position_id: Position.create(position_attributes.with_defaults(assigned_user_id: self.id, user_id: self.user_id, team_id: team_id)).id)
             end
         end
     end
@@ -55,7 +55,8 @@ class User < ApplicationRecord
     end
 
     def assigned_tasks
-        self.position.tasks
+        position = Position.find_by(assigned_user_id: self.id)
+        position.nil? ? position : self.position.tasks
     end
 
     def assigned_position
@@ -63,7 +64,8 @@ class User < ApplicationRecord
     end
 
     def team
-        Position.find_by(assigned_user_id: self.id).team
+        position = Position.find_by(assigned_user_id: self.id)
+        position.nil? ? position : position.team
     end
 
     def position

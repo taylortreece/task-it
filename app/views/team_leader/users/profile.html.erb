@@ -5,7 +5,7 @@
 
 <h1><%= @user.full_name %>'s Profile</h1>
 <h4><%= @user.email %></h4>
-<h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= @user.team.name unless @user.assigned_position.nil? %></h4>
+<h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= @user.team.name unless @user.team.nil? || @user.assigned_position.nil? %></h4>
 
 <%= link_to "Edit Profile", "/team_leader/profile/#{@user.id}/edit" %>
 

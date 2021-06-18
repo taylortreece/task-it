@@ -6,7 +6,7 @@
 <% if @edit_my_profile == false %>
 
 <h4><%= @user.email %></h4>
-<h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= link_to "#{@user.team.name}", team_path(@user.team) unless @user.assigned_position.nil? %></h4>
+<h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= link_to "#{@user.team.name}", team_path(@user.team) unless @user.team.nil? || @user.assigned_position.nil? %></h4>
 
 <%= link_to "Edit Profile", "/profile/#{@user.id}/edit" %>
 

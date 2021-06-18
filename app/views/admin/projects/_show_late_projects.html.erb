@@ -1,5 +1,5 @@
 <% if Project.late.empty? %>
-    <p>There are no past due Projects!</p>
+    <br><br><p>There are no past due Projects!</p>
 <% else %>
     <% Project.late.each do |project| %>
         <%= link_to "#{project.title}", admin_project_path(project) %><br>

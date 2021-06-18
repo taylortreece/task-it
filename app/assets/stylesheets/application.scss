@@ -33,15 +33,16 @@
   }
 
  .col-lg, .col-lg-8 {
+    width: 100%;
     border: 1px solid #000;
     border-radius: 5px;
     margin-top: 15px;
     margin-bottom: 15px;
     text-align: center;
-    font-family:Perpetua,Baskerville,Big Caslon,Palatino Linotype,Palatino,URW Palladio L,Nimbus Roman No9 L,serif;
     font-size: 1.3em;
     overflow: auto;
     padding: 3px;
+    font-family:Perpetua,Baskerville,Big Caslon,Palatino Linotype,Palatino,URW Palladio L,Nimbus Roman No9 L,serif;
  }
 
  ul {
@@ -73,6 +74,10 @@
     box-shadow: inset 0 0 10px;;
     margin: 15px;
     border-radius: 1%;
+  }
+
+  .logo {
+    text-align: left;
   }
 
 

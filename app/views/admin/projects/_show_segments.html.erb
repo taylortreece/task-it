@@ -1,6 +1,6 @@
 <% if @project.nil? %>
 <% elsif @project.segments == [] %>
-    <p>You have no segments for this project</p>
+    <p>You have no segments for this project. <%= link_to "Add Segments", admin_project_path(@project, :show_segment_form => true ) unless @segment %></p>
 <% else %>
     <% @project.segments.ordered.each do |segment| %>
         <div class="inner-content">

@@ -1,18 +1,22 @@
 <% @company.teams.each do |team| %>
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
     <h3><%= link_to "#{team.name}", admin_team_path(team) %></h3>
     <%= team.description %><br>
     <% if team.leaders.empty? %>
+      <div class="inner-content">
         <p>This team has no assigned leaders</p>
+      </div>
     <% else %><br>
     <h5>Leaders</h5>
-    <% team.leaders.each do |user| %>
-        <%= link_to "#{user.full_name}", admin_team_user_path(team, user) %>, <%= user.privilege %>:<br>
-        <%= user.assigned_position.title %> - <%= user.assigned_position.description %><br>
-        <%= user.email %><br><br>
-        <%end%>
+      <% team.leaders.each do |user| %>
+        <div class="inner-content">
+          <%= link_to "#{user.full_name}", admin_team_user_path(team, user) %>, <%= user.privilege %>:<br>
+          <%= user.assigned_position.title %> - <%= user.assigned_position.description %><br>
+          <%= user.email %><br><br>
+        </div>
+      <%end%>
     <%end%>
     </div>
   </div>

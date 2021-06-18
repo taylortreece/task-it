@@ -1,4 +1,4 @@
-<% if @team.segments.incomplete.empty? || @team.nil? %>
+<% if @team.nil? || @team.segments.incomplete.empty? %>
     <p>There are no incomplete Projects!</p>
 <% else %>
     <% @team.segments.incomplete.each do |segment| %>

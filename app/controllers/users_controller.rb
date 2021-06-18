@@ -44,7 +44,7 @@ class UsersController < ApplicationController
             @user = User.new(signup_user_params)
             if @user.save
                 login(@user)
-                redirect_to '/'
+                redirect_to admin_home_path
             else
                 render :new, :layout => false
             end
