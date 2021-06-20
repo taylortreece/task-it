@@ -1,10 +1,10 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-    <% if Project.completed.empty? %>
+    <% if @company.projects.completed.empty? %>
         <p>There are no complete Projects!</p>
     <% else %>
-    <% Project.completed.each do |project| %>
+    <% @company.projects.completed.each do |project| %>
         <h2><%= link_to "#{project.title}", project_path(project)%><br></h2>
         <strong><%= pretty_deadline(project) %></strong><br><br>
         <%= project.description %><br><br>

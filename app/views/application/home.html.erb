@@ -1,30 +1,24 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;"><%= link_to "My team", team_path(@user.team) unless @user.team.nil?%></p>
-        <%= link_to "#{@user.team.name}", team_path(@user.team) unless @user.team.nil? %><br><br>
-        <%= render :partial => "teams/show_team" unless @user.team.nil?%>
+    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
+        <% if @user.team.nil? %>
+          <p class="home-col">My Team</p>
+          <br><p>You have not been assigned to a team</p>
+        <% else %>
+          <p class="home-col"><%= link_to "My team", team_path(@user.team) %></p>
+          <%= link_to "#{@user.team.name}", team_path(@user.team)  %><br><br>
+          <%= render :partial => "teams/show_team" %>
+        <% end %>
     </div>
 
-    <div class="col-lg-8" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;"><%= link_to "My Tasks", "/profile/#{@user.id}" %></p>
-
-      <% if @tasks.nil? %>
-        <p>You do not have any incomplete tasks!</p>
-      <% else %>
-      <% @tasks.each do |task|%>
-        <% @task = task %>
-        <%= link_to "#{task.title}", segment_task_path(task.segment, task) unless task.id.nil? %><br>
-        <%= task.deadline %><br>
-        <%= task.description %><br><br>
-        <%= render :partial => "tasks/completed_form" %><br>
-        <% end %>
-        <% end %>
-          <%= render :partial => "projects/show_segments" %>
+    <div class="col-lg-7" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
+      <p class="home-col"><%= link_to "My Tasks", "/profile/#{@user.id}" %></p>
+      <%= render :partial => "tasks/show_tasks" %>
     </div>
     
-    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-      <p style="border-style: solid;">Messages</p>
+    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
+      <p class="home-col">Messages</p>
+      <br><p>Messaging features are still under development.</p>
     </div>
 
   </div>

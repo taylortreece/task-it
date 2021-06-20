@@ -1,6 +1,6 @@
 Open Tasks:<br>
   <% if @user.position.nil? || @user.assigned_tasks.incomplete.empty? %>
-    <p>This user has no open tasks.</p>
+    <br><p>This user has no open tasks.</p>
   <% else %>
   <% @user.assigned_tasks.incomplete.each do |task| %>
   <% @task = task %>

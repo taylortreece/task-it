@@ -1,7 +1,4 @@
 <% @projects.ordered.each do |project| %>
-<div id="container-fluid">
-  <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
     <h2><%= link_to "#{project.title}", admin_project_path(project)%><br></h2>
     <strong><%= pretty_deadline(project) %></strong><br>
     <%= project.description %><br><br>
@@ -18,8 +15,5 @@
           </div>
         <% end %>
       <% end %><br><br>
-    </div>
-  </div>
-</div>
 <% end %>
 

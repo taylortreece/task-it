@@ -37,6 +37,7 @@ class Admin::SegmentsController < ApplicationController
         @segment = Segment.find_by(id: params[:id])
         @project = @segment.project
         @team = Team.new
+        @show_segment_and_team_form = params[:show_segment_and_team_form]
     end
 
     def update

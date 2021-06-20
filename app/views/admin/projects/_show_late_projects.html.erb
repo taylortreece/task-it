@@ -1,7 +1,7 @@
-<% if Project.late.empty? %>
+<% if @company.projects.late.empty? %>
     <br><br><p>There are no past due Projects!</p>
 <% else %>
-    <% Project.late.each do |project| %>
+    <% @company.projects.late.each do |project| %>
         <%= link_to "#{project.title}", admin_project_path(project) %><br>
         <%= pretty_deadline(project) %>
     <% end %>

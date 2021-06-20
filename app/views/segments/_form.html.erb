@@ -7,7 +7,7 @@
     Title: <%= segment_builder.text_field :title %>
     Deadline: <%= segment_builder.date_field :deadline %>
     Description: <%= segment_builder.text_area :description %><br><br>
-      <% if Team.all != [] %>
+      <% if @company.teams.all != [] %>
            Pick a Team<%= segment_builder.collection_select :team_id, Team.all, :id, :name, {:include_blank => true} %>
            <%= segment_builder.submit "Create Segment" unless @team %><br><br>
       <% end %><br>
@@ -17,7 +17,7 @@
 </div>
 
         <% if @segment.team.nil? %>
-          <% if Team.all == [] %> <p>You currently have not created any teams. You need to create a team before you can create a segment.</p> <% end %>
+          <% if @company.teams.all == [] %> <p>You currently have not created any teams. You need to create a team before you can create a segment.</p> <% end %>
         <% else %>
   <div id="container-fluid">
     <div class="row">

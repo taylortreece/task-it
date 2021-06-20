@@ -4,19 +4,26 @@
       <p class="home-col"><%= link_to "Create Team", new_admin_team_path %></p>
 
       <% if @company.teams.empty? %>
-      <br><br>Create teams for your company <%= link_to "here", new_admin_team_path %>
+        <br><br>Create teams for your company <%= link_to "here", new_admin_team_path %>
       <% else %>
-      Current Teams:<br><br>
+      Active Teams:<br>
         <% @company.teams.each do |team| %>
-          <div class="col-content">
+          <div class="inner-content" %>
             <%=link_to "#{team.name}", admin_team_path(team) %><br>
-            <%= team.description %><br><br>
+            <%= team.description %>
+            <% if !team.leaders.empty? %>
+            Leaders:
+              <% team.leaders.each do |leader| %>
+                <%= link_to "#{leader.full_name}", admin_team_user_path(team, leader) %><br>
+                <%= leader.email %>
+              <% end %>
+            <% end %>
           </div>
         <% end %>
       <% end %>
     </div>
 
-    <div class="col-lg-8" style="height: 90vh">
+    <div class="col-lg-7" style="height: 90vh">
       <p class="home-col"><%= link_to "Create Project", new_admin_project_path %></p>
         <% if !@project.nil? %>
         <div class="col-content">

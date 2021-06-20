@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     end
 
     def admin_home
-        @project = Project.all.last
+        @project = @company.projects.last
         render layout: "admin_layout"
     end
 
