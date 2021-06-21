@@ -1,21 +1,22 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
+    <div class="col-lg" style="heigh:600px;width:120px;border:1px solid #ccc;overflow:auto;">
       <% if @current_user.team.nil? %>
         <p class="home-col">My Team</p>
         <br><br><P>You do not have a team.</p>
       <% else %>
         <p class="home-col"><%= link_to "My Team", team_leader_team_path(@current_user.team) unless @current_user.team.nil? %></p>
+        <%= @current_user.team.name %> Team Members
       <%= render :partial => "team_leader/teams/show_team" %>
       <% end %>
     </div>
 
     <div class="col-lg-7" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
       <% if @current_user.team.nil? %>
-        <p class="home-col">Segments & Tasks</p>
+        <p class="home-col">Segments</p>
         <br><br><p>Your team does not have any open Segments or Tasks.</p>
       <% else %>
-        <p class="home-col"><%= link_to "Segments & Tasks", team_leader_team_path(@current_user.team) %></p>
+        <p class="home-col"><%= link_to "#{@current_user.team.name} Segments", team_leader_team_path(@current_user.team) %></p>
         <% @current_user.team.name %>
         <%= render :partial => "team_leader/projects/show_team_segments" %>
       <% end %>

@@ -3,17 +3,22 @@
     <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
         <% if @user.team.nil? %>
           <p class="home-col">My Team</p>
-          <br><p>You have not been assigned to a team</p>
+          <br><p>You have not been assigned to a team.</p>
         <% else %>
           <p class="home-col"><%= link_to "My team", team_path(@user.team) %></p>
-          <%= link_to "#{@user.team.name}", team_path(@user.team)  %><br><br>
+          <%= link_to "#{@user.team.name}", team_path(@user.team)  %><br>
           <%= render :partial => "teams/show_team" %>
         <% end %>
     </div>
 
     <div class="col-lg-7" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
-      <p class="home-col"><%= link_to "My Tasks", "/profile/#{@user.id}" %></p>
-      <%= render :partial => "tasks/show_tasks" %>
+      <% if @user.tasks.empty? %>
+        <p class="home-col">Tasks</p>
+        <br><br>You do not have any tasks assigned to you!</p>
+      <% else %>
+        <p class="home-col"><%= link_to "My Tasks", "/profile/#{@user.id}" %></p>
+        <%= render :partial => "tasks/show_tasks" %>
+      <% end %>
     </div>
     
     <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">

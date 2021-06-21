@@ -1,13 +1,21 @@
-<ul style="text-align: center;">
-    <strong><li style="font-size: 20px;"><%= link_to "#{@company.name}'s Projects", team_leader_projects_path %></li></strong>
-    <li><%= link_to "Completed Projects", team_leader_projects_path(:project_index_link => "complete") %></li>
-    <li><%= link_to "Incomplete Projects", team_leader_projects_path(:project_index_link => "incomplete") %></li>
-  </ul>
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
 
-<% if @project_index_links == "complete" %>
-    <%= render :partial => "team_leader/projects/show_complete_projects" %>
-<% elsif @project_index_links == "incomplete" %>
-    <%= render :partial => "team_leader/projects/show_incomplete_projects" %>
-<% else %>
-    <%= render :partial => "team_leader/projects/index_form" %>
-<% end %>
+    <ul style="text-align: center;padding:20px;">
+      <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Projects", team_leader_projects_path %></li></strong> | 
+      <li><%= link_to "Completed Projects", team_leader_projects_path(:project_index_link => "complete") %></li> | 
+      <li><%= link_to "Incomplete Projects", team_leader_projects_path(:project_index_link => "incomplete") %></li> | 
+    </ul>
+
+    <% if @project_index_links == "complete" %>
+        <%= render :partial => "team_leader/projects/show_complete_projects" %>
+    <% elsif @project_index_links == "incomplete" %>
+        <%= render :partial => "team_leader/projects/show_incomplete_projects" %>
+    <% else %>
+        <%= render :partial => "team_leader/projects/index_form" %>
+    <% end %>
+
+    </div>
+  </div>
+</div>

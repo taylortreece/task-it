@@ -2,17 +2,18 @@
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
     <h1><%= @task.title %></h1>
-    <%= @task.description %><br>
-    Project:<%= link_to "#{@task.segment.project.title}", project_path(@task.segment.project)%><br>
-    Segment: <%= link_to "#{@task.segment.title}", project_segment_path(@task.segment.project, @task.segment)%><br><br>
+    
+    <div class="col-content">
+    <%= @task.description %><br><br>
     Assigned Team Member: <%= link_to "#{@task.assigned_user.full_name}", team_user_path(@task.assigned_user.team, @task.assigned_user) %><br><br>
-    Status: <%= @task.completed ? "Complete" : "Incomplete" %>
 
-    <%= render :partial => "completed_form" if @current_user.assigned_tasks.include?(@task) %><br>
+    <%= render :partial => "tasks/completed_form" if @task.assigned_user == @current_user %><br>
+
     </div>
   </div>
+</div>
 </div>
 
 <%= render :partial => 'task_comments/form', :locals => { :subject => @task } %>
 
-<%= render :partial => "show_comments" %><br>
+<%= render :partial => "tasks/show_comments" %><br>

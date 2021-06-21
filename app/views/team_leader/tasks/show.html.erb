@@ -2,15 +2,18 @@
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
     <h1><%= @task.title %></h1>
-    <%= @task.description %>
-    Assigned Team Member: <%= @task.assigned_user.full_name %><br><br>
+    <%= link_to "Update Task", edit_team_leader_segment_task_path(@task.segment, @task) if @current_user.team == @task.segment.team %>
+    <%= link_to "Delete Task", [:team_leader, @task.segment, @task], confirm: "Are you sure?", :method => :delete if @current_user.team == @task.segment.team %><br><br>
+    
+    <div class="col-content">
+    <%= @task.description %><br><br>
+    Assigned Team Member: <%= link_to "#{@task.assigned_user.full_name}", team_leader_team_user_path(@task.assigned_user.team, @task.assigned_user) %><br><br>
 
     <%= render :partial => "team_leader/tasks/completed_form" %><br>
 
-    <%= link_to "Update Task", edit_team_leader_segment_task_path(@task.segment, @task) %>
-    <%= link_to "Delete Task", [:team_leader, @task.segment, @task], confirm: "Are you sure?", :method => :delete %>
     </div>
   </div>
+</div>
 </div>
 
 <%= render :partial => 'team_leader/task_comments/form', :locals => { :subject => @task } %>

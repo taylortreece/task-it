@@ -4,20 +4,19 @@
 
 <h1><%= @segment.title %></h1>
 
-<%= link_to "Add Tasks", team_leader_project_segment_path(@segment, :show_task_form => true) unless @task || @segment.team != @current_user.team %>&nbsp&nbsp
-<%= link_to "Update Segment", edit_team_leader_project_segment_path(@segment.project, @segment) %>&nbsp&nbsp
-<%= link_to "Delete Segment", team_leader_project_segment_path(@segment.project, @segment), :method => :delete %><br><br>
+<%= link_to "Add Tasks", team_leader_project_segment_path(@segment, :show_task_form => true) unless @task || @segment.team != @current_user.team %><br><br>
 
-<h3><%= link_to "#{@segment.project.title}", team_leader_project_path(@segment.project) %></h3>
+<div class="col-content">
+Project: <%= link_to "#{@segment.project.title}", team_leader_project_path(@segment.project) %><br>
 Assigned Team: <%= link_to "#{@segment.team.name}", team_leader_team_path(@segment.team) %><br>
 
-<%= render :partial => "completed_form" %><br><br>
+<%= render :partial => "completed_form" if @current_user.team == @segment.team %><br><br>
 
-<h2>Tasks</h2>
+<h2>Tasks:</h2>
 <%= render :partial => "team_leader/segments/show_tasks" %><br>
 
 <%= render :partial => 'team_leader/tasks/form', :locals => { :task => @task } if @task %>
-
+      </div>
     </div>
   </div>
 </div>

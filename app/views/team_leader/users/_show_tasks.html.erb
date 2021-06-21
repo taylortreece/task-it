@@ -4,10 +4,12 @@ Open Tasks:<br>
   <% else %>
   <% @user.assigned_tasks.incomplete.each do |task| %>
   <% @task = task %>
-    <%= link_to "#{task.title}", segment_task_path(task.segment, task) %><br>
+  <div class="inner-content">
+    <%= link_to "#{task.title}", team_leader_segment_task_path(task.segment, task) %><br>
     <%= render :partial => "team_leader/tasks/completed_form" if @current_user.assigned_tasks.include?(task) || @current_user.team == @user.team %>
     project: <%= link_to "#{task.segment.project.title}", team_leader_project_path(task.segment.project)%><br>
     segment: <%= link_to "#{task.segment.title}", team_leader_project_segment_path(task.segment.project, task.segment)%><br><br>
+    </div>
     <% end %>
   <% end %>
     </div>

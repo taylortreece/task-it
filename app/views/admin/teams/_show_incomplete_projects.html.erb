@@ -1,43 +1,30 @@
 <% @arr = []%>
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
   
 <% @company.teams.each do |team| %>
 
 <% if team.segments.incomplete.empty?%>
 <% else%>
-<div id="container-fluid">
-  <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
       <% @team = team %>
+      <h3 style="margin-bottom:2%">Team: <%= link_to "#{team.name}", admin_team_path(team) %><br>incomplete segments:</h3>
         <% team.segments.incomplete.ordered.each do |segment| %>
         <% @segment = segment %>
         <% @arr << segment %>
 
-       <h3 style="margin-bottom:2%">Team: <%= link_to "#{team.name}", admin_team_path(team) %><br>incomplete segments:</h3>
-
-        <div class="col-content">
+        <div class="inner-content">
         <h4><%= link_to "#{segment.title}", admin_project_segment_path(segment.project, segment)%></h4>
         <p style="font-size:20px;margin:0%"><%= pretty_deadline(segment) %></p>
         <p style="font-size:20px;margin:0;">Description: <%= segment.description %></p>
         <p style="font-size:20px;margin:0;">Project: <%= link_to "#{segment.project.title}", admin_project_path(segment.project)%>, <%= pretty_deadline(segment.project) %></p>
         <%= render :partial => "admin/segments/completed_form" %>
-
-        <div class="inner-content">
-
-        <% segment.tasks.incomplete.ordered.each do |task| %>
-        <% @task = task %>
-        <p style="font-size:20px;margin:0%">Task: <%= link_to "#{task.title}", admin_segment_task_path(@segment, task) %></p>
-        <p style="font-size:20px;margin:0%">Assigned Team Member: <%= link_to "#{task.assigned_user.full_name}", admin_team_user_path(@team, task.assigned_user) %><br></p>
-        <p style="font-size:20px;margin:0%"><%= pretty_deadline(task)%></p>
-        <p style="font-size:20px;margin:0%">Description: <%= task.description %></p>
-        <p style="font-size:20px;margin:0%"><%= render :partial => "admin/tasks/completed_form" %>
-        </div>
-        </div>
-          <% end %>
+          </div>
         <% end %>
-      <% end %>
-        </div>
+      <% end %><br><br>
+    <% end %><br><br>
     </div>
+  </div>
 </div>
-<% end %><br><br>
 
 <p style="text-align: center;"><%= "There are no incomplete segments!" if @arr.empty? %><p>

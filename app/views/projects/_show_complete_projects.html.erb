@@ -1,7 +1,4 @@
-<div id="container-fluid">
-  <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-    <% if @company.projects.completed.empty? %>
+<% if @company.projects.completed.empty? %>
         <p>There are no complete Projects!</p>
     <% else %>
     <% @company.projects.completed.each do |project| %>
@@ -13,14 +10,13 @@
             <%= "You do not have any segments associated with this project." + link_to("Create Segments", project_path(project)) %>
         <% else %>
             <% project.segments.ordered.each do |segment| %>
+                  <div class="inner-content">
                     <h4><%= link_to "#{segment.title}", project_segment_path(project, segment) %><br></h4>
                     <strong><%= pretty_deadline(segment) %></strong><br>
                     <%= segment.description %><br>
                     <%= completed(segment)%>
+                  </div>
               <% end %>
-            <% end %>
+            <% end %><br><br>
           <% end %>
-        <% end %><br><br>
-      </div>
-   </div>
-</div>
+        <% end %>

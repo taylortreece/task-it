@@ -2,10 +2,11 @@
     <p>Your team has no segments to complete</p>
 <% else %>
     <% @project.segments.ordered.each do |segment| %>
-    <% @segment = segment %>
+        <div class="inner-content">
         <%= link_to("#{segment.title}", team_leader_project_segment_path(segment.project.id, segment.id)) %><br>
-        <%= "#{segment.deadline}" %><br>
-        <%= "#{segment.description}" %><br><br>
-        <%= render :partial => "team_leader/segments/completed_form" %><br><br>
+        <%= "#{pretty_deadline(segment)}" %><br>
+        Assigned Team: <%= link_to "#{segment.team.name}", team_leader_team_path(segment.team) %><br>
+        <%= segment.description %><br><br>
+        </div>
     <% end %>
 <% end %>

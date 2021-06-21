@@ -4,8 +4,10 @@
     <% @tasks.each do |task|%>
         <% @task = task %>
         <%= link_to "#{task.title}", segment_task_path(task.segment, task) unless task.id.nil? %><br>
-        <%= task.deadline %><br>
-        <%= task.description %><br><br>
+        <div class="inner-content">
+        <%= pretty_deadline(task) %><br>
+        <%= task.title %><br><br>
         <%= render :partial => "tasks/completed_form" %><br>
+        </div>
     <% end %>
 <% end %>
