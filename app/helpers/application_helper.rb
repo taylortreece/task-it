@@ -8,4 +8,12 @@ module ApplicationHelper
     #         "#{@current_user.company.name} does not have any registered teams."
     #     end
     # end
+
+    def display_progress(arg)
+        if arg.completed
+            "completed"
+        else
+            "incomplete"
+        end
+    end
 end

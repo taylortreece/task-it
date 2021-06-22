@@ -4,8 +4,8 @@ Open Tasks:<br>
   <% else %>
   <% @user.assigned_tasks.incomplete.each do |task| %>
     <% @task = task%>
-    <div class="inner-content">
-    <%= link_to "#{task.title}", segment_task_path(task.segment, task) %><br>
+    <div class="<%=display_progress(task)%>-inner-content">
+    <%= link_to "#{task.title}", admin_segment_task_path(task.segment, task) %><br>
     <%= render :partial => "admin/tasks/completed_form" %>
     project: <%= link_to "#{task.segment.project.title}", project_segment_path(task.segment.project)%><br>
     segment: <%= link_to "#{task.segment.title}", segment_task_path(task.segment)%><br><br>

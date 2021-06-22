@@ -6,7 +6,4 @@ class Company < ApplicationRecord
 
     validates :name, :industry, :address, :city, :state, :phone_number, :email, presence: { message: "All fields are required and must be at least two characters."}, length: { minimum: 2 }
 
-    # def full_error_message
-    #     self.errors.full_messages.first
-    # end
 end

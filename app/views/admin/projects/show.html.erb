@@ -1,11 +1,11 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
+      <div class="<%=display_progress(@project)%>-col-content">
 <h1><%= @project.title %></h1>
 <%= link_to "Add Segments", admin_project_path(@project, :show_segment_form => true ) unless @segment %>&nbsp&nbsp
 <%= link_to "Update Project", edit_admin_project_path(@project) %>&nbsp&nbsp
 <%= link_to "Delete Project", admin_project_path(@project), :method => :delete %><br><br>
-    <div class="col-content">
 <%= pretty_deadline(@project) %><br>
 <%= @project.description %><br><br>
 

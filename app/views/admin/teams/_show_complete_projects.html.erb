@@ -14,7 +14,7 @@
         <% @segment = segment %>
         <% @arr << segment %>
 
-        <div class="inner-content">
+        <div class="<%=display_progress(segment)%>-inner-content">
         <h4><%= link_to "#{segment.title}", admin_project_segment_path(segment.project, segment)%></h4>
         <p style="font-size:20px;margin:0%"><%= pretty_deadline(segment) %></p>
         <p style="font-size:20px;margin:0;">Description: <%= segment.description %></p>

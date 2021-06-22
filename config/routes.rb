@@ -61,7 +61,7 @@ resources :projects, only: [:index, :show]
       resources :users, only: [:show]
     end
 
-    resources :tasks, only: [:index]
+    resources :tasks, only: [:index, :edit, :update]
 
     resources :project_comments
     resources :segment_comments

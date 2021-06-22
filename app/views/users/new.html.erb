@@ -3,15 +3,6 @@
     <div class="col-lg" style="text-align: center; border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 <h1>Sign up</h1>
 
-<% if @user.errors.full_messages.any? %>
-    <h3>Errors:</h3>
-    <% @user.errors.full_messages.each do |message| %>
-        <ul>
-            <li><%= message %>
-        </ul>
-    <% end %>
-<% end %>
-
     <%= form_for @user, :url => "/signup" do |user_builder| %>
     First Name: <%= user_builder.text_field :first_name, :required => true, :placeholder => "Enter your first name..." %><br><br>
     Last Name: <%= user_builder.text_field :last_name, :required => true, :placeholder => "Enter your last name..." %><br><br>
@@ -20,13 +11,13 @@
     Re-Password: <%= user_builder.password_field :password_confirmation, :required => true, :placeholder => "Re-enter your password..." %><br><br>
 
         <%= user_builder.fields_for :company_attributes, @company do |company_builder| %><br><br>
-    Company Name: <%= company_builder.text_field :name, :required => true, :placeholder => "Enter your Company's name..." %><br><br>
-    Company Industry: <%= company_builder.text_field :industry, :required => true, :placeholder => "Enter your Company's industry..." %><br><br>
-    Company Address: <%= company_builder.text_field :address, :required => true, :placeholder => "Enter your Company's street address..." %><br><br>
-    Company City: <%= company_builder.text_field :city, :required => true, :placeholder => "Enter your Company's city..." %><br><br>
-    Company State: <%= company_builder.text_field :state, :required => true, :placeholder => "Enter your Company's state..." %><br><br>
-    Company Phone Number: <%= company_builder.text_field :phone_number, :required => true, :placeholder => "Enter your Company's phone number..." %><br><br>
-    Company Email: <%= company_builder.text_field :email, :required => true, :placeholder => "Enter your Company's email address..." %><br><br>
+    Company Name: <%= company_builder.text_field :name, :placeholder => "Enter your Company's name..." %><br><br>
+    Company Industry: <%= company_builder.text_field :industry, :placeholder => "Enter your Company's industry..." %><br><br>
+    Company Address: <%= company_builder.text_field :address, :placeholder => "Enter your Company's street address..." %><br><br>
+    Company City: <%= company_builder.text_field :city, :placeholder => "Enter your Company's city..." %><br><br>
+    Company State: <%= company_builder.text_field :state, :placeholder => "Enter your Company's state..." %><br><br>
+    Company Phone Number: <%= company_builder.text_field :phone_number, :placeholder => "Enter your Company's phone number..." %><br><br>
+    Company Email: <%= company_builder.text_field :email, :placeholder => "Enter your Company's email address..." %><br><br>
         <% end %>
         
         <%= user_builder.submit "Create Profile and Company" %>

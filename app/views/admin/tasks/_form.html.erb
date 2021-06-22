@@ -1,3 +1,8 @@
+<div id="container-fluid">
+  <div class="row">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
+     
+ 
   <% if @task.errors.full_messages.any? %>
     <h3>Errors:</h3>
     <% @task.errors.full_messages.each do |message| %>
@@ -24,7 +29,7 @@
         <% end %>
 
         <% if @task.assigned_user %>
-          <br><br><%= link_to "Edit Task's Assigned Team Member", edit_admin_segment_task_path(@task.segment, @task, :show_user_form => "edit_user") unless @show_user_form || @task.id.nil? %>
+          <br><br><%= link_to "Edit Task's Assigned Team Member", edit_admin_segment_task_path(@task.segment, @task, :show_user_form => "edit_user") unless @show_user_form || @task.id.nil? %><br>
         <% else %>
           <br><br><%= link_to "Create Task's Assigned Team Member", edit_admin_segment_task_path(@task.segment, @task, :show_user_form => "create_user") unless @show_user_form || @task.id.nil?%>
         <% end %>
@@ -49,7 +54,9 @@
         Position Description: <%= position_builder.text_area :description %>
           <% end %><br>
       <% end %>
-      <br><%= task_builder.submit "Submit Task" unless @segment.team.positions == nil? || @show_task_and_user_form.nil? %>
   <% end %>
-
+  <br><%= task_builder.submit "Submit Task" %>
 <% end %>
+</div>
+</div>
+</div>

@@ -14,6 +14,7 @@ class Admin::ProjectsController < ApplicationController
         elsif params[:show_segment_and_team_form] == "true"
             @segment = Segment.new
             @team = @segment.build_team
+            @show_segment_and_team_form = params[:show_segment_and_team_form]
         else
         end
     end

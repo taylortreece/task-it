@@ -1,6 +1,6 @@
 <% if @segment.tasks != [] %>
     <% @segment.tasks.ordered.each do |task| %>
-      <div class ="inner-content">
+      <div class ="<%=display_progress(task)%>-inner-content">
         <br><h4><strong>Task</strong>: <%= link_to "#{task.title}", admin_segment_task_path(@segment.id, task.id) %></h4>
         <strong>Assigned Team Member</strong>: <%= link_to "#{task.assigned_user.full_name}", admin_team_user_path(task.position.team.id, task.assigned_user.id) %> - <%= task.position.title %><br>
         <strong>Description</strong>: <%= task.description %><br>

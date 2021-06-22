@@ -1,19 +1,15 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
+    <div class="<%=display_progress(@segment)%>-col-content">
 <h1><%= @segment.title %></h1>
-
-<div class="col-content">
 Project: <%= link_to "#{@segment.project.title}", project_path(@segment.project) %><br>
-Assigned Team: <%= link_to "#{@segment.team.name}", team_path(@segment.team) %><br>
-
-<%= render :partial => "completed_form" if @current_user.team == @segment.team %><br><br>
+Segment Deadline: <%= pretty_deadline(@segment) %><br>
+Assigned Team: <%= link_to "#{@segment.team.name}", team_path(@segment.team) %><br><br>
 
 <h2>Tasks:</h2>
 <%= render :partial => "segments/show_tasks" %><br>
 
-<%= render :partial => 'tasks/form', :locals => { :task => @task } if @task %>
       </div>
     </div>
   </div>

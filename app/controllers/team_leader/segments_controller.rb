@@ -18,27 +18,6 @@ class TeamLeader::SegmentsController < ApplicationController
         end
     end
 
-    def new
-        @segment = Segment.new
-    end
-
-    def create
-        @segment = Segment.new(segment_params)
-        @project = Project.find_by(id: params[:segment][:project_id])
-        @team = Team.find_by(id: params[:segment][:team_id])
-        if @segment.save
-            redirect_to team_leader_project_path(@project)
-        else
-            render "team_leader/projects/show"
-        end
-    end
-
-    def edit
-        @segment = Segment.find_by(id: params[:id])
-        @project = @segment.project
-        @team = Team.new
-    end
-
     def update
         @segment = Segment.find_by(id: params[:id])
         if @segment.update(segment_params)
@@ -46,13 +25,6 @@ class TeamLeader::SegmentsController < ApplicationController
         else
             render :edit
         end
-    end
-
-    def destroy
-        @segment = Segment.find_by(id: params[:id])
-        @project = @segment.project
-        @segment.destroy
-        redirect_to team_leader_project_path(@project)
     end
 
     private

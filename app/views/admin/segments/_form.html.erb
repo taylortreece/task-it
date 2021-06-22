@@ -19,16 +19,15 @@
     Description: <%= segment_builder.text_area :description, required: true, placeholder: "Enter the new Segment's description..." %><br><br>
       <% if @company.teams != [] %>
            Pick a Team<%= segment_builder.collection_select :team_id, Team.all, :id, :name, {:include_blank => true} %>
-           <%= link_to " or Create New Team", admin_project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? && !@show_segment_and_team_form.nil?%>
-           <%= link_to " or Create New Team", edit_admin_project_segment_path(@project, @segment, :show_segment_and_team_form => true) unless @show_segment_and_team_form %>
+           <%= link_to " or Create New Team", admin_project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? && @show_segment_and_team_form.nil? %><br>
            <%= segment_builder.submit "Create Segment" unless @team %><br><br>
       <% end %>
-
-        <% if @segment.team.nil? %>
-          <% if @company.teams == [] %> <p>You currently have not created any teams. You need to create a team before you can create a segment. <% end %>
+      
+        <% if @company.teams.empty? %>
+          <p>You currently have not created any teams. You need to create a team before you can create a segment.
         <% else %>
-          <% if @show_segment_and_team_form %>
-          <h3>New Team</h3>
+          <% if @show_segment_and_team_form == "true" %>
+          <h2>New Team</h2>
             <%= segment_builder.fields_for :team, @team do |team_builder| %>
             Team Name: <br><%= team_builder.text_field :name, required: true, placeholder: "Enter the new Team's name..." %><br><br>
             Team Description: <br><%= team_builder.text_area :description, required: true, placeholder: "Enter the new Team's description..." %><br><br>

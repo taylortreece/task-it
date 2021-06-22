@@ -1,17 +1,22 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
+      <div class="<%=display_progress(@project)%>-col-content">
 <h1><%= @project.title %></h1>
-<%= pretty_deadline(@project) %><br><br>
+<%= pretty_deadline(@project) %><br>
 <%= @project.description %><br><br>
 
+<%= render :partial => "projects/completed_form" %><br>
+
 <h3>Segments:</h3>
-<%= render :partial => "show_segments" %>
+<%= render :partial => "projects/show_segments" %>
+
+<%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %><br>
 
         </div>
-    </div>
+     </div>
+   </div>
 </div>
-
 <%= render :partial => 'project_comments/form', :locals => { :subject => @project } %>
 
-<br><%= render :partial => "show_comments" %>
+<br><%= render :partial => "projects/show_comments" %>

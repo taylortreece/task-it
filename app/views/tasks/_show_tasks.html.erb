@@ -1,10 +1,10 @@
 <% if @tasks.nil? %>
     <br><p>You do not have any incomplete tasks!</p>
 <% else %>
-    <% @tasks.each do |task|%>
+    <% @tasks.incomplete.each do |task|%>
         <% @task = task %>
         <%= link_to "#{task.title}", segment_task_path(task.segment, task) unless task.id.nil? %><br>
-        <div class="inner-content">
+        <div class="<%=display_progress(task)%>-inner-content">
         <%= pretty_deadline(task) %><br>
         <%= task.title %><br><br>
         <%= render :partial => "tasks/completed_form" %><br>

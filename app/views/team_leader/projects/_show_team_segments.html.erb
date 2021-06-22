@@ -2,14 +2,23 @@
     <p>There are no incomplete Projects!</p>
 <% else %>
     <% @team.segments.incomplete.each do |segment| %>
-        <div class="col-content">
+    <% @segment = segment %>
+        <div class="<%=display_progress(segment)%>-col-content">
         <h4><%= link_to "#{segment.title}", team_leader_project_segment_path(segment.project, segment) %></h4>
-        <strong><%= pretty_deadline(segment) %></strong><br>
-        <div class="inner-content">
         Project: <%= link_to "#{segment.project.title}", team_leader_project_path(segment.project)%><br>
-        <strong><%= pretty_deadline(segment.project) %></strong><br>
-        <%= segment.project.description %><br><br>
-        </div>
-        </div>
+        Segment Deadline: <strong><%= pretty_deadline(segment) %></strong><br>
+        <% @segment.tasks.ordered.each do |task| %>
+            <% if !task.id.nil? && !task.assigned_user_id.nil? %>
+            <div class="<%=display_progress(task)%>-inner-content">
+            <strong>Task</strong>: <%= link_to "#{task.title}", team_leader_segment_task_path(@segment.id, task.id) %><br>
+            <strong>Assigned Team Member</strong>: <%= link_to "#{task.assigned_user.full_name}", team_leader_team_user_path(task.position.team.id, task.assigned_user.id) %> - <%= task.position.title %><br>
+            <strong>Description</strong>: <%= task.description %><br>
+            <%= completed(task) %>
+            </div>
+          <% else %>
+        <p>You do not have any tasks associated with this segment.</p>
         <% end %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %><br><br>

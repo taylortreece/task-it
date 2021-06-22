@@ -1,6 +1,6 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
+    <div class="col-lg" style="height:90vh;">
         <% if @user.team.nil? %>
           <p class="home-col">My Team</p>
           <br><p>You have not been assigned to a team.</p>
@@ -11,17 +11,17 @@
         <% end %>
     </div>
 
-    <div class="col-lg-7" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
-      <% if @user.tasks.empty? %>
-        <p class="home-col">Tasks</p>
-        <br><br>You do not have any tasks assigned to you!</p>
+    <div class="col-lg-7">
+      <% if @user.tasks.incomplete.empty? %>
+        <p class="home-col">My Tasks</p>
+        <br><br>You do not have any incomplete tasks assigned to you!</p>
       <% else %>
         <p class="home-col"><%= link_to "My Tasks", "/profile/#{@user.id}" %></p>
         <%= render :partial => "tasks/show_tasks" %>
       <% end %>
     </div>
     
-    <div class="col-lg" style="height:600px;width:120px;border:1px solid #ccc;overflow:auto;">
+    <div class="col-lg">
       <p class="home-col">Messages</p>
       <br><p>Messaging features are still under development.</p>
     </div>

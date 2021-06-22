@@ -1,6 +1,6 @@
 <div id="container-fluid">
   <div class="row">
-    <div class="col-lg">
+    <div class="col-lg" style="height:90vh;">
       <p class="home-col"><%= link_to "Create Team", new_admin_team_path %></p>
 
       <% if @company.teams.empty? %>
@@ -10,9 +10,9 @@
         <% @company.teams.each do |team| %>
           <div class="inner-content" %>
             <%=link_to "#{team.name}", admin_team_path(team) %><br>
-            <%= team.description %>
+            <%= team.description %><br>
             <% if !team.leaders.empty? %>
-            Leaders:
+            <h4>Leaders:</h4>
               <% team.leaders.each do |leader| %>
                 <%= link_to "#{leader.full_name}", admin_team_user_path(team, leader) %><br>
                 <%= leader.email %>
@@ -26,7 +26,7 @@
     <div class="col-lg-7" style="height: 90vh">
       <p class="home-col"><%= link_to "Create Project", new_admin_project_path %></p>
         <% if !@project.nil? %>
-        <div class="col-content">
+        <div class="<%=display_progress(@project)%>-col-content">
           <h4>Nearest Project Deadline:</h4>
             <h3><%= link_to "#{@project.title}", admin_project_path(@company.projects.last) unless @company.projects == []%></h3>
             <%= pretty_deadline(@project) %><br>

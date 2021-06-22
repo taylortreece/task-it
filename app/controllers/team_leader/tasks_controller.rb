@@ -38,7 +38,7 @@ class TeamLeader::TasksController < ApplicationController
     def update
         @task = Task.find_by(id: params[:id])
         if @task.update(task_params)
-            redirect_to admin_segment_task_path(@task)
+            redirect_to team_leader_segment_task_path(@task)
         else
             render :edit
         end
