@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
 
-<% if @segment.errors.full_messages.any? %>
+<% if @segment.errors.any? %>
     <h3>Errors:</h3>
+        <ul class="error-content">
     <% @segment.errors.full_messages.each do |message| %>
-        <ul>
             <li><%= message %>
+          <% end %>
         </ul>
-    <% end %>
 <% end %>
 
 <%= form_for [:admin, @project, @segment] do |segment_builder| %>

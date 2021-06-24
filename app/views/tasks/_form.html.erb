@@ -1,6 +1,16 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    
+    <% if @segment.errors.any? %>
+      <h3>Errors:</h3>
+        <ul class="error-content">
+      <% @segment.errors.full_messages.each do |message| %>
+            <li><%= message %>
+          <% end %>
+        </ul>
+    <% end %>
+
 <%= form_for [@segment, @task] do |task_builder| %>
     <%= task_builder.hidden_field :segment_id, :value => @segment.id %>
     Title: <%= task_builder.text_field :title %>

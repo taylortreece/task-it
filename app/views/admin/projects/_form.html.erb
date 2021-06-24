@@ -9,7 +9,7 @@
 <% if @project.errors.full_messages.any? %>
     <h3>Errors:</h3>
     <% @project.errors.full_messages.each do |message| %>
-        <ul>
+        <ul class="error-content">
             <li><%= message %>
         </ul>
     <% end %>

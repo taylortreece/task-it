@@ -13,8 +13,8 @@ class User < ApplicationRecord
     has_many :segments
     has_many :tasks
     
-    validates :last_name, presence: { message: "All fields are required and must be at least two characters."}, length: { minimum: 2 }
-    validates :email, presence: true, uniqueness: true
+    validates :first_name, :last_name, :email, :passowrd, presence: true
+    validates :email, uniqueness: true
 
     accepts_nested_attributes_for :company
     accepts_nested_attributes_for :positions

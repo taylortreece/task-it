@@ -1,10 +1,10 @@
-<% if @task.errors.full_messages.any? %>
+<% if @task.errors.any? %>
     <h3>Errors:</h3>
+        <ul class="error-content">
     <% @task.errors.full_messages.each do |message| %>
-        <ul>
             <li><%= message %>
+          <% end %>
         </ul>
-    <% end %>
 <% end %>
 
 <%= form_for [:admin, @segment, @task] do |task_builder| %>

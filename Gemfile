@@ -35,7 +35,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem "omniauth-github", github: "omniauth/omniauth-github", branch: "master"
-
+  gem "omniauth-rails_csrf_protection"
 end
 
 group :development do

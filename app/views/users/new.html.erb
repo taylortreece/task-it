@@ -3,6 +3,15 @@
     <div class="col-lg" style="text-align: center; border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 <h1>Sign up</h1>
 
+  <% if @user.errors.any? %>
+  <h2>Errors:</h2>
+    <ul class="error-content">
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
     <%= form_for @user, :url => "/signup" do |user_builder| %>
     First Name: <%= user_builder.text_field :first_name, :required => true, :placeholder => "Enter your first name..." %><br><br>
     Last Name: <%= user_builder.text_field :last_name, :required => true, :placeholder => "Enter your last name..." %><br><br>

@@ -41,12 +41,15 @@ class Admin::TeamsController < ApplicationController
     end
 
     def destroy
-        Team.find_by(id: params[:id]).positions.each do |position|
-            position.assigned_user.delete
-            position.delete
+        @team = Team.find_by(id: params[:id])
+
+        if @team.positions.empty? && @team.segments.empty?
+            @team.delete
+            redirect_to admin_teams_path
+        else
+            flash[:message] = "A Team cannot be deleted while it has members or segments! Relocate or delete all members and segments in order to delete #{@team.name}."
+            render :show
         end
-        Team.find_by(id: params[:id]).delete
-        redirect_to admin_teams_path
     end
 
     private

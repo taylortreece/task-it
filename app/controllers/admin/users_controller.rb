@@ -92,8 +92,14 @@ class Admin::UsersController < ApplicationController
     def destroy
         @user = User.find_by(id: params[:id])
         @team = @user.team
-        @user.position.delete && @user.delete
-        redirect_to admin_team_path(@team)
+
+        if @user.assigned_tasks.empty?
+            @user.position.delete && @user.delete
+            redirect_to admin_team_path(@team)
+        else
+            flash[:message] = "Please reassign or delete all tasks associated with this user before deletion."
+            render :show
+        end
     end
 
     private

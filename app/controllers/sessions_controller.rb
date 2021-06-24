@@ -7,10 +7,12 @@ class SessionsController < ApplicationController
 
     def create
         if auth
-            user =User.find_or_create_by(email: auth[:info][:email]) do |user|
-                user.password = SecureRandom.hex(12)
+             user = User.find_or_create_by(email: auth[:info][:email]) do |user|
+             user.password = SecureRandom.hex(12)
             end
             if user
+                session[:user_id] = user.id
+                @current_user = user
                 determine_route(@current_user)
             else
                 render :login

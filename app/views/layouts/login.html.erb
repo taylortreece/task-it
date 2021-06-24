@@ -1,10 +1,20 @@
-<h1>Login</h1>
+<head>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<%= form_tag '/login', method: :post %>
+<%= csrf_meta_tags %>
+</head>
+
+<div class='inner-content' style="text-align:center;padding:2em">
+<h5>Login</h5>
+
+<%= form_tag '/login', method: :post do %>
     Email: <%= text_field_tag :'user[email]' %>
     Password: <%= text_field_tag :'user[password]' %>
 <%= submit_tag "Log In" %>
+<% end %>
 
 or <%= link_to 'Signup', '/signup' %>
 
-<br><br><%= link_to "Login with Github", "/auth/github" %>
+<br><br><%= link_to "Login with Github", "/auth/github", method: :post %> unless an account has already been provided for you.
+</div>

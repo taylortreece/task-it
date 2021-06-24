@@ -3,14 +3,14 @@
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
      
  
-  <% if @task.errors.full_messages.any? %>
+  <% if @task.errors.any? %>
     <h3>Errors:</h3>
+      <ul class="error-content">
     <% @task.errors.full_messages.each do |message| %>
-        <ul>
             <li><%= message %>
-        </ul>
-    <% end %>
-<% end %>
+          <% end %>
+      </ul>
+  <% end %>
 
 <%= form_for [:admin, @segment, @task] do |task_builder| %>
     <%= task_builder.hidden_field :segment_id, :value => @segment.id %>

@@ -104,7 +104,7 @@ resources :projects, only: [:index, :show]
 
   # match must be last route
 
-  # match '*path', to: "application#notfound", via: [:get, :post]
+  match '*path', to: "application#notfound", via: [:get, :post]
 
   # Which routes need to be namespaced??
 

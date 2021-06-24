@@ -1,15 +1,16 @@
-
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
     <ul style="text-align: center;padding:20px;">
         <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", admin_teams_path %></li></strong> | 
         <li><%= link_to "Edit Team", edit_admin_team_path(@team)%></li> | 
-        <li><%= link_to "Delete Team", @team, :method => :delete %></li> | 
+        <li><%= link_to "Delete Team", [:admin, @team], :method => :delete %></li> | 
         <li><%= link_to "Create New User", admin_team_path(@team, :show_user_form => true ) unless @user %></li>
     </ul>
 
 <h1 style="text-align: center;"><%= @team.name %></h1>
+
+<h3 style="color:red;"><%= flash[:message] if flash[:message] %></h3>
 
 <%= render :partial => "admin/teams/show_team" %>
 

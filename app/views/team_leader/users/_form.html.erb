@@ -1,3 +1,12 @@
+<% if @user.errors.any? %>
+    <h3>Errors:</h3>
+        <ul class="error-content">
+    <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %>
+          <% end %>
+        </ul>
+<% end %>
+
 <%= form_for [:team_leader, @team, @user] do |user_builder| %>
     First Name: <%= user_builder.text_field :first_name, required: true %><br><br>
     Last Name: <%= user_builder.text_field :last_name, required: true %><br><br>

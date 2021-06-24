@@ -3,6 +3,15 @@
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;"><br>
     <h1>New Team</h1>
 
+    <% if @team.errors.any? %>
+      <h3>Errors:</h3>
+        <ul class="error-content">
+    <% @team.errors.full_messages.each do |message| %>
+            <li><%= message %>
+          <% end %>
+        </ul>
+    <% end %>
+
 <%= form_for [:admin, @team] do |team_builder| %>
 Team Name: <br><%= team_builder.text_field :name %><br><br>
 Team Description: <br><%= team_builder.text_area :description %><br><br>

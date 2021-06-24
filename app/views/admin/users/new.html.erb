@@ -1,3 +1,12 @@
+<% if @user.errors.any? %>
+    <h3>Errors:</h3>
+        <ul class="error-content">
+    <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %>
+          <% end %>
+        </ul>
+<% end %>
+
 <h1>Sign up</h1>
 
     <%= form_for @user, :url => "/signup" do |user_builder| %>
