@@ -13,7 +13,7 @@ class User < ApplicationRecord
     has_many :segments
     has_many :tasks
     
-    validates :first_name, :last_name, :email, :passowrd, presence: true
+    validates :first_name, :last_name, :email, :password, presence: true
     validates :email, uniqueness: true
 
     accepts_nested_attributes_for :company

@@ -33,7 +33,6 @@ class Admin::UsersController < ApplicationController
         @user = User.find_by(id: params[:id])
         @user.update(created_user_params)
         redirect_to "/admin/profile/#{@user.id}"
-        binding.pry
     end
 
     def new
@@ -71,7 +70,6 @@ class Admin::UsersController < ApplicationController
     end
 
     def update
-        binding.pry
         @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
         @user = User.find_by(id: params[:id])
         

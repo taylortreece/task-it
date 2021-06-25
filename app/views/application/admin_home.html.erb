@@ -10,12 +10,11 @@
         <% @company.teams.each do |team| %>
           <div class="inner-content" %>
             <%=link_to "#{team.name}", admin_team_path(team) %><br>
-            <%= team.description %><br>
             <% if !team.leaders.empty? %>
             <h4>Leaders:</h4>
               <% team.leaders.each do |leader| %>
                 <%= link_to "#{leader.full_name}", admin_team_user_path(team, leader) %><br>
-                <%= leader.email %>
+                <%= leader.email %><br>
               <% end %>
             <% end %>
           </div>

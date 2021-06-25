@@ -107,9 +107,20 @@
     text-align: left;
   }
 
-  .field_with_errors {
-    text-align: left;
+  .error-content {
+    color: rgb(231, 75, 75);
+    box-shadow: inset 0 0 10px;;
   }
+
+  .flash-message {
+    color: rgb(99, 233, 99);
+  }
+
+  .flash-error {
+    color: rgb(231, 75, 75);
+  }
+
+
 
 
 

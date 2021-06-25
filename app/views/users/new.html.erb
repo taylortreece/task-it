@@ -1,3 +1,9 @@
+<head>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+</head>
+
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="text-align: center; border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
@@ -5,12 +11,14 @@
 
   <% if @user.errors.any? %>
   <h2>Errors:</h2>
-    <ul class="error-content">
+  <div class="error-content">
+    <ul>
     <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+      <li><%= message %></li><br>
     <% end %>
     </ul>
-  <% end %>
+  </div>
+  <% end %><br>
 
     <%= form_for @user, :url => "/signup" do |user_builder| %>
     First Name: <%= user_builder.text_field :first_name, :required => true, :placeholder => "Enter your first name..." %><br><br>
