@@ -16,12 +16,12 @@
     Privlages: <br>
     Admin: <%= user_builder.radio_button :privilege, "Admin" %><br>
     Team Leader: <%= user_builder.radio_button :privilege, "Team Leader" %><br>
-    Team Member: <%= user_builder.radio_button :privilege, "Team Member "%><br>
+    Team Member: <%= user_builder.radio_button :privilege, "Team Member"%><br>
                
     <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
         <%= position_builder.hidden_field :team_id, :value => @team.id %>
         Position Title: <%= position_builder.text_field :title, required: true, placeholder: "Enter Team Member's Position title..." %>
-        Position Description: <%= position_builder.text_field :description, required: true, placeholder: "Enter Team Member's Position description..." %>
+        Position Description: <%= position_builder.text_area :description, required: true, placeholder: "Enter Team Member's Position description..." %>
         <% end %>
     <%= user_builder.submit "Submit User" %>
 <% end %>

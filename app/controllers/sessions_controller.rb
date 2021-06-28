@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
                 @current_user = user
                 determine_route(@current_user)
             else
-                render :login
+                redirect_to :login
             end
         end
     end

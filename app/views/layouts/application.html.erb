@@ -10,17 +10,17 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-  <ul>
-    <li style="font-size:40px;"><%= link_to "Task It - #{@company.name}", root_path unless @company.nil?%></li>
-    <li><%= link_to "Company Projects", projects_path %></li>
-    <li><%= link_to "Company Teams", teams_path %></li>
-    <li><%= link_to "Logout", '/logout' %></li>
-    <li><%= link_to "Profile", "/profile/#{@current_user.id}" unless @current_user.nil?%>
-  </ul>
+    <body>
+    <ul>
+      <li style="font-size:40px;"><%= link_to "Task It - #{@company.name}", root_path unless @company.nil?%></li>
+      <li><%= link_to "Company Projects", projects_path %></li>
+      <li><%= link_to "Company Teams", teams_path %></li>
+      <li><%= link_to "Logout", '/logout' %></li>
+      <li><%= link_to "Profile", "/profile/#{@current_user.id}" unless @current_user.nil?%>
+    </ul>
 
-  <p style="text-align: center;"><%= link_to "Team Leader View", team_leader_home_path if @current_user.admin == true || @current_user.team_leader %>
-   | <%= link_to "Admin View", admin_home_path if @current_user.admin == true%></p>
-    <%= yield %>
-  </body>
+    <p style="text-align: center;"><%= link_to "Team Leader View", team_leader_home_path if @current_user.admin == true || @current_user.team_leader %>
+     | <%= link_to "Admin View", admin_home_path if @current_user.admin == true%></p>
+      <%= yield %>
+    </body>
 </html>

@@ -1,19 +1,25 @@
-<head>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TaskIt</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
-</head>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
 
 <div class='inner-content' style="text-align:center;padding:2em">
-<h5>Login</h5>
+    <h5>Login</h5>
 
-<%= form_tag '/login', method: :post do %>
-    Email: <%= text_field_tag :'user[email]' %>
-    Password: <%= text_field_tag :'user[password]' %>
-<%= submit_tag "Log In" %>
-<% end %>
+    <%= form_tag '/login', method: :post do %>
+        Email: <%= text_field_tag :'user[email]' %>
+        Password: <%= text_field_tag :'user[password]' %>
+        <%= submit_tag "Log In" %>
+    <% end %>
 
-or <%= link_to 'Signup', '/signup' %>
+    or <%= link_to 'Signup', '/signup' %><br><br>
 
-<br><br><%= link_to "Login with Github", "/auth/github", method: :post %> unless an account has already been provided for you.
+    <%= link_to "Login with Github", "/auth/github", method: :post %>
 </div>
