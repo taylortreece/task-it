@@ -1,17 +1,17 @@
 Open Tasks:<br>
-  <% if @user.position.nil? || @user.assigned_tasks.incomplete.empty? %>
-    <br><p>This user has no open tasks.</p>
-  <% else %>
+<% if @user.position.nil? || @user.assigned_tasks.incomplete.empty? %>
+  <br><p>This user has no open tasks.</p>
+<% else %>
   <% @user.assigned_tasks.incomplete.each do |task| %>
-  <% @task = task %>
-  <div class="inner-content">
-    <%= link_to "#{task.title}", segment_task_path(task.segment, task) %><br>
-    <%= render :partial => "tasks/completed_form" if @current_user.assigned_tasks.include?(task) %>
-    project: <%= link_to "#{task.segment.project.title}", project_path(task.segment.project)%><br>
-    segment: <%= link_to "#{task.segment.title}", project_segment_path(task.segment.project, task.segment)%><br><br>
-    </div>
-    <% end %>
-  <% end %>
+        <% @task = task %>
+          <div class="inner-content">
+            <%= link_to "#{task.title}", segment_task_path(task.segment, task) %><br>
+            <%= render :partial => "tasks/completed_form" if @current_user.assigned_tasks.include?(task) %>
+            project: <%= link_to "#{task.segment.project.title}", project_path(task.segment.project)%><br>
+            segment: <%= link_to "#{task.segment.title}", project_segment_path(task.segment.project, task.segment)%><br><br>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -45,7 +45,7 @@ class User < ApplicationRecord
             if self.position #update
                 @team ? self.position.update(team_id: @team.id) : self.position.update(position_attributes.with_defaults(assigned_user_id: self.id))
             else #create
-        self.update(assigned_position_id: Position.create(position_attributes.with_defaults(assigned_user_id: self.id, user_id: self.user_id, team_id: team_id)).id)
+                self.update(assigned_position_id: Position.create(position_attributes.with_defaults(assigned_user_id: self.id, user_id: self.user_id, team_id: team_id)).id)
             end
         end
     end

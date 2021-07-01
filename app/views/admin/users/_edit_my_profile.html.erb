@@ -24,8 +24,9 @@
 
     <br>
     <% if @show_form != "new-team-and-new-position" %>
-    <%= user_builder.fields_for :team_attributes, @team do |team_builder| %>
-            <%= team_builder.hidden_field :profile, :value => "profile" %>
+      <%= user_builder.fields_for :team_attributes, @team do |team_builder| %>
+        <%= team_builder.hidden_field :profile, :value => "profile" %>
+
         <% if @company.teams == [] %>
             <br><h3>Create a New Team:</h3>
         Team Name: <%= team_builder.text_field :name %>
@@ -47,39 +48,40 @@
             Team Description: <%= team_builder.text_area :description %><br><br>
         <% end %>
 
-    <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
-        <% if @user.assigned_position.nil? %>
-            <br><h3>Create a Position:</h3>
-            Position Title: <%= position_builder.text_field :title %>
-            Position Description: <%= position_builder.text_area :description %>
-        <% else %>
-            <% if @show_form == "new-team" %>
-                <%= link_to "Update Position", "/admin/profile/#{@user.id}/edit/new-team-and-new-position" %>
-            <% else %>
-                <%= link_to "Update Position", "/admin/profile/#{@user.id}/edit/new-position" unless @show_form == "new-position" %>
-            <% end %>
-        <% end %>
+        <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
 
-        <% if @show_form == "new-position" %>
-            <br><h3>Create a Position:</h3><br>
-            Position Title: <%= position_builder.text_field :title %>
-            Position Description: <%= position_builder.text_area :description %>
-        <% end %>
-      <% end %>
-    <br><br><%= user_builder.submit "Submit User" %>
-  <% end %>
-    
-        <% else %>
-            <%= user_builder.fields_for :team_attributes, @team do |team_builder| %>
-                <%= team_builder.hidden_field :profile, :value => "profile" %>
-                <br><h3>Create a New Team:</h3>
-                Team Name: <%= team_builder.text_field :name %>
-                Team Description: <%= team_builder.text_area :description %><br><br>
-            
-            <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
-               <br><h3>Create a Position:</h3>
+            <% if @user.assigned_position.nil? %>
+                <br><h3>Create a Position:</h3>
                 Position Title: <%= position_builder.text_field :title %>
                 Position Description: <%= position_builder.text_area :description %>
+            <% else %>
+                <% if @show_form == "new-team" %>
+                    <%= link_to "Update Position", "/admin/profile/#{@user.id}/edit/new-team-and-new-position" %>
+                <% else %>
+                    <%= link_to "Update Position", "/admin/profile/#{@user.id}/edit/new-position" unless @show_form == "new-position" %>
+                <% end %>
+            <% end %>
+
+            <% if @show_form == "new-position" %>
+            <br><h3>Create a Position:</h3><br>
+                Position Title: <%= position_builder.text_field :title %>
+                Position Description: <%= position_builder.text_area :description %>
+            <% end %>
+          <% end %>
+        <br><br><%= user_builder.submit "Submit User" %>
+      <% end %>
+    
+    <% else %>
+        <%= user_builder.fields_for :team_attributes, @team do |team_builder| %>
+            <%= team_builder.hidden_field :profile, :value => "profile" %>
+            <br><h3>Create a New Team:</h3>
+            Team Name: <%= team_builder.text_field :name %>
+            Team Description: <%= team_builder.text_area :description %><br><br>
+        
+        <%= user_builder.fields_for :position_attributes, @position do |position_builder| %>
+           <br><h3>Create a Position:</h3>
+            Position Title: <%= position_builder.text_field :title %>
+            Position Description: <%= position_builder.text_area :description %>
         <% end %>
       <% end %><br><br>  
     <br><br><%= user_builder.submit "Submit User" %>

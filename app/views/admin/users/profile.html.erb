@@ -2,24 +2,20 @@
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
 
-  <div class="flash-message">
-    <%= flash[:message] %>
-  </div>
-  
-<% if @edit_my_profile == false %>
+      <div class="flash-message">
+        <%= flash[:message] %>
+      </div>
 
-<h1><%= @user.full_name %>'s Profile</h1>
-<h4><%= @user.email %></h4>
-<h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= @user.team.name unless @user.assigned_position.nil? %></h4>
-
-<%= link_to "Edit Profile", "/admin/profile/#{@user.id}/edit" %>
-
-<% else %>
-
-<%= render :partial => "/admin/users/edit_my_profile" %>
-
-<% end %>
-        </div>
+      <% if @edit_my_profile == false %>
+        <h1><%= @user.full_name %>'s Profile</h1>
+        <h4><%= @user.email %></h4>
+        <h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= @user.team.name unless @user.assigned_position.nil? %></h4>
+        
+        <%= link_to "Edit Profile", "/admin/profile/#{@user.id}/edit" %>
+      <% else %>
+        <%= render :partial => "/admin/users/edit_my_profile" %>
+      <% end %>
     </div>
+  </div>
 </div>
 

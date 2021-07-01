@@ -1,20 +1,20 @@
 <h1 style="text-align: center;"><%= @user.full_name %></h1>
+
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+      <% if @edit_my_profile == false %>
 
-<% if @edit_my_profile == false %>
+      <h4><%= @user.email %></h4>
+      <h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= link_to "#{@user.team.name}", team_path(@user.team) unless @user.team.nil? || @user.assigned_position.nil? %></h4>
 
-<h4><%= @user.email %></h4>
-<h4><%= @user.assigned_position.title unless @user.assigned_position.nil? %> - <%= link_to "#{@user.team.name}", team_path(@user.team) unless @user.team.nil? || @user.assigned_position.nil? %></h4>
+      <%= link_to "Edit Profile", "/profile/#{@user.id}/edit" %>
 
-<%= link_to "Edit Profile", "/profile/#{@user.id}/edit" %>
+      <% else %>
 
-<% else %>
+      <%= render :partial => "users/edit_my_profile" %>
 
-<%= render :partial => "users/edit_my_profile" %>
-
-<% end %>
+      <% end %>
     </div>
   </div>
 </div>

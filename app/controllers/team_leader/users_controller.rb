@@ -31,7 +31,7 @@ class TeamLeader::UsersController < ApplicationController
 
     def profile_form_handler
         @user = User.find_by(id: params[:id])
-        @user.update(created_user_params)
+        @user.update(user_params)
         redirect_to "/team_leader/profile/#{@user.id}"
     end
 
@@ -41,19 +41,9 @@ class TeamLeader::UsersController < ApplicationController
     end
 
     def create
-        #create a new user from signup
-        if !current_user
-            @user = User.new(signup_user_params)
-            if @user.save
-                login(@user)
-                redirect_to '/'
-            else
-                flash[:error] = "Oops! Something went wrong. Try again."
-                render :new
-            end
         #create a new user as an team_leader
         else
-            @user = User.new(created_user_params)
+            @user = User.new(user_params)
             @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
             @position = @user.assigned_position
             if @user.save
@@ -74,7 +64,7 @@ class TeamLeader::UsersController < ApplicationController
         @team = Team.find_by(id: params[:user][:position_attributes][:team_id])
         @user = User.find_by(id: params[:id])
         
-        if @user.update(created_user_params)
+        if @user.update(user_params)
             @team = @user.team
             redirect_to team_leader_team_user_path(@team, @user)
         else
@@ -97,26 +87,7 @@ class TeamLeader::UsersController < ApplicationController
 
     private
 
-    def signup_user_params
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :privilege,
-            company_attributes: [
-                :name,
-                :industry,
-                :address,
-                :city,
-                :state,
-                :phone_number,
-                :email
-            ],
-            position_attributes: [
-                :title,
-                :description,
-                :team_id,
-            ]
-        )
-    end
-
-    def created_user_params
+    def user_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :privilege,
             :team_attributes => [
                 :name,

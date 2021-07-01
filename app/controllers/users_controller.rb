@@ -85,12 +85,6 @@ class UsersController < ApplicationController
         end
     end
 
-    def destroy
-        @user = User.find_by(id: params[:id])
-        @user.position.delete && @user.delete
-        redirect_to '/'
-    end
-
     private
 
     def signup_user_params

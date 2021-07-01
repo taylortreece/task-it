@@ -1,21 +1,27 @@
+<%= form_tag "/admin/projects", method: :get do %>
+  Search for Projects: <%= text_field_tag "project" %>
+  <%= submit_tag "Search" %>
+<% end %><br>
+
 <% @projects.ordered.each do |project| %>
-  <div class="<%=display_progress(project)%>-col-content"><br><br>
+  <div class="<%=display_progress(project)%>-col-content"><br>
     <h2><%= link_to "#{project.title}", admin_project_path(project)%><br></h2>
     <strong><%= pretty_deadline(project) %></strong><br>
     <%= project.description %><br><br>
     <h3><strong>Segments</strong>:</h3>
+
     <% if project.segments.empty?%>
-        <%= "You do not have any segments associated with this project." + link_to("Create Segments", admin_project_path(project)) %>
+        <%= link_to "Create Segments", admin_project_path(project) %><br><br>
     <% else %>
-       <% project.segments.ordered.each do |segment| %>
+      <% project.segments.ordered.each do |segment| %>
         <div class="<%=display_progress(segment)%>-inner-content">
-            <h4><%= link_to "#{segment.title}", admin_project_segment_path(project, segment) %><br></h4>
-            <strong><%= pretty_deadline(segment) %></strong><br>
-            <%= segment.description %><br>
-            <%= completed(segment)%>
-          </div>
-        <% end %>
+          <h4><%= link_to "#{segment.title}", admin_project_segment_path(project, segment) %><br></h4>
+          <strong><%= pretty_deadline(segment) %></strong><br>
+          <%= segment.description %><br>
+          <%= completed(segment)%>
         </div>
-      <% end %><br><br>
+      <% end %>
+    <% end %>
+  </div><br>
 <% end %>
 

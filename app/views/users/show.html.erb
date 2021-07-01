@@ -3,21 +3,20 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
-      
-<% if @edit_my_profile.nil? %>
-  <div class="col-content">
-<%= link_to "Edit Profile", "profile/#{@user.id}/edit" %><br><br>
-<h5>Email: <%= @user.email %></h5><br>
-<h5><%= @user.assigned_position ? link_to("Team: #{@user.team.name}", team_path(@user.team)) : "This user has no assigned Team." %><br></h5>
-<h5><%= @user.assigned_position ? "Title: #{@user.assigned_position.title}" : "This user has no assigned Position." %><br><br></h5>
+        <% if @edit_my_profile.nil? %>
+          <div class="col-content">
+        <%= link_to "Edit Profile", "profile/#{@user.id}/edit" %><br><br>
+        <h5>Email: <%= @user.email %></h5><br>
+        <h5><%= @user.assigned_position ? link_to("Team: #{@user.team.name}", team_path(@user.team)) : "This user has no assigned Team." %><br></h5>
+        <h5><%= @user.assigned_position ? "Title: #{@user.assigned_position.title}" : "This user has no assigned Position." %><br><br></h5>
 
-<% else %>
+        <% else %>
 
-<%= render :partial => "edit_my_profile" if @user == @current_user%>
+        <%= render :partial => "edit_my_profile" if @user == @current_user%>
 
-<% end %>
+        <% end %>
 
-<%= render :partial => "show_tasks" %>
+        <%= render :partial => "show_tasks" %>
       </div>
     </div>
   </div>

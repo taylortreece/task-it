@@ -6,8 +6,8 @@
         <strong>Description</strong>: <%= task.description %><br>
         <strong>deadline</strong>: <%= pretty_deadline(task) %><br>
         <%= completed(task) %>
-        </div>
-     <% end %>
-    <% else %>
-        <p>There are no tasks associated with this segment.</p>
+      </div>
     <% end %>
+<% else %>
+  <p>There are no tasks associated with this segment.</p>
+<% end %>

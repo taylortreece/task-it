@@ -2,21 +2,23 @@
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
       <div class="<%=display_progress(@project)%>-col-content">
-<h1><%= @project.title %></h1>
-<%= pretty_deadline(@project) %><br>
-<%= @project.description %><br><br>
 
-<%= render :partial => "projects/completed_form" %><br>
+        <h1><%= @project.title %></h1>
+        <%= pretty_deadline(@project) %><br>
+        <%= @project.description %><br><br>
 
-<h3>Segments:</h3>
-<%= render :partial => "projects/show_segments" %>
+        <%= render :partial => "projects/completed_form" %><br>
 
-<%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %><br>
+        <h3>Segments:</h3>
+        <%= render :partial => "projects/show_segments" %>
 
-        </div>
-     </div>
-   </div>
+        <%= render :partial => 'segments/form', :locals => { :segment => @segment } if @segment %><br>
+
+      </div>
+    </div>
+  </div>
 </div>
+
 <%= render :partial => 'project_comments/form', :locals => { :subject => @project } %>
 
 <br><%= render :partial => "projects/show_comments" %>

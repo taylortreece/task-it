@@ -17,21 +17,4 @@ class TeamLeader::SegmentsController < ApplicationController
         else
         end
     end
-
-    def update
-        @segment = Segment.find_by(id: params[:id])
-        if @segment.update(segment_params)
-            redirect_to team_leader_segment_path(@segment)
-        else
-            render :edit
-        end
-    end
-
-    private
-
-    def segment_params
-        params.require(:segment).permit({:team_attributes => [:name, :description]}, 
-        :title, :deadline, :description, :project_id, :user_id, :team_id, :completed)
-        .with_defaults(user_id: current_user.id)
-    end
 end

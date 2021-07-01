@@ -2,40 +2,41 @@
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
 
-<% if @segment.errors.any? %>
-    <h3>Errors:</h3>
-        <ul class="error-content">
-    <% @segment.errors.full_messages.each do |message| %>
-            <li><%= message %>
-          <% end %>
-        </ul>
-<% end %>
-
-<%= form_for [:admin, @project, @segment] do |segment_builder| %>
-    <h4>Add Segment:</h4>
-    <%= segment_builder.hidden_field :project_id, :value => @project.id %>
-    Title: <%= segment_builder.text_field :title, required: true, placeholder: "Enter the new Segment's title..." %>
-    Deadline: <%= segment_builder.date_field :deadline %>
-    Description: <%= segment_builder.text_area :description, required: true, placeholder: "Enter the new Segment's description..." %><br><br>
-      <% if @company.teams != [] %>
-           Pick a Team<%= segment_builder.collection_select :team_id, @company.teams.all, :id, :name, {:include_blank => true} %>
-           <%= link_to " or Create New Team", admin_project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? && @show_segment_and_team_form.nil? %><br>
-           <%= segment_builder.submit "Create Segment" unless @team %><br><br>
+      <% if @segment.errors.any? %>
+          <h3>Errors:</h3>
+              <ul class="error-content">
+          <% @segment.errors.full_messages.each do |message| %>
+                  <li><%= message %>
+                <% end %>
+              </ul>
       <% end %>
-      
-        <% if @company.teams.empty? %>
-          <p>You currently have not created any teams. You need to create a team before you can create a segment.
-        <% else %>
-          <% if @show_segment_and_team_form == "true" %>
-          <h2>New Team</h2>
-            <%= segment_builder.fields_for :team, @team do |team_builder| %>
-            Team Name: <br><%= team_builder.text_field :name, required: true, placeholder: "Enter the new Team's name..." %><br><br>
-            Team Description: <br><%= team_builder.text_area :description, required: true, placeholder: "Enter the new Team's description..." %><br><br>
-              <% end %>
+
+      <%= form_for [:admin, @project, @segment] do |segment_builder| %>
+        <h4>Add Segment:</h4>
+        <%= segment_builder.hidden_field :project_id, :value => @project.id %>
+          Title: <%= segment_builder.text_field :title, required: true, placeholder: "Enter the new Segment's title..." %>
+          Deadline: <%= segment_builder.date_field :deadline %>
+          Description: <%= segment_builder.text_area :description, required: true, placeholder: "Enter the new Segment's description..." %><br><br>
+          
+          <% if @company.teams != [] %>
+               Pick a Team<%= segment_builder.collection_select :team_id, @company.teams.all, :id, :name, {:include_blank => true} %>
+               <%= link_to " or Create New Team", admin_project_path(@project, :show_segment_and_team_form => true) if @segment && @team.nil? && @show_segment_and_team_form.nil? %><br>
+               <%= segment_builder.submit "Create Segment" unless @team %><br><br>
+          <% end %>
+          
+          <% if @company.teams.empty? %>
+            <p>You currently have not created any teams. You need to create a team before you can create a segment.
+          <% else %>
+            <% if @show_segment_and_team_form == "true" %>
+              <h2>New Team</h2>
+              <%= segment_builder.fields_for :team, @team do |team_builder| %>
+                Team Name: <br><%= team_builder.text_field :name, required: true, placeholder: "Enter the new Team's name..." %><br><br>
+                Team Description: <br><%= team_builder.text_area :description, required: true, placeholder: "Enter the new Team's description..." %><br><br>
             <% end %>
           <% end %>
-          <%= segment_builder.submit "Create Segment" if @team %>
-         </div>
-      </div>
-  </div>    
+        <% end %>
+      <%= segment_builder.submit "Create Segment" if @team %>
+    </div>
+  </div>
+</div>    
 <% end %>

@@ -1,10 +1,10 @@
 <% if !@team.nil? && !@team.positions.empty? %>
-<% @team.positions.each do |position| %>
+    <% @team.positions.each do |position| %>
         <div class="inner-content" %>
-        <p style="font-size: 20px;"><%= link_to "#{position.assigned_user.full_name}", team_leader_team_user_path(@team.id, position.assigned_user.id) %> 
-        - <%= position.title %></p>
-        <%= position.assigned_user.email %><br>
-        <%= link_to "View #{position.assigned_user.first_name}'s active tasks", team_leader_team_user_path(@team.id, position.assigned_user.id) %><br><br>
+            <p style="font-size: 20px;"><%= link_to "#{position.assigned_user.full_name}", team_leader_team_user_path(@team.id, position.assigned_user.id) %> 
+            - <%= position.title %></p>
+            <%= position.assigned_user.email %><br>
+            <%= link_to "View #{position.assigned_user.first_name}'s active tasks", team_leader_team_user_path(@team.id, position.assigned_user.id) %><br><br>
         </div><br>
     <% end %>
 <% else %>

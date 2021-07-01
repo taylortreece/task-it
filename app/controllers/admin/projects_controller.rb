@@ -5,6 +5,10 @@ class Admin::ProjectsController < ApplicationController
     def index
         @project_index_links = params[:project_index_link]
         @projects = company.projects.ordered
+
+        if params[:project] 
+            @projects = @company.projects.search_title(params[:project])
+        end
     end
 
     def show

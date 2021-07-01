@@ -13,6 +13,7 @@ class Project < ApplicationRecord
     scope :incomplete, -> { where(completed: false)}
     scope :ordered, -> { order "deadline ASC" }
     scope :late, lambda { where('deadline < ?', Date.today).where(completed: false) }
+    scope :search_title, -> (title) { where("title LIKE ?", "%#{title}%") }
 
     def ordered_segments
         self.segments.ordered

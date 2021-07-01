@@ -3,10 +3,10 @@
 <% else %>
     <% @project.segments.ordered.each do |segment| %>
         <div class="inner-content">
-        <%= link_to("#{segment.title}", team_leader_project_segment_path(segment.project.id, segment.id)) %><br>
-        <%= "#{pretty_deadline(segment)}" %><br>
-        Assigned Team: <%= link_to "#{segment.team.name}", team_leader_team_path(segment.team) %><br>
-        <%= segment.description %><br><br>
+            <%= link_to("#{segment.title}", team_leader_project_segment_path(segment.project.id, segment.id)) %><br>
+            <%= "#{pretty_deadline(segment)}" %><br>
+            Assigned Team: <%= link_to "#{segment.team.name}", team_leader_team_path(segment.team) %><br>
+            <%= segment.description %><br><br>
         </div>
     <% end %>
 <% end %>

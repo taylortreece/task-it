@@ -28,27 +28,26 @@
           <br><br><%= link_to "Create Task's Assigned Team Member", edit_team_leader_segment_task_path(@task.segment, @task, :show_user_form => "create_user") unless @show_user_form || @task.id.nil?%>
         <% end %>
 
-    <% if @show_user_form || @task.assigned_user.nil? %>
+        <% if @show_user_form || @task.assigned_user.nil? %>
 
-        <%= task_builder.fields_for :user, @user do |user_builder| %>
-        <br><h3><%= @user.nil? || @user.id.nil? ? "New Team Member" : "Edit Team Member" %></h3><br>
-        <%= user_builder.hidden_field :user_param_value, :value => "#{@show_user_form}" %>
-        First Name: <%= user_builder.text_field :first_name, required: true %><br><br>
-        Last Name: <%= user_builder.text_field :last_name, required: true %><br><br>
-        Email: <%= user_builder.text_field :email, required: true %><br><br>
-        Password: <%= user_builder.password_field :password, :placeholder => "Not required for edit..." %><br><br>
-        Re-Password: <%= user_builder.password_field :password_confirmation, :placeholder => "Not required for edit..." %><br><br>
-        Privlages: <br><br>
-        Admin: <%= user_builder.radio_button :privilege, "Admin", required: true%><br>
-        Team Leader: <%= user_builder.radio_button :privilege, "Team Leader", required: true%><br>
-        Team Member: <%= user_builder.radio_button :privilege, "Team Member", required: true%><br><br>
+          <%= task_builder.fields_for :user, @user do |user_builder| %>
+          <br><h3><%= @user.nil? || @user.id.nil? ? "New Team Member" : "Edit Team Member" %></h3><br>
+          <%= user_builder.hidden_field :user_param_value, :value => "#{@show_user_form}" %>
+          First Name: <%= user_builder.text_field :first_name, required: true %><br><br>
+          Last Name: <%= user_builder.text_field :last_name, required: true %><br><br>
+          Email: <%= user_builder.text_field :email, required: true %><br><br>
+          Password: <%= user_builder.password_field :password, :placeholder => "Not required for edit..." %><br><br>
+          Re-Password: <%= user_builder.password_field :password_confirmation, :placeholder => "Not required for edit..." %><br><br>
+          Privlages: <br><br>
+          Admin: <%= user_builder.radio_button :privilege, "Admin", required: true%><br>
+          Team Leader: <%= user_builder.radio_button :privilege, "Team Leader", required: true%><br>
+          Team Member: <%= user_builder.radio_button :privilege, "Team Member", required: true%><br><br>
 
-        <%= task_builder.fields_for :position, @position do |position_builder| %>
-        Position Title: <%= position_builder.text_field :title %>
-        Position Description: <%= position_builder.text_area :description %>
-          <% end %><br>
-      <% end %>
+          <%= task_builder.fields_for :position, @position do |position_builder| %>
+          Position Title: <%= position_builder.text_field :title %>
+          Position Description: <%= position_builder.text_area :description %>
+            <% end %><br>
+        <% end %>
       <br><%= task_builder.submit "Submit Task" %>
   <% end %>
-
 <% end %>

@@ -1,11 +1,11 @@
 <% @company.teams.each do |team| %>
-    <h3><%= link_to "#{team.name}", team_path(team) %></h3>
-    <%= team.description %><br>
-    <% if team.leaders.empty? %>
-      <div class="inner-content">
-        <p>This team has no assigned leaders</p>
-      </div>
-    <% else %>
+  <h3><%= link_to "#{team.name}", team_path(team) %></h3>
+  <%= team.description %><br>
+  <% if team.leaders.empty? %>
+    <div class="inner-content">
+      <p>This team has no assigned leaders</p>
+    </div>
+  <% else %>
     <h2 style="margin-top:10px;" >Leaders</h2>
       <% team.leaders.each do |user| %>
         <div class="inner-content">
@@ -14,5 +14,5 @@
           <%= user.email %><br><br>
         </div>
       <%end%>
-    <%end%><br><br>
+  <%end%><br><br>
 <%end%><br>

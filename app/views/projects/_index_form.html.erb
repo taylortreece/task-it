@@ -4,18 +4,18 @@
     <strong><%= pretty_deadline(project) %></strong><br>
     <%= project.description %><br><br>
     <h3><strong>Segments</strong>:</h3>
-    <% if project.segments.empty?%>
+      <% if project.segments.empty?%>
         There are no segments associated with this project
-    <% else %>
+      <% else %>
        <% project.segments.ordered.each do |segment| %>
         <div class="<%=display_progress(segment)%>-inner-content">
-            <h4><%= link_to "#{segment.title}", project_segment_path(project, segment) %><br></h4>
-            <strong><%= pretty_deadline(segment) %></strong><br>
-            <%= segment.description %><br>
-            <%= completed(segment)%>
-          </div>
-        <% end %>
+          <h4><%= link_to "#{segment.title}", project_segment_path(project, segment) %><br></h4>
+          <strong><%= pretty_deadline(segment) %></strong><br>
+          <%= segment.description %><br>
+          <%= completed(segment)%>
         </div>
-      <% end %><br><br>
+      <% end %>
+    </div>
+  <% end %><br><br>
 <% end %>
 

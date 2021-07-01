@@ -1,24 +1,24 @@
 <% if @company.projects.completed.empty? %>
         <p>There are no complete Projects!</p>
-    <% else %>
-    <% @company.projects.completed.each do |project| %>
-      <div class="<%=display_progress(project)%>-col-content"><br>
-        <h2><%= link_to "#{project.title}", team_leader_project_path(project)%><br></h2>
-        <strong><%= pretty_deadline(project) %></strong><br><br>
-        <%= project.description %><br><br>
-        <h3><strong>Segments</strong>:</h3>
-        <% if project.segments.empty?%>
-            <%= "You do not have any segments associated with this project." + link_to("Create Segments", team_leader_project_path(project)) %>
-        <% else %>
-            <% project.segments.ordered.each do |segment| %>
-                  <div class="<%=display_progress(segment)%>-inner-content">
-                    <h4><%= link_to "#{segment.title}", team_leader_project_segment_path(project, segment) %><br></h4>
-                    <strong><%= pretty_deadline(segment) %></strong><br>
-                    <%= segment.description %><br>
-                    <%= completed(segment)%>
-                  </div>
-              <% end %>
-              </div>
-            <% end %><br><br>
-          <% end %>
+<% else %>
+  <% @company.projects.completed.each do |project| %>
+    <div class="<%=display_progress(project)%>-col-content"><br>
+      <h2><%= link_to "#{project.title}", team_leader_project_path(project)%><br></h2>
+      <strong><%= pretty_deadline(project) %></strong><br><br>
+      <%= project.description %><br><br>
+      <h3><strong>Segments</strong>:</h3>
+      <% if project.segments.empty?%>
+        <%= "You do not have any segments associated with this project." + link_to("Create Segments", team_leader_project_path(project)) %>
+      <% else %>
+        <% project.segments.ordered.each do |segment| %>
+          <div class="<%=display_progress(segment)%>-inner-content">
+            <h4><%= link_to "#{segment.title}", team_leader_project_segment_path(project, segment) %><br></h4>
+            <strong><%= pretty_deadline(segment) %></strong><br>
+            <%= segment.description %><br>
+            <%= completed(segment)%>
+          </div>
         <% end %>
+      </div>
+    <% end %><br><br>
+  <% end %>
+<% end %>

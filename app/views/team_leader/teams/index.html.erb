@@ -2,19 +2,19 @@
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
 
-<ul style="text-align: center;padding:20px;">
-    <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", team_leader_teams_path %></li></strong> | 
-    <li><%= link_to "Complete Segments", team_leader_teams_path(:team_index_link => "complete") %></li> | 
-    <li><%= link_to "Incomplete Segments", team_leader_teams_path(:team_index_link => "incomplete") %></li> | 
-  </ul>
+      <ul style="text-align: center;padding:20px;">
+        <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", team_leader_teams_path %></li></strong> | 
+        <li><%= link_to "Complete Segments", team_leader_teams_path(:team_index_link => "complete") %></li> | 
+        <li><%= link_to "Incomplete Segments", team_leader_teams_path(:team_index_link => "incomplete") %></li> | 
+      </ul>
 
-<% if @team_index_link == "complete" %>
-    <%= render :partial => "team_leader/teams/show_complete_projects" %>
-<% elsif @team_index_link == "incomplete" %>
-    <%= render :partial => "team_leader/teams/show_incomplete_projects" %>
-<% else %>
-    <%= render :partial => "team_leader/teams/show_all_teams" %>
-<% end %>
+      <% if @team_index_link == "complete" %>
+          <%= render :partial => "team_leader/teams/show_complete_projects" %>
+      <% elsif @team_index_link == "incomplete" %>
+          <%= render :partial => "team_leader/teams/show_incomplete_projects" %>
+      <% else %>
+          <%= render :partial => "team_leader/teams/show_all_teams" %>
+      <% end %>
 
     </div>
   </div>

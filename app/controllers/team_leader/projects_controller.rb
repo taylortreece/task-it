@@ -18,17 +18,4 @@ class TeamLeader::ProjectsController < ApplicationController
         else
         end
     end
-
-    private
-
-    def project_params
-    params.require(:project).permit(:title, :deadline, :description, :completed, company: current_user.company,
-        :segment_attributes => [
-            :title,
-            :deadline,
-            :description
-        ]
-    )
-    end
-
 end

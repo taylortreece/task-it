@@ -7,7 +7,7 @@
       <% else %>
         <p class="home-col"><%= link_to "My Team", team_leader_team_path(@current_user.team) unless @current_user.team.nil? %></p>
         <%= @current_user.team.name %> Team Members
-      <%= render :partial => "team_leader/teams/show_team" %>
+        <%= render :partial => "team_leader/teams/show_team" %>
       <% end %>
     </div>
 

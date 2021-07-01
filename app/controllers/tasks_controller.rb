@@ -22,11 +22,6 @@ class TasksController < ApplicationController
         end
     end
 
-    def destroy
-        Task.find_by(id: params[:id]).destroy
-        redirect_to '/'
-    end
-
     private
 
     def task_params
@@ -45,14 +40,5 @@ class TasksController < ApplicationController
             :description,
             :user_id
         ]).with_defaults(user_id: current_user.id)
-    end
-
-    def assign_existing_user
-        if @task.position.assigned_user_id.nil?
-            @task.position.assigned_user_id = @task.assigned_user.id
-        elsif @task.assigned_user_id.nil?
-            @task.assigned_user_id = @task.position.assigned_user.id
-        else
-        end
     end
 end

@@ -6,8 +6,8 @@
         <strong>Description</strong>: <%= task.description %><br>
         <strong>deadline</strong>: <%= pretty_deadline(task) %><br>
         <%= completed(task) %>
-        </div>
-     <% end %>
-    <% else %>
-        <p>You do not have any tasks associated with this segment. <%= link_to "Add Tasks", admin_project_segment_path(@segment, :show_task_form => true) unless @task %></p>
+      </div>
     <% end %>
+<% else %>
+    <p>You do not have any tasks associated with this segment. <%= link_to "Add Tasks", admin_project_segment_path(@segment, :show_task_form => true) unless @task %></p>
+<% end %>

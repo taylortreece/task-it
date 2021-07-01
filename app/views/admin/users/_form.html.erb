@@ -22,6 +22,7 @@
         <%= position_builder.hidden_field :team_id, :value => @team.id %>
         Position Title: <%= position_builder.text_field :title, required: true, placeholder: "Enter Team Member's Position title..." %>
         Position Description: <%= position_builder.text_area :description, required: true, placeholder: "Enter Team Member's Position description..." %>
-        <% end %>
+    <% end %>
+    
     <%= user_builder.submit "Submit User" %>
 <% end %>

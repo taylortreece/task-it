@@ -1,12 +1,12 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
-    <div class="<%=display_progress(@task)%>-col-content">
+      <div class="<%=display_progress(@task)%>-col-content">
 
-    <h1><%= @task.title %></h1>
-    <%= render :partial => "tasks/completed_form" if @task.assigned_user == @current_user %><br>
-    <%= @task.description %><br>
-    Assigned Team Member: <%= link_to "#{@task.assigned_user.full_name}", team_user_path(@task.assigned_user.team, @task.assigned_user) %><br><br>
+        <h1><%= @task.title %></h1>
+        <%= render :partial => "tasks/completed_form" if @task.assigned_user == @current_user %><br>
+        <%= @task.description %><br>
+        Assigned Team Member: <%= link_to "#{@task.assigned_user.full_name}", team_user_path(@task.assigned_user.team, @task.assigned_user) %><br><br>
 
       </div>
     </div>

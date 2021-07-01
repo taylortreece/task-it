@@ -6,7 +6,7 @@
     <% @user.errors.full_messages.each do |message| %>
             <li><%= message %>
           <% end %>
-        </ul>
+      </ul>
 <% end %>
 
 <%= form_for @user, url: "/profile/#{@user.id}", :method => "patch" do |user_builder| %>
@@ -17,4 +17,4 @@
     Re-Password: <%= user_builder.password_field :password_confirmation %><br><br>
 
     <br><br><%= user_builder.submit "Submit User" %>
-  <% end %>
+<% end %>

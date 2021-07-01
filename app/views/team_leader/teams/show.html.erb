@@ -1,19 +1,21 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
-    <ul style="text-align: center;padding:20px;">
-        <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", team_leader_teams_path %></li></strong> 
-        <li><%= link_to "| Create New User", team_leader_team_path(@team, :show_user_form => true ) unless @user || @current_user.team != @team %></li>
-    </ul>
 
-<h1 style="text-align: center;"><%= @team.name %></h1>
+      <ul style="text-align: center;padding:20px;">
+          <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", team_leader_teams_path %></li></strong> 
+          <li><%= link_to "| Create New User", team_leader_team_path(@team, :show_user_form => true ) unless @user || @current_user.team != @team %></li>
+      </ul>
 
-<%= render :partial => "team_leader/teams/show_team" unless @user %>
+      <h1 style="text-align: center;"><%= @team.name %></h1>
 
-<% if @user %>
-  <h2>New User:</h2><br>
-  <%= render :partial => 'team_leader/users/form', :locals => { :user => @user } %>
-<% end %>
+      <%= render :partial => "team_leader/teams/show_team" unless @user %>
+
+      <% if @user %>
+        <h2>New User:</h2><br>
+        <%= render :partial => 'team_leader/users/form', :locals => { :user => @user } %>
+      <% end %>
+      
     </div>
   </div>
 </div>

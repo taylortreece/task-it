@@ -1,29 +1,26 @@
-
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
-
-    
     <h1>New Project</h1>
 
-<% if @project.errors.full_messages.any? %>
-    <h3>Errors:</h3>
-    <% @project.errors.full_messages.each do |message| %>
-        <ul class="error-content">
-            <li><%= message %>
-        </ul>
+    <% if @project.errors.full_messages.any? %>
+        <h3>Errors:</h3>
+        <% @project.errors.full_messages.each do |message| %>
+            <ul class="error-content">
+                <li><%= message %>
+            </ul>
+        <% end %>
     <% end %>
-<% end %>
 
     <%= form_for [:admin, @project] do |project_builder| %>
-    Title: <br>
-    <%= project_builder.text_field :title, required: true, placeholder: "Enter the new Project's title..." %><br><br>
-    Deadline: <br>
-    <%= project_builder.date_field :deadline, required: true %><br><br>
-    Description: <br>
-    <%= project_builder.text_area :description, required: true, placeholder: "Enter the new Project's description..." %><br><br>
-
-    <%= project_builder.submit "Create Project" %><br><br>
+      Title: <br>
+      <%= project_builder.text_field :title, required: true, placeholder: "Enter the new Project's title..." %><br><br>
+      Deadline: <br>
+      <%= project_builder.date_field :deadline, required: true %><br><br>
+      Description: <br>
+      <%= project_builder.text_area :description, required: true, placeholder: "Enter the new Project's description..." %><br><br>
+  
+      <%= project_builder.submit "Create Project" %><br><br>
     <% end %>
     </div>
   </div>

@@ -1,25 +1,23 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
+      <ul style="text-align: center;padding:20px;">
+          <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", admin_teams_path %></li></strong> | 
+          <li><%= link_to "Complete Segments", admin_teams_path(:team_index_link => "complete") %></li> | 
+          <li><%= link_to "Incomplete Segments", admin_teams_path(:team_index_link => "incomplete") %></li> | 
+          <li><%= link_to "Add Team", new_admin_team_path %></li> | 
+        </ul>
 
-<ul style="text-align: center;padding:20px;">
-    <strong><li style="font-size: 20px;"><%= link_to "#{@current_user.company.name}'s Teams", admin_teams_path %></li></strong> | 
-    <li><%= link_to "Complete Segments", admin_teams_path(:team_index_link => "complete") %></li> | 
-    <li><%= link_to "Incomplete Segments", admin_teams_path(:team_index_link => "incomplete") %></li> | 
-    <li><%= link_to "Add Team", new_admin_team_path %></li> | 
-  </ul>
-
-<br><br><%= link_to "Create Teams", new_admin_team_path if @company.teams.empty? %><br>
+      <br><br><%= link_to "Create Teams", new_admin_team_path if @company.teams.empty? %><br>
 
 
-<% if @team_index_link == "complete" %>
-    <%= render :partial => "admin/teams/show_complete_projects" %>
-<% elsif @team_index_link == "incomplete" %>
-    <%= render :partial => "admin/teams/show_incomplete_projects" %>
-<% else %>
-    <%= render :partial => "admin/teams/show_all_teams" %>
-<% end %>
-
+      <% if @team_index_link == "complete" %>
+          <%= render :partial => "admin/teams/show_complete_projects" %>
+      <% elsif @team_index_link == "incomplete" %>
+          <%= render :partial => "admin/teams/show_incomplete_projects" %>
+      <% else %>
+          <%= render :partial => "admin/teams/show_all_teams" %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,20 +1,23 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
-    <div class="<%=display_progress(@segment)%>-col-content">
-<h1><%= @segment.title %></h1>
-<%= link_to "Add Tasks", admin_project_segment_path(@segment, :show_task_form => true) unless @task %>&nbsp&nbsp
-<%= link_to "Update Segment", edit_admin_project_segment_path(@segment.project, @segment) %>&nbsp&nbsp
-<%= link_to "Delete Segment", admin_project_segment_path(@segment.project, @segment), :method => :delete %><br><br>
-<%= render :partial => "completed_form" %><br>
-Project: <%= link_to "#{@segment.project.title}", admin_project_path(@segment.project) %><br>
-Segment Deadline: <%= pretty_deadline(@segment) %><br>
-Assigned Team: <%= link_to "#{@segment.team.name}", admin_team_path(@segment.team) %><br><br>
-
-<h2>Tasks:</h2>
-<%= render :partial => "admin/segments/show_tasks" %><br>
-
-<%= render :partial => 'admin/tasks/form', :locals => { :task => @task } if @task %>
+      <div class="<%=display_progress(@segment)%>-col-content">
+        <h1><%= @segment.title %></h1>
+  
+        <%= link_to "Add Tasks", admin_project_segment_path(@segment, :show_task_form => true) unless @task %>&nbsp&nbsp
+        <%= link_to "Update Segment", edit_admin_project_segment_path(@segment.project, @segment) %>&nbsp&nbsp
+        <%= link_to "Delete Segment", admin_project_segment_path(@segment.project, @segment), :method => :delete %><br><br>
+        
+        <%= render :partial => "completed_form" %><br>
+  
+        Project: <%= link_to "#{@segment.project.title}", admin_project_path(@segment.project) %><br>
+        Segment Deadline: <%= pretty_deadline(@segment) %><br>
+        Assigned Team: <%= link_to "#{@segment.team.name}", admin_team_path(@segment.team) %><br><br>
+  
+        <h2>Tasks:</h2>
+        <%= render :partial => "admin/segments/show_tasks" %><br>
+  
+        <%= render :partial => 'admin/tasks/form', :locals => { :task => @task } if @task %>
       </div>
     </div>
   </div>

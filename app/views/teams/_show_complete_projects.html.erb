@@ -4,24 +4,24 @@
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
   
-<% @company.teams.each do |team| %>
+      <% @company.teams.each do |team| %>
 
-<% if team.segments.completed.empty?%>
-<% else%>
-      <% @team = team %>
-      <h3 style="margin-bottom:2%">Team: <%= link_to "#{team.name}", team_path(team) %><br>completed segments:</h3>
-        <% team.segments.completed.ordered.each do |segment| %>
-        <% @arr << segment %>
+      <% if team.segments.completed.empty?%>
+      <% else%>
+        <% @team = team %>
+          <h3 style="margin-bottom:2%">Team: <%= link_to "#{team.name}", team_path(team) %><br>completed segments:</h3>
+            <% team.segments.completed.ordered.each do |segment| %>
+            <% @arr << segment %>
 
-        <div class="<%=display_progress(segment)%>-inner-content">
-        <h4><%= link_to "#{segment.title}", project_segment_path(segment.project, segment)%></h4>
-        <p style="font-size:20px;margin:0%"><%= pretty_deadline(segment) %></p>
-        <p style="font-size:20px;margin:0;">Description: <%= segment.description %></p>
-        <p style="font-size:20px;margin:0;">Project: <%= link_to "#{segment.project.title}", project_path(segment.project)%>, <%= pretty_deadline(segment.project) %></p>
-          </div>
-        <% end %>
+            <div class="<%=display_progress(segment)%>-inner-content">
+              <h4><%= link_to "#{segment.title}", project_segment_path(segment.project, segment)%></h4>
+              <p style="font-size:20px;margin:0%"><%= pretty_deadline(segment) %></p>
+              <p style="font-size:20px;margin:0;">Description: <%= segment.description %></p>
+              <p style="font-size:20px;margin:0;">Project: <%= link_to "#{segment.project.title}", project_path(segment.project)%>, <%= pretty_deadline(segment.project) %></p>
+            </div>
+          <% end %>
+        <% end %><br><br>
       <% end %><br><br>
-    <% end %><br><br>
     </div>
   </div>
 </div>

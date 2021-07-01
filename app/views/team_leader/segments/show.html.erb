@@ -1,18 +1,19 @@
 <div id="container-fluid">
   <div class="row">
     <div class="col-lg" style="border:1px solid #ccc;overflow:auto;">
-    <div class="<%=display_progress(@segment)%>-col-content">
-<h1><%= @segment.title %></h1>
-<%= link_to "Add Tasks", team_leader_project_segment_path(@segment, :show_task_form => true) unless @task || @segment.team != @current_user.team %>&nbsp&nbsp
-<%= render :partial => "completed_form" %><br>
-Project: <%= link_to "#{@segment.project.title}", team_leader_project_path(@segment.project) %><br>
-Segment Deadline: <%= pretty_deadline(@segment) %><br>
-Assigned Team: <%= link_to "#{@segment.team.name}", team_leader_team_path(@segment.team) %><br><br>
+      <div class="<%=display_progress(@segment)%>-col-content">
+        <h1><%= @segment.title %></h1>
+        
+        <%= link_to "Add Tasks", team_leader_project_segment_path(@segment, :show_task_form => true) unless @task || @segment.team != @current_user.team %>&nbsp&nbsp
+        <%= render :partial => "completed_form" %><br>
+        Project: <%= link_to "#{@segment.project.title}", team_leader_project_path(@segment.project) %><br>
+        Segment Deadline: <%= pretty_deadline(@segment) %><br>
+        Assigned Team: <%= link_to "#{@segment.team.name}", team_leader_team_path(@segment.team) %><br><br>
 
-<h2>Tasks:</h2>
-<%= render :partial => "team_leader/segments/show_tasks" %><br>
+        <h2>Tasks:</h2>
+        <%= render :partial => "team_leader/segments/show_tasks" %><br>
 
-<%= render :partial => 'team_leader/tasks/form', :locals => { :task => @task } if @task && @segment.team == @current_user.team%>
+        <%= render :partial => 'team_leader/tasks/form', :locals => { :task => @task } if @task && @segment.team == @current_user.team%>
       </div>
     </div>
   </div>
